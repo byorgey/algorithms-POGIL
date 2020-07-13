@@ -1,0 +1,112 @@
+% -*- compile-command: "./build.sh" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+\usepackage{acode}
+
+\title{\thecourse: Introduction to Divide \& Conquer}
+\date{}
+
+%%% NOTE: In Fall 2017 this had another part but we didn't get to it;
+%%% I just spent another class doing the second part.  So I have now
+%%% moved that part into a second activity, #10: D&C arithmetic.
+
+\begin{document}
+
+\maketitle
+
+\begin{model*}{Merge sort}{mergesort}
+  \begin{acode}
+\> mergesort($xs$) = \\
+\> \tb \> !if $\mathit{len}(xs) \leq 1$ !then !return $xs$ \\
+\>     \> split $xs$ into halves $(xs_1, xs_2)$ \\
+\>     \> $xs_1' \gets$ mergesort($xs_1$) \\
+\>     \> $xs_2' \gets$ mergesort($xs_2$) \\
+\>     \> $xs' \gets$ merge($xs_1'$, $xs_2'$) \\
+\>     \> !return $xs'$
+  \end{acode}
+
+  \begin{align*}
+    T(1) &= \Theta(1) \\
+    T(n) &= 2 T(n/2) + \Theta(n)
+  \end{align*}
+
+  \begin{center}
+  \begin{diagram}[width=300]
+    import Diagrams.TwoD.Layout.Tree
+    import Diagrams.Prelude hiding (Empty)
+    import Data.Maybe
+
+    mergeSortTree :: Int -> BTree String
+    mergeSortTree = go 1
+      where
+        go _ 0 = Empty
+        go k n = BNode ("n" ++ if (k > 1) then ("/" ++ show k) else "") s s
+          where s = go (2*k) (n-1)
+
+    tree :: Diagram B
+    tree = maybe mempty
+            (renderTree (\l -> text ("$" ++ l ++ "$") <> square 2 # lw none # fc white ) (~~))
+        . symmLayoutBin' (with & slHSep .~ 4 & slVSep .~ 3)
+        $ mergeSortTree 4   -- $
+
+    dia :: Diagram B
+    dia = vsep 1 [tree, vsep 0.3 (replicate 3 (circle 0.2 # fc black))]
+  \end{diagram}
+  \end{center}
+\end{model*}
+
+Recall the \emph{merge sort} algorithm, which works by splitting the
+input list into halves, recursively sorting the two halves, and then
+merging the two sorted halves back together.
+
+\begin{objective}
+  Students will use recurrence relations and recursion trees to
+  describe and analyze divide and conquer algorithms.
+\end{objective}
+
+\begin{questions}
+  \item How long does \textsf{mergesort} take on a list of length $1$?
+  \item Just by looking at the code, how many recursive calls does
+  \textsf{mergesort} make at each step?\marginnote{\emph{Hint}: don't overthink
+  this one; yes, it's really that easy.}
+  \item If $xs$ has size $n$, what is the size of the inputs to the
+    recursive calls to \textsf{mergesort}?
+  \item (Review) How long does it take (in big-$\Theta$ terms) to
+    merge $xs_1$ and $xs_2$ after they are sorted?
+  \item Let $T(n)$ denote the total amount of time taken by
+    \textsf{mergesort} on an input list of length $n$.  Use your
+    answers to the previous questions to explain the equations for
+    $T(n)$ given in the model.  This is called a \emph{recurrence
+      relation} because it defines $T(n)$ via recursion.
+  \item Suppose algorithm $X$ takes an input of size $n$, splits it
+    into three equal-sized pieces, and makes a recursive call on each
+    piece.  Deciding how to split up the input into pieces takes
+    $\Theta(n^2)$ time; combining the results of the recursive calls
+    takes additional $\Theta(n)$ time.  In the base case, algorithm
+    $X$ takes constant time on an input of size $1$. Write a
+    recurrence relation $X(n)$ describing the time taken by algorithm
+    $X$, similar to the one given in the model.
+  \item Now suppose algorithm $X$ makes only two recursive calls instead
+    of three, but each recursive call is still on an input one-third
+    the size of the original input.  How does your recurrence relation
+    for $X$ change?
+  \item Write a recurrence relation for binary search.
+\end{questions}
+
+Now let's return to considering merge sort.  The tree shown in
+the model represents the call tree of merge sort on an input of
+size $n$, that is, each node in the tree represents one recursive call
+to merge sort.  The expression at each node shows how much work
+happens at that node (from merging).
+
+\begin{questions}
+  \item Notice that the entire tree is not shown; the dots indicate
+    that the tree continues further with the same pattern.  What is
+    the depth (number of levels) of the tree, in terms of $n$?
+  \item How much total work happens on each individual level of the tree?
+  \item How much total work happens in the entire tree?
+  \item Draw a similar tree for the second version of algorithm $X$.
+\end{questions}
+
+\end{document}

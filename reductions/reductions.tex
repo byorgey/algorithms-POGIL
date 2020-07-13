@@ -1,0 +1,129 @@
+% -*- compile-command: "./build.sh" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Introduction to reductions}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% \begin{objective}
+%   Students will XXX.
+% \end{objective}
+
+\begin{model*}{Independent sets}{IS}
+  \begin{defn}
+    An \emph{independent set} in an undirected graph $G = (V,E)$ is a
+    subset of vertices $S \subseteq V$ such that no two vertices in
+    $S$ are adjacent.
+  \end{defn}
+  \begin{defn}
+    A \emph{vertex cover} in an undirected graph $G = (V,E)$ is a
+    subset of vertices $C \subseteq V$ such that every edge $e \in E$
+    has at least one endpoint in (is ``covered by'') $C$.
+  \end{defn}
+  \begin{center}
+  \begin{diagram}[width=300]
+    import ReductionGraphs
+
+    dia = hsep 2
+      [ drawGraph (tex.show) exampleGraph1
+      , drawGraph (tex.(:[])) exampleGraph2
+      ]
+  \end{diagram}
+  \end{center}
+\end{model*}
+
+\begin{questions}
+\item \label{q:whichIS} Which of the following are independent sets?
+  \begin{enumerate}[label=(\alph*)]
+  \item $\{1,2\}$
+  \item $\{1,5\}$
+  \item $\{c,a\}$
+  \item $\{e,a,i,g\}$
+  \item $\{7\}$
+  \item $\varnothing$
+  \end{enumerate}
+
+\item For each graph, list at least three other examples of
+  independent sets.
+
+\item Given an arbitrary graph $G$, does $G$ always have at least one
+  independent set?  Why or why not?
+
+\item Intuitively, which is harder: to find big independent sets, or
+  small ones?  Why?
+
+\item Based on the previous observation, an interesting question to
+  ask about a given graph $G$ is to find the \blank.
+
+\item Try to answer your interesting question for the given example
+  graphs (but don't spend more than a few minutes).  How sure are you
+  about your answer?
+
+\item Describe a brute-force algorithm to answer this question.  What
+  is its big-$\Theta$ running time in terms of $|V|$ and $|E|$?
+
+\item Guess the running time (in terms of $|V|$ and $|E|$) of the
+  fastest known algorithm to solve this problem. (You do not have to
+  come up with an algorithm; just guess how fast you think this
+  problem can be solved.)
+
+\item \label{q:whichVC} Which of the following are vertex covers?
+  \begin{enumerate}[label=(\alph*)]
+  \item $\{3,4,5,6,7\}$
+  \item $\{2,3,4,6,7\}$
+  \item $\{b,d,e,f,g,h,i,j\}$
+  \item $\{b,c,d,f,h,j\}$
+  \item $\{1,2,3,4,5,6\}$
+  \item $\{1,2,3,4,5,6,7\}$
+  \end{enumerate}
+
+\item For each graph, list at least three other examples of
+  vertex covers.
+
+\item Given an arbitrary graph $G$, does $G$ always have at least one
+  vertex cover?  Why or why not?
+
+\item Intuitively, which is harder: to find small vertex covers, or
+  big ones?  Why?
+
+\item Based on the previous observation, an interesting question to
+  ask about a given graph $G$ is to find the \blank.
+
+\item Answer your interesting question for the given example graphs.
+  How sure are you about your answer?
+
+\item Describe a brute-force algorithm to answer this question.  What
+  is its big-$\Theta$ running time in terms of $|V|$ and $|E|$?
+
+\item Compare your answers to questions \ref{q:whichIS} and
+  \ref{q:whichVC}.  What do you notice?
+\end{questions}
+
+Make a conjecture based on your observations in the previous question,
+and prove it:
+
+\begin{thm}
+  Let $G = (V,E)$ be an undirected graph, and $S \subseteq V$ a subset
+  of its vertices.  Then $S$ is an independent set if and only if \blank.
+\end{thm}
+
+\begin{proof}
+  ($\Longrightarrow$) Let $S$ be an independent set.  We must show \\
+  \blank. So pick an arbitrary edge $e = (u,v) \in E$; \\ by
+  definition we must show that at least one of $u$ or $v$ \blank, \\
+  that is, at least one of $u$ or $v$ is not \blank. \\
+  Since $S$ is an independent set and $u$ and $v$ are connected by an \\
+  edge, $u$ and $v$ can't both \blank, \\
+  and therefore \blank. \medskip
+
+  ($\Longleftarrow$) (You fill in the proof for this direction!)\marginnote{Write down
+    what you get to assume and what you are trying to prove, and
+    expand definitions.}
+\end{proof}
+
+\end{document}

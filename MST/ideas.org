@@ -1,0 +1,48 @@
+Brainstorming for MST activity.
+
+Learning goals:
+
+  - recall MST definition
+  - recognize MST applications
+  - understand and prove cut property
+  - describe Prim's and Kruskal's algorithms
+
+Model 1: MWSS definitions and sample graph. (see notes).
+
+CTQ's:
+
+C/V/D ??
+E/Invention/Application
+
+- which scenarios could be modeled as a MWSS?
+  - connecting cities by rail as cheaply as possible
+  - connecting nodes by network links.  Must be 2 routes between any
+    pair of nodes, so any one link going down will not disconnect the network
+  - Given a rail network, find cheapest route from city A to city B
+  - XXX?
+
+- Find a MWSS for the example graph.
+
+- (Review) What is the definition of a tree?
+
+- Explain why a MWSS must always be a tree.
+
+For this reason we call it Minimum Spanning Tree (MST).
+
+Model 2: Four algorithms
+
+- Prim's
+- Kruskal's
+- Reverse delete
+- Some other greedy path sort of algorithm
+
+- Show four copies of the graph.  Try one algorithm on each.
+- Which ones do you think work?
+
+Model 3: Cut Property
+
+State cut property with a picture.
+
+Fill in proof of cut property.
+
+Fill in proof of Kruskal, Prim using cut property?

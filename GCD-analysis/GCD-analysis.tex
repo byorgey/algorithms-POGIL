@@ -1,0 +1,120 @@
+% -*- compile-command: "rubber --unsafe -d GCD-analysis.tex" -*-
+
+% History:
+%   - 8a79ce3: used Fri, 25 Aug, 2017.
+
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+\usepackage{acode}
+
+\title{\thecourse: GCD analysis}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Review questions}
+
+\begin{questions}
+  \item What is $27 \bmod 5$?
+  \item What is $2 \bmod 5$?
+  \item Which of the following statements is true, assuming that $a$
+    and $b$ are positive integers?
+    \begin{itemize}
+    \item $0 \leq a \bmod b < b$
+    \item $0 \leq a \bmod b < a$
+    \end{itemize}
+  \item What is $5 \bmod 0$?
+  \item Is $0$ divisible by $10$?
+\end{questions}
+
+\newpage
+\begin{model*}{GCD}{gcd}
+\begin{defn}
+  Recall that the \term{greatest common divisor}, or GCD, of two
+  positive integers $a$ and $b$ is defined as the largest positive
+  integer which evenly divides both $a$ and $b$.  The GCD of $a$ and
+  $b$ is denoted $\gcd(a,b)$.
+\end{defn}
+\end{model*}
+
+\begin{questions}
+\item What is $\gcd(12,30)$?
+\item What are the prime factorizations of $12$ and $30$?
+\item What do the prime factorizations of $12$ and $30$ have to do
+  with $\gcd(12,30)$?
+\item What is $\gcd(144, 690)$?
+\item What if we extend the definition of GCD to apply to all
+  nonnegative integers?  What should $\gcd(a,0)$ be when $a > 0$?
+\end{questions}
+
+\newpage
+
+\begin{model*}{The Euclidean Algorithm}{euclidean-algorithm}
+
+  Consider the four algorithms specified below. They are all supposed
+  to compute the GCD of nonnegative integers, but only two of them are
+  correct. \bigskip
+
+\begin{minipage}[t]{.5\textwidth}
+\begin{acode}
+\> GCDIa($m$,$n$) = \\
+\> \tb \> $a \gets m$ \\
+\>     \> $b \gets n$ \\
+\>     \> !while $(a \neq 0)$ \\
+\>     \> \tb \> !if $a \leq b$ \\
+\>     \>     \> \tb \> !then \> $b \gets b \bmod a$ \\
+\>     \>     \>     \> !else \> $a \gets a \bmod b$ \\
+\>     \> !if $a = 0$ !then !return $b$ !else !return $a$
+\end{acode} \bigskip
+
+\begin{acode}
+\> GCDRa($a$,$b$) = \\
+\> \tb \> !if $b = 0$ \\
+\>     \> \tb \> !then \> $a$ \\
+\>     \>     \> !else \> GCDRa($b$, $a \bmod b$)
+\end{acode}
+\end{minipage}
+\begin{minipage}[t]{.5\textwidth}
+\begin{acode}
+\> GCDIb($m$,$n$) = \\
+\> \tb \> $a \gets m$ \\
+\>     \> $b \gets n$ \\
+\>     \> !while $(a \neq 0)$ !and $(b \neq 0)$ \\
+\>     \> \tb \> !if $a \leq b$ \\
+\>     \>     \> \tb \> !then \> $b \gets b \bmod a$ \\
+\>     \>     \>     \> !else \> $a \gets a \bmod b$ \\
+\>     \> !if $a = 0$ !then !return $b$ !else !return $a$
+\end{acode} \bigskip
+
+\begin{acode}
+\> GCDRb($a$,$b$) = \\
+\> \tb \> !if $b = 0$ \\
+\>     \> \tb \> !then \> $a$ \\
+\>     \>     \> !else \> GCDRb($a \bmod b$, $b$)
+\end{acode}
+\end{minipage}
+\end{model*}
+
+\begin{questions}
+\item \label{q:trace} Trace the execution of each algorithm on the inputs
+  $(144,690)$.
+\end{questions}
+
+\newpage
+\begin{questions}
+\item What do you think the \textsf{I} and \textsf{R} stand for in
+  \textsf{GCDI} and \textsf{GCDR}?
+\item List some similarities and differences among the algorithms.
+\item Which algorithms are incorrect?  What is wrong with them?
+\item For the correct algorithms, describe in a few sentences what
+  happened to the values of $a$ and $b$ as the algorithm ran.  Can you
+  explain why the algorithms will always stop eventually?
+\item Look at one of your execution traces from \pref{q:trace}.  Find
+  the $\gcd$ of $a$ and $b$ after each iteration of the algorithm.
+  What do you notice?
+\end{questions}
+
+\end{document}

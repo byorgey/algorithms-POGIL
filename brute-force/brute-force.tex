@@ -1,0 +1,133 @@
+% -*- compile-command: "pdflatex brute-force.tex" -*-
+
+\documentclass{tufte-handout}
+
+\usepackage{../algo-activity}
+
+\title{\thecourse: Brute Force}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model}{Some Problems and Algorithms}{probs-algos}
+Consider the following scenarios:
+
+\begin{enumerate}[label=(\alph*)]
+\item You are given a list of $64$-bit integers, and asked to sort
+  them in increasing order.
+% \item You have a subway map of New York City and want to find
+%   the shortest route between two given stations.
+\item You are given a collection of 2D points, and asked to find the
+  two points which are closest to each other.
+\item You are given a set of (positive and negative)
+  integers, and asked to find a subset which sums to zero (if there is
+  one).
+\item You are given two positive integers $a$ and $b$ and asked to
+  find their greatest common divisor, that is, the largest positive
+  integer which evenly divides both $a$ and $b$.
+% \item Given an amount in US dollars and cents, you want to find the
+%   minimum number of coins (using only pennies, nickels, dimes, and
+%   quarters) needed to make the given amount.
+\item You are asked whether there is any way to visit all $48$
+  contiguous US states by car without entering the same state twice.
+\end{enumerate}
+
+\vspace{0.5in}
+Here are some algorithms intended to solve the above scenarios:
+  \begin{enumerate}[label=(\alph*)]
+  \item List every possible ordering of the given integers.  Test each
+    one to see whether it is sorted, and stop as soon as a sorted
+    ordering is found.
+  \item List each possible pair of points, and compute the distance
+    between each.  Return the points with the smallest distance.
+  \item List every subset of the given set, and find the sum of each.
+    If any subset is found with a sum of zero, return it.
+  % \item List all possible routes (that never retrace any segments)
+  %   between the two stations.  Compute the length of each route and
+  %   output the shortest one.
+  \item (\emph{You will fill in this algorithm in \pref{q:gcd-brute}.})
+  % \item List all possible ways to make the given amount using US
+  %   coins.  Output the one that uses the fewest coins.
+  \item List every possible ordering of the 48 states.  Check each
+    ordering to see whether every pair of adjacent states in the
+    ordering is also geographically adjacent.  If such an ordering is
+    found, output ``yes''; else output ``no''.
+  \end{enumerate}
+\end{model}
+
+\begin{objective}
+  Students will analyze problems in terms of inputs and outputs.
+\end{objective}
+
+\begin{objective}
+  Students will write brute-force algorithms to solve search problems.
+\end{objective}
+
+\begin{questions}
+% \item Sort these integers in increasing order:
+% \[ \begin{array}{rrrr}
+%      2850315545522213899 & 1319900231253041735 & 6671615477926962880 & 816074892707851151 \\
+%      3153324888213964873 & 6478282629679038038 & 524678787506768624 & 3299307200078362735
+%    \end{array}
+% \]
+% \item Which two of these points are closest to each other?
+%   \[ (2,5) \quad (3,1) \quad (4,0) \quad (0,0) \quad (5,7) \quad (6,2) \]
+% \item Is there a subset of these integers that sums to zero?
+%   \[ \{ 2, 3, -9, -4, 7, -2, -6 \} \]
+% \item What is the greatest common divisor of 90 and 525?
+
+% \item What is the minimum number of coins needed to make \$1.67?
+
+%   \newpage
+
+% \item What do you think?  \emph{Is} there a way to visit all 48
+%   contiguous US states by car without entering the same state
+%   twice?
+%   \begin{fullwidth}
+%     \begin{center}
+%       \includegraphics[width=1.4\textwidth]{US-outline.pdf}
+%     \end{center}
+%   \end{fullwidth}
+% \newpage
+
+\item For each scenario, identify the \emph{input(s)} to the problem.
+  \begin{subquestions}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \end{subquestions}
+
+\item For each scenario, identify the desired \emph{output(s)}.
+  \begin{subquestions}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \end{subquestions}
+
+  \newpage
+  \item All the algorithms in \pref{model:probs-algos} are called
+    \term{brute force algorithms}.  Using one or more \textbf{complete
+      English sentences}, write down a definition of what a
+    \term{brute force algorithm} is.
+
+  \item \label{q:gcd-brute} Fill in this description of a brute force
+    algorithm for scenario (d): \vspace{0.3in}
+
+    \begin{fullwidth}
+    \begin{quote}
+      \emph{List all the \uline{\hfill} \\[2em] and output
+        \uline{\hfill}.}
+    \end{quote}
+    \end{fullwidth}
+  \item For which of the scenarios (a)--(e) do you think the given
+    algorithm is the fastest possible algorithm?  For which ones do
+    you think a faster algorithm is possible?
+\end{questions}
+
+\end{document}

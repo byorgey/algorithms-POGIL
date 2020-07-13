@@ -1,0 +1,140 @@
+* Misc ideas
++ Spend some time specifically focusing on proofs by induction e.g. in
+  the context of graphs?
++ "Proof templates" where they are given some overall structure and
+  have to fill in the details.  I could even make some of those for
+  this year...?
++ Come up with counterexamples when we relax each condition of a
+  theorem.
+
++ Almost all problems boil down to some kind of search + optimization:
+  "Find the best (biggest, smallest, cheapest, ...) X with property
+  P".  Brute force = list *all possible* X, check which have property
+  P, and find which one is the best.
+
+* To do
+
+  + [X] rewrite course description
+
+* Planning/brainstorming, 28 May 2017
+
+  What are some next steps?
+
+  + [ ] brainstorm major themes / learning goals
+  + [ ] plan out list of topics based on those goals.  What should I
+    keep?  What can I drop?  What should be added/expanded?
+  + [ ] plan calendar
+
+* Learning goals (from syllabus)
+
+  Here are the learning goals I came up with.  Analyze them according
+  to Bloom's taxonomy?  Yes.  Have now sorted them according to their
+  position in the hierarchy.
+
+  Should mention induction and invariants somewhere?
+
+  + Explain, implement, and apply standard algorithmic solutions to
+    common problems.
+
+    Comprehension/application.
+
+  + Appropriately select and apply standard algorithmic problem-solving and
+    proof techniques such as greedy algorithms, divide & conquer, dynamic
+    programming, network flow, and amortization.
+
+    Comprehension/application
+
+  + Use Big-O notation and standard tools such as recurrence relations and
+    the Master Theorem to analyze the asymptotic time and space complexity
+    of computational processes.
+
+    Analysis/application
+
+  + Explain basic definitions and results in complexity theory;
+    prove NP-hardness results by polynomial reduction.
+
+    Comprehension - synthesis
+
+  + Construct and reason about appropriate formal mathematical models of
+    a given computational problem.
+
+    Synthesis/analysis.
+
+  + Write coherent, logically sound proofs of algorithm correctness
+    and asymptotic complexity, using standard tools such as induction
+    and invariants.
+
+    Synthesis
+
+  + Move fluently between theory and practice by writing programs to
+    implement theoretical results, and using theory to analyze
+    existing programs.
+
+    Analysis/synthesis
+* Course description
+
+  Introduction to standard algorithms and algorithm design strategies,
+  with an emphasis on constructing rigorous formal proofs of algorithm
+  correctness and performance, as well as translating fluently between
+  theory and practice.  Strategies discussed include brute-force,
+  greedy algorithms, divide and conquer, dynamic programming,
+  amortization, and problem reduction.  The course includes an
+  introduction to complexity theory and the complexity classes P and
+  NP.  Prerequisites: CSCI 151 and MATH 240.
+
+* Activities/planning
+** 01 Introduction
+*** Learning objectives & assessment Q's
+
+    1. Students will be able to list the roles in a POGIL classroom,
+       and explain the benefits of the POGIL approach to learning.
+
+       XXX list ...
+
+    2. Something that uses syllabus/website as the model.  What do I
+       actually want them to know/be able to do as a result?
+
+    3. Students will analyze problems in terms of inputs and outputs,
+       and will formulate problems as search problems.
+
+    4. Students will write brute-force algorithms to solve search
+       problems, and compute the size of the search space.
+*** Brainstorming
+
+    Intro to POGIL:
+    - On the screen: welcome!  Please sit in groups of 3 or 4.
+
+    - Pick a manager somehow.
+
+    V question: can any of these be solved faster?
+
+    & intro to the class: look at syllabus/website etc.
+** 02 GCD analysis
+*** Learning objectives
+
+    Want them to see examples of doing formal proofs.
+
+    Big idea: INVARIANTS.  Also want them to see examples of doing
+    induction etc.
+
+    1. Students will propose invariants that can be used to prove the
+       correctness of iterative algorithms.
+
+** 03 Asymptotic analysis
+*** Learning objectives
+
+    1. Students will describe asymptotic behavior of functions
+       using big-O, big-Θ, and big-Ω notation.
+
+    2. Students will determine the asymptotic behavior of functions
+       using limit theorems.
+
+       - Assessment Q: describe the asymptotic behavior of f(n) = 2n +
+         sqrt(3n) + 2 using big-Theta notation.  Give two different
+         justifications for your answer.
+
+** 04 AA zoo
+
+*** Learning objectives
+    1. Students will explain the asymptotic behavior of common series
+       such as 1+2+3+4+... and 1+2+4+8+...

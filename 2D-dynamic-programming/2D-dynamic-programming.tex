@@ -1,0 +1,142 @@
+% -*- compile-command: "rubber -d --unsafe 2D-dynamic-programming.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: 2D Dynamic Programming}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model*}{Some sets}{sets}
+  \begin{align*}
+    A &= \{ 1, 2, 3, 5, 7 \} \\
+    B &= \{ 4, 16, 19, 23, 25, 72, 103 \} \\
+    C &= \{ 3, 34, 4, 12, 5, 2, 99 \}
+  \end{align*}
+\end{model*}
+
+\begin{questions}
+\item For each number below, say whether each set has some subset
+  which adds up to the given number.  For example, $A$ and $C$ have
+  subsets which add up to $7$ ($\{7\}$ and $\{5,2\}$ respectively),
+  but $B$ does not.
+  \begin{enumerate}[label=(\alph*)]
+  \item 149
+  \item 148
+  \item 9
+  \item 16
+  \end{enumerate}
+\end{questions}
+
+In general, consider the following problem, called the \textsc{Subset Sum}
+problem:
+\begin{itemize}
+\item \textbf{Input}:
+  \begin{itemize}
+  \item a set $\{x_1, \dots, x_n\}$ of $n$ positive
+    integers,\marginnote{Yes, the first element is $x_1$, not $x_0$.
+      This is a deliberate choice which will come in handy later.} and
+  \item a positive integer $S$.
+  \end{itemize}
+
+\item \textbf{Output}: is there a subset of $\{x_1, \dots, x_n\}$
+  whose sum is exactly $S$?
+\end{itemize}
+
+\begin{questions}
+\item Describe a brute-force algorithm for solving this problem.
+\item \label{q:brute} What is the running time of your brute-force algorithm?
+\end{questions}
+
+Let's see how to attack this problem using dynamic programming.
+
+\noindent
+\textbf{Step 1: Break the problem into subproblems and make a
+  recurrence.}
+
+\begin{itemize}
+\item We can make the problem simpler by restricting ourselves to only
+  using \emph{some} of the $x_i$.  For example, a subproblem might
+  look like ``Can we find a subset of only $\{x_1, \dots, x_k\}$ that
+  adds up to $S$?'' for some $k \leq n$.
+\item However, by itself this doesn't help: just knowing whether we
+  can add up to $S$ using only $x_1, \dots, x_k$ doesn't tell us
+  whether we can add up to $S$ using $x_1, \dots, x_n$.  In
+  particular, in order to add up to $S$ we might need to use some of
+  the elements from $x_1, \dots, x_k$ in addition to some of the other
+  elements.  We can fix this by generalizing along another dimension
+  as well: we need to know whether we can add up not just to $S$
+  itself, but to \emph{any} sum $0 \leq s \leq S$.  That is, a
+  subproblem now looks like ``Can we find a subset of only $\{x_1,
+  \dots, x_k\}$ that adds up to $s$?'' for some $k \leq n$ and $s \leq S$.
+\end{itemize}
+
+\newcommand{\canAddTo}{\mathit{canAddTo}}
+
+Define $\canAddTo(k,s)$ to be a true or false value which is
+the answer to the question, ``Is there a subset of $\{x_1, \dots,
+x_k\}$ which adds up to exactly $s$?''
+
+\begin{questions}
+  \item Fill in base cases for $\canAddTo$:
+    \begin{itemize}
+    \item $\canAddTo(k,0) = $ \blank for all $k \geq 0$, \\ because
+      \blank.
+    \item $\canAddTo(0,s) = $ \blank for all $s > 0$, \\ because \blank.
+    \end{itemize}
+  \item Now consider $\canAddTo(k,s)$ in the general case, when
+    $k > 0$ and $s > 0$.  That is, we are trying to find whether we
+    can add up to exactly $s$ using only some subset of
+    $x_1, \dots, x_k$.  In order to break this problem down into
+    subproblems, we would need to decrease $k$ and/or $s$.  Fill in
+    the following steps.
+    \begin{itemize}
+    \item If \blank, then we definitely cannot use $x_k$ as part of a \\
+      subset adding to $s$, because it is too \blank.  \\ In this
+      case, we would get the same result if we only allowed ourselves
+      to use $\{x_1, \dots, x_{k-1}\}$, that is, $\canAddTo(k,s)$ is the
+      same as \blank.
+    \item Otherwise, we have two choices: we can try to use
+      \blank as \\ part of our subset or not.  If we don't use it, it
+      is the same as the previous case.  If we do use it, then in
+      order to complete the subset we have to make a subset
+      using only \blank \\ which adds up to \blank.
+    \end{itemize}
+  \item Use your reasoning above to write down a complete recursive
+    definition of $\canAddTo$.
+\end{questions}
+
+\pause
+\noindent
+\textbf{Step 2: Memoize.}
+
+\begin{questions}
+  \item Explain why it would be extremely slow to directly evaluate
+    $\canAddTo(n,S)$ as a recursive function.
+  \item $\canAddTo$ takes a \emph{pair} of values as input.  How many
+    possible such pairs are there?\marginnote{Of course there are
+      infinitely many pairs of numbers; this question is really asking
+      about how many inputs to recursive calls we might possibly see
+      after starting by calling $\canAddTo(n,S)$.}
+  \item If we wanted to memoize the results of $\canAddTo$ by storing
+    the output corresponding to each possible input, what data
+    structure should we use?  Draw a picture.
+  \item How big is this data structure?
+  \newpage
+  \item In what order can we fill in the data structure, so that we
+    never try to fill in a value before filling in other values it
+    depends on?
+  \item How long does it take to fill in each value?
+  \item Therefore, what is the running time of this dynamic
+    programming algorithm?
+  \item Is this faster than your answer to
+    \pref{q:brute}?\marginnote{Hint: this is a trick question.}
+  \item Write some code (using either pseudocode or a language of your
+    choice) to compute $\canAddTo(n,S)$ using the approach outlined
+    here.
+\end{questions}
+
+\end{document}

@@ -1,0 +1,90 @@
+% -*- compile-command: "pdflatex --enable-write18 15-SAT.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{../algo-activity}
+\usepackage{booktabs}
+
+\title{\thecourse\ Activity 15: SAT}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+XXX THIS ACTIVITY NEEDS REVISING
+
+% \begin{objective}
+%   Students will XXX.
+% \end{objective}
+
+\begin{model*}{SAT}{SAT}
+  Recall that $\land$ denotes logical AND, and $\lor$ denotes logical
+  OR. $\overline{x}$ denotes logical negation. \bigskip
+
+  \begin{tabular}{l|p{2.5in}|p{2.5in}}
+    & Examples & Non-examples \\ \hline
+    \emph{Term}
+    & $x_1$ \newline $x_3$ \newline $\overline{x_3}$
+    & $x_1 \land x_2$ \newline $x_2 \lor x_4$ \\ \hline
+    \emph{Clause}
+    & $x_1$ \newline $x_1 \lor x_2$ \newline $\overline{x_1} \lor x_3
+      \lor x_2$ \newline $\overline{x_3}$ \newline $\overline{x_5}
+      \lor x_3 \lor \overline{x_7} \lor x_9$
+    & $x_1 \land x_2$ \newline $x_2 \lor \overline{x_3} \land x_4$
+      \newline $x_1 \Rightarrow x_5$ \\ \hline
+    \emph{CNF}
+    & $x_1$ \newline $x_2 \lor x_5 \lor \overline{x_1}$ \newline $x_1 \land \overline{x_3}$ \newline $(x_1 \lor
+      x_2) \land (\overline{x_3} \lor x_5 \lor x_9 \lor x_8 \lor x_2)$ \newline $x_4
+      \land (x_1 \lor x_2) \land \overline{x_5} \land (x_1 \lor
+      \overline{x_3} \lor x_5)$ \newline $x_1 \land (\overline{x_1}
+      \lor x_3) \land (\overline{x_1} \lor \overline{x_3})$
+    & $(x_1 \land x_3) \lor (x_2 \land x_5)$ \newline $x_1 \land (x_2
+      \lor (x_3 \land (x_4 \lor (x_5 \land x_6))))$
+  \end{tabular}
+\end{model*}
+
+\newcommand{\true}{\textsf{T}\xspace}
+\newcommand{\false}{\textsf{F}\xspace}
+
+Each variable $x_i$ represents a Boolean value (\true or \false).  An
+\emph{assignment} consists in specifying a \true or \false value for
+each variable.
+
+\begin{questions}
+\item Based on the examples and non-examples of \emph{terms} in the first row
+  of the chart, write down a definition of a term.
+\item Based on the examples and non-examples, write a definition of
+  a \term{clause}.
+\item Again based on the model, write a definition of a
+  CNF.\marginnote{CNF stands for \term{conjunctive normal form}.}
+\item Consider the assignment setting each $x_i$ to \true when $i$ is
+  even, and \false otherwise.  For each CNF in the left-hand
+  column,
+  say whether it evaluates to \true or \false under this assignment
+  (using the usual rules of Boolean logic).
+\item Find an assignment that makes $x_1 \land (\overline{x_2} \lor
+  \overline{x_3} \lor \overline{x_1}) \land (x_2 \lor \overline{x_1})$
+  true. (You only need to specify values for $x_1$, $x_2$, and $x_3$.)
+\item Does every \term{clause} have some assignment which makes it
+  true?  If so, explain why; if not, give a counterexample.
+\item Does every \term{CNF} have some assignment which makes it
+  true?  If so, explain why; if not, give a counterexample.
+\item Based on your previous answer, state an interesting decision
+  problem about CNF formulas.
+\end{questions}
+
+This is a famous decision problem called \textsc{SAT}.  If we restrict
+every \term{clause} to have \emph{exactly three} terms, the
+corresponding decision problem is known as \textsc{3-SAT}.
+
+\begin{questions}
+\item Explain why $\textsc{3-SAT} \leq_P \textsc{SAT}$.
+\end{questions}
+
+XXX expand this part---get them to write down proof!
+
+\begin{thm}
+  $\textsc{3-SAT} \leq_P \textsc{Independent-Set}$.
+\end{thm}
+
+\end{document}

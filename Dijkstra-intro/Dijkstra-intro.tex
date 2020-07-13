@@ -1,0 +1,107 @@
+% -*- compile-command: "./build.sh" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Introduction to Dijkstra's Algorithm}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model}{Some graphs}{graphs}
+  \begin{center}
+    \begin{diagram}[width=300]
+    import Graphs
+
+    g1 :: Graph
+    g1 = Graph
+      (zip (map (:[]) "sabtc") [ (0,4), (0,1), (2,0), (4,1), (3,4) ])
+      [ ("s", "a", Just 3), ("s", "c", Just 9), ("a", "b", Just 2)
+      , ("b", "t", Just 4), ("c", "t", Just 2)
+      ]
+
+    g2 :: Graph
+    g2 = Graph
+      (zip (map (:[]) "s234567t") [(0,0), (3,3), (15,3), (13,0), (9,-1), (6,0), (3, -3), (15,-3)])
+      [ ("s", "2", Just 9), ("s", "7", Just 15), ("s", "6", Just 14)
+      , ("6", "7", Just 5), ("2", "3", Just 24), ("6", "3", Just 18)
+      , ("6", "5", Just 30), ("5", "3", Just 2), ("5", "4", Just 11)
+      , ("4", "3", Just 6), ("4", "t", Just 6), ("3", "t", Just 19)
+      , ("7", "t", Just 44), ("7", "5", Just 20), ("5", "t", Just 16)
+      ]
+
+    dia :: Diagram B
+    dia = vsep 5
+      [ hsep 2 [drawG (unweight g1), drawG g1] # center # fontSizeL 0.6
+      , drawG g2 # center # fontSizeL 0.5
+      ]
+  \end{diagram}
+
+  \end{center}
+\end{model}
+
+(Review) Begin by considering Graph 1 (top left).
+\begin{questions}
+\item What is the shortest path from $s$ to $t$?  How long is it?
+\item \label{q:bfs} What algorithm would you use to find it?
+\end{questions}
+
+Now consider Graph 2 (top right). It looks just like Graph 1 except that each edge
+is labelled with a \emph{weight}.
+\begin{questions}
+  \item What do you think the ``length'' of a path means in this
+    graph?
+  \item According to your definition of length, what is the shortest
+    path from $s$ to $t$?  How long is it?
+  \item Why wouldn't your answer to \pref{q:bfs} work here?
+\end{questions}
+
+Now consider Graph 3.  Imagine that each edge is a pipe that only
+allows water through in the direction the arrow is pointing.  The
+number on the edge indicates how many seconds it takes for water to
+flow from one end of the pipe to the other.  Now imagine that we hook
+up an (infinite) source of water to vertex $s$ and watch the water
+start flowing through the network of pipes.  Of course, water always
+flows in all possible directions.  For example, as soon as we hook up
+the water source to vertex $s$, water immediately begins flowing
+along all three pipes leaving from $s$.
+\begin{questions}
+  \item What is the first vertex (besides $s$) the water reaches?  At
+    what time does this happen (counting in seconds from the moment we
+    hook up the water to vertex $s$)?
+  \item What is the second vertex the water reaches?  At what time
+    does it happen?
+  \item What is the third vertex the water reaches?  At what time?
+  \item Suppose we changed the length of the pipe $s \to 7$ from $15$
+    to $20$.  How (if at all) would this change your answers to the
+    previous questions?
+  \item Draw the situation after $32$ seconds.  (You may wish to draw
+    directly on the graph in the model; or you can make a separate
+    copy.)  Which vertices has the water reached?  Which pipes are
+    full?
+  \item After $32$ seconds, which new vertex will the water reach next?
+  \item How does thinking about water flooding the graph help us solve
+    the problem of finding shortest paths?  Make a conjecture relating water in
+    the graph to shortest paths between $s$ and other vertices.
+\end{questions}
+
+\pause
+
+\begin{questions}
+\item What similarities or differences do you see between BFS and
+  Dijkstra's algorithm?
+\item If you had a black box that could run Dijkstra's algorithm, and
+  someone gave you an \emph{unweighted}, directed graph and asked for
+  the shortest path between two vertices, what would you do?
+\item How about vice versa?  That is, imagine you have a black box
+  that can run BFS, and someone gives you a directed graph
+  with positive integer weights on the edges, and asks for the
+  shortest path between two vertices.  What should you do?
+\item Does Dijkstra's algorithm work if there are edges with negative
+  weight?  Explain why it works, or draw an example graph to illustrate
+  why it doesn't.
+\end{questions}
+
+\end{document}

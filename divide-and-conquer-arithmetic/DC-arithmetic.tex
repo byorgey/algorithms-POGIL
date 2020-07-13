@@ -1,0 +1,120 @@
+% -*- compile-command: "pdflatex --enable-write18 DC-arithmetic.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Divide and conquer arithmetic}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% \begin{objective}
+%   Students will XXX.
+% \end{objective}
+
+\begin{model*}{Arithmetic}{arithmetic}
+  \[
+    \begin{array}{cccccccc}
+         & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+       + & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\
+      \hline
+       1 & 1 & 0 & 0 & 1 & 1 & 0 & 1
+    \end{array}
+  \] \vspace{0.3in}
+
+  \[
+    \begin{array}{cccccccccccccc}
+  & & & & & & &1&0&1&1&0&1&0 \\
+  & & & & & &\times&1&1&1&0&0&1&1 \\
+  \hline
+  & & & & & & &1&0&1&1&0&1&0 \\
+  & & & & & &1&0&1&1&0&1&0&0 \\
+  & & &1&0&1&1&0&1&0&0&0&0&0 \\
+  & &1&0&1&1&0&1&0&0&0&0&0&0 \\
+ +&1&0&1&1&0&1&0&0&0&0&0&0&0 \\
+ \hline
+ 1&0&1&0&0&0&0&1&1&0&1&1&1&0
+    \end{array}
+  \] \vspace{0.3in}
+\end{model*}
+
+In many situations, when we use arithmetic operations on integers such
+as addition or multiplication, we simply assume they take constant
+time.  This is appropriate when the integers are bounded by some fixed
+size, \eg if all the integers are $64$-bit integers.  However, if we
+want to be able to deal with integers of arbitrary size, this is no
+longer appropriate; we must take the size of the integers into account.
+
+\begin{objective}
+  Students will analyze arithmetic operations on $n$-bit integers.
+\end{objective}
+
+\begin{questions}
+\item Approximately how many single bit operations (\emph{e.g.} adding
+  or comparing two bits) are needed to compute the addition
+  $1011010_2 + 1110011_2$ shown in the model?
+\item In general, suppose we want to add two integers of $n$ bits
+  each.  In terms of $\Theta$, how many bit operations are needed?
+\item Explain why it is not possible to do any better than this.
+\item If we have a list of $\Theta(n)$ integers, each with
+  $\Theta(n)$ bits, how long will it take (in terms of single bit
+  operations) to add all of them?
+\end{questions}
+
+Now consider the multiplication shown in the model.
+
+\begin{questions}
+\item Why are there five rows in between the two horizontal lines?
+\item How many operations are needed to produce each such row?
+  (\emph{Hint}: you may assume that multiplying by a power of two
+  takes constant time.)
+\item If we are multiplying two integers with $n$ bits each, how many
+  intermediate rows could there be?
+  case?
+\item How long will it take to add them all?
+\end{questions}
+
+\pause
+
+\begin{model*}{Arithmetic by pieces}{pieces}
+  \begin{align*}
+    X &= 01101001_2 & X_1 &= 0110_2 & X_2 &= 1001_2 \\
+    Y &= 11100100_2 & Y_1 &= 1110_2 & Y_2 &= 0100_2
+  \end{align*}
+\end{model*}
+
+Let's now consider whether it is possible to multiply two $n$-bit
+integers any faster.
+
+\begin{questions}
+\item What is the relationship between $X$, $X_1$ and $X_2$ in the
+  model?  What about $Y$, $Y_1$, and $Y_2$?
+\item Suppose $Z = 1011100101_2$.  What would $Z_1$ and $Z_2$ be?
+\item What is $2^4 \cdot X_1$ in binary?
+\item In general, if $b$ is some number expressed in binary, what is
+  $2^4 \cdot b$?
+\item Write two equations expressing $X$ in terms of $X_1$ and $X_2$
+  and $Y$ in terms of $Y_1$ and $Y_2$.
+\item In general, suppose $A$ is an $n$-bit integer, and we split it
+  into $A_1$ and $A_2$.  Generalize your previous answer to express
+  $A$ in terms of $A_1$ and $A_2$.
+\newpage
+\item \label{q:expr} Suppose $A$ and $B$ are $n$-bit integers, and consider the
+  product $AB$. Expand both $A$ and $B$ using your previous answer,
+  and distribute the resulting product.  You should end up with an
+  expression involving only $A_1$, $A_2$, $B_1$, and $B_2$.
+\item How many multiplications are required to compute the expression
+  from \pref{q:expr}? (Remember that multiplying by a power of two
+  takes constant time and does not need to be counted.)
+\item How big (how many bits) are the inputs to each multiplication in
+  \pref{q:expr}?
+\item Explain how we can use the equation from \pref{q:expr} as a recursive
+  algorithm to compute $AB$.
+\item Let $M(n)$ denote the time taken to multiply two $n$-bit
+  integers, and write a recurrence relation for $M(n)$ corresponding
+  to this recursive algorithm.
+\end{questions}
+
+\end{document}

@@ -1,0 +1,171 @@
+% -*- compile-command: "./build.sh" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Introduction to Flow Networks}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% \begin{objective}
+%   Students will XXX.
+% \end{objective}
+
+\begin{model}{Networks and flows}{networksandflows}
+  \begin{center}
+  {\huge A}
+  \begin{diagram}[width=300]
+    import FlowIntro
+    import qualified Data.Map as M
+    dia = drawFlow False flowExample
+  \end{diagram}
+  \end{center}
+  \bigskip \bigskip
+
+  \hrule \bigskip
+
+  \begin{center}
+  {\huge B}
+  \begin{diagram}[width=300]
+    import FlowIntro
+    import qualified Data.Map as M
+
+    flow = M.fromList $  -- $
+      [ (('s','a'), 2)
+      , (('s','b'), 3)
+      , (('a','d'), 1)
+      , (('d','t'), 1)
+      , (('a','b'), 1)
+      , (('b','e'), 4)
+      , (('e','f'), 2)
+      , (('e','t'), 2)
+      , (('f','t'), 2)
+      ]
+    dia = drawFlow True (flowExample # withFlow flow)
+  \end{diagram}
+  \end{center}
+\end{model}
+
+\setcounter{modelcounter}{0}
+\begin{model}{(continued)}{networksandflows}
+  \begin{center}
+  {\huge C}
+  \begin{diagram}[width=300]
+    import FlowIntro
+    import qualified Data.Map as M
+
+    flow = M.fromList $  -- $
+      [ (('s','a'), 10)
+      , (('a','d'), 9)
+      , (('a','e'), 1)
+      , (('d','t'), 9)
+      , (('e','t'), 1)
+      ]
+    dia = drawFlow True (flowExample # withFlow flow)
+  \end{diagram}
+  \end{center}
+  \bigskip \bigskip
+
+  \hrule \bigskip
+
+  \begin{center}
+  {\huge D}
+  \begin{diagram}[width=300]
+    import FlowIntro
+    import qualified Data.Map as M
+
+    flow = M.fromList $  -- $
+      [ (('s','a'), 10)
+      , (('s','b'), 5)
+      , (('b','e'), 7)
+      , (('a','d'), 10)
+      , (('d','e'), 1)
+      , (('d','t'), 9)
+      , (('e','t'), 8)
+      ]
+    dia = drawFlow True (flowExample # withFlow flow)
+  \end{diagram}
+  \end{center}
+\end{model}
+
+Consider graph $A$. Once again we have a directed graph with weighted
+edges.  However, instead of thinking of the weights as some sort of
+length, we will now think of them as a \emph{capacity}: the ``maximum
+amount of stuff'' that the edge can carry.  For example, the capacity
+might be used to model things like:
+\begin{itemize}
+\item maximum gallons of water per minute that can flow through a pipe;
+\item maximum number of trucks per hour that can drive along a road; or
+\item maximum number of times a certain resource can be used before it
+  is all used up.
+\end{itemize}
+
+\begin{questions}
+\item Consider graph $B$.  How is it related to graph $A$?
+\item What do the blue edges in graph $B$ all have in common?
+\item What do you think the labels on the edges of graph $B$
+  represent?
+\item Now consider graph $C$.  Why do you think some of the edges are
+  green?
+\item Graph $D$ is invalid!  In fact, there are two things wrong with
+  it.  What are they?
+\end{questions}
+
+\newcommand{\R}{\mathbb{R}}
+
+\pause
+\begin{defn}
+  A \term{flow network} is a directed graph $G = (V,E)$ with
+  \begin{itemize}
+  \item a distinguished \term{source} vertex $s \in V$, with only
+    outgoing edges;
+  \item a distinguished \term{sink} or \term{target} vertex $t \in V$,
+    with only incoming edges;
+  \item a \term{capacity function} $c : E \to \R^+$ assigning a
+    non-negative real number capacity $c(e)$ to each edge $e \in E$.
+  \end{itemize}
+\end{defn}
+
+\begin{questions}
+  \item Is graph $A$ a flow network?  Why or why not?
+\end{questions}
+
+Now let's define a \term{flow}.  Both graphs $B$ and $C$ depict valid
+flows on $A$; graph $D$ does not.
+
+\begin{defn}
+  A \term{flow} on a flow network $G$ is a function $f : E \to \R^+$
+  assigning a non-negative flow $f(e)$ to each edge, such that
+  \begin{enumerate}
+  \item $\underline{\phantom{XXXXXXXX}} \leq f(e) \leq
+    \underline{\phantom{XXXXXXXX}}$ for every $e \in E$
+  \item At each vertex $v \in V$ other than $s$ and $t$, \blank
+    \newline \blank.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  The \term{value} of a flow, $v(f)$, is the sum of the flow on all
+  edges leaving $s$.
+\end{defn}
+
+\begin{questions}
+  \item What is the value of the flow on graph $B$?
+  \item What is the value of the flow on graph $C$?
+  \item Make a conjecture about the relationship between the value of
+    a flow and the amount of flow entering $t$.
+  \item For each amount, say whether you can construct a flow on graph
+    $A$ with the given value.
+    \begin{enumerate}[label=(\alph*)]
+    \item $15$ \vspace{1in}
+    \item $40$ \vspace{1in}
+    \item $30$ \vspace{1in}
+    \end{enumerate}
+  \item What is the value of the biggest flow you can construct on
+    graph $A$?
+\end{questions}
+
+\end{document}

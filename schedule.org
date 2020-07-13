@@ -1,0 +1,224 @@
+* S '17 schedule
+** W 18 Jan           --- Stable matchings and the [Gale-Shapley algorithm](static/01-propose-reject.pdf)
+   HW 0 assigned
+
+** F 20 Jan           --- Proof of Gale-Shapley algorithm correctness
+   HW 1 assigned (stable matching Qs & implementation)
+
+** M 23 Jan           --- Data representations for Gale-Shapley
+** W 25 Jan           --- Asymptotic analysis
+** F 27 Jan           --- Asymptotic analysis II (Complexity zoo)
+   HW 2 assigned (asymptotic analysis)
+
+** M 30 Jan           --- Largest sum subinterval problem
+** W 1 Feb            --- More LSS, intro to graphs (representation, paths, cycles, trees)
+** F 3 Feb            --- BFS (definitions, properties, asymptotics)
+   HW 3 assigned (graphs, BFS)
+
+** M 6 Feb            --- Bipartite graphs, directed graphs
+** W 8 Feb            --- DAGs and topological sorting
+** F 10 Feb, M 13 Feb --- [Dijkstra](http://www.cs.utexas.edu/~EWD/)'s Algorithm
+   HW 4 assigned (DAG/cycle finding implementation)
+
+** M 13 Feb           --- [Dijkstra](http://www.cs.utexas.edu/~EWD/)'s Algorithm
+** W 15 Feb           --- Kruskal's and Prim's MST algorithms
+** F 17 Feb           --- Implementing Prim's algorithm
+   Exam out
+
+** [mid-winter break]
+** W 22 Feb           --- Implementing Kruskal's algorithm, Union-Find structure
+** Exam 1
+   Covering asymptotic analysis, graphs, and greedy algorithms
+
+   HW 5 assigned (percolation)
+
+** M 27 Feb           --- Integer multiplication, Master Theorem
+** W 1 Mar            --- Matrix multiplication, FFT intro
+** F 3 Mar            --- FFT
+   HW 6 assigned (D&C, FFT etc.)
+
+** M 6 Mar            --- Intro to Dynamic Progragmming ([Fibonacci](static/fib.py), [hi/lo stress jobs](static/jobs.py))
+** W 8 Mar            --- Matrix chain multiplication ([MatrixChainFull.java](static/MatrixChainFull.java))
+** F 10 Mar           --- Floyd-Warshall algorithm
+   HW 7 assigned (DP)
+
+** M 13 Mar           --- Network flow I (definitions, Ford-Fulkerson algorithm)
+** W 15 Mar           --- Network flow II (F-F algo examples, flows and cuts)
+** F 17 Mar           --- Network flow III (max flow/min cut theorem)
+   HW 8 assigned (Network flow, amortized I) (due in 2 weeks)
+
+** [spring break]
+
+** M 27 Mar           --- Intro to amortized analysis. Direct counting method.
+** W 29 Mar           --- More amortized analysis. Accounting method.
+** F 31 Mar           --- Binomial trees and heaps
+   Exam out
+
+   [Make binomial trees & heaps into HW implementation project?]
+
+** M 3 Apr            --- Potential method, splay trees
+** W 5 Apr            --- Analysis of splay trees
+** Exam 2
+   Covering divide & conquer, dynamic programming, network flow, and amortized analysis (through 29 March)
+   HW 9 assigned (Potpourri)
+
+** M 10 Apr           --- Reductions
+** W 12 Apr           --- Reductions, decision problems
+** F 14 Apr           --- SAT, 3-SAT
+   HW 10 assigned (NP-completeness, reductions)
+
+** M 17 Apr           --- NP, NP-completeness
+** W 19 Apr           --- CIRCUIT-SAT is NP-complete
+** F 21 Apr           --- special guest lecture
+   HW 11 assigned (graph colorability / SAT)
+
+** M 24 Apr           --- Rabin-Karp matching
+** W 26 Apr           --- Rabin-Karp matching, bucket sort
+** F 28 Apr           --- radix sort
+** M 1 May            --- radix sort
+
+** Final exam
+* F '17 calendar
+
+** W 8/23 - intro to POGIL; GCD                       (P)
+   HW 0 assigned
+** F 8/25 - GCD analysis I                            (P/L)
+   HW 1 assigned:
+   - GCD, asymptotic analysis (proof with Fibonacci numbers)
+   - extended GCD, implement and prove/analyze.
+
+** M 8/28 - GCD analysis II                           (L)
+** W 8/30 - AA I  (definitions)                       (P)
+** F 9/1  - AA II (zoo)                               (P)
+
+   HW #2: asymptotics. Add LSS problem to it somehow.  They have to
+   fill in steps of the proof and analysis.
+
+**   [M 9/4: Labor day]
+** W 9/6  - Intro to graphs                           (P*/L)
+   [Intro to graphs P; proofs about trees P/L.]
+** F 9/8  - BFS (defns, properties, asymptotics)      (L)
+
+   HW 3 assigned (graphs, BFS)
+
+** M 9/11 - Bipartite graphs, directed graphs         (P)
+** W 9/13 - DAGs and topological sorting              (L/P?)
+** F 9/15 - FREE DAY FOR BABY
+   HW 4 assigned (DAG/cycle finding implementation)
+
+
+BABY WEEK!!
+
+** M 9/18 - Dijkstra I                                (P*)
+** W 9/20 - Dijkstra II (note invariants)             (L)
+** F 9/22 - MST, intro to Kruskal & Prim              (P)
+   Exam 1 out
+
+** M 9/25 - Implementing Prim                         (?)
+** W 9/27 - Implementing Kruskal, union-find          (?)
+** F 9/29 - Exam 1
+   HW 5 assigned (percolation)
+
+** M 10/2 - Intro to D&C (Integer multiplication)     (P*)
+** W 10/4 - Master thm (no proof); examples/induction (L)
+** F 10/6 - D&C problem-solving workshop              (P*)
+
+   **HW 6 assigned (D&C). Get rid of FFT!  Super cool beans but not
+   really accomplishing much.  Add skyline problem?
+   (HW due Monday -- Fall Break?)
+
+** M 10/9  - Intro to DP (fibo, hi/lo stress jobs)    (P*)
+** W 10/11 - More DP examples; induction.             (L)
+   **HW 7 assigned: DP I (only 1D DP; some conceptual, some algorithms
+   with proofs)
+**   [F 10/13: Fall Break]
+
+** M 10/16 - Matrix chain multiplication              (P/L?)
+** W 10/18 - 2D DP problems workshop                  (P)
+** F 10/20 - Floyd-Warshall                           (L)
+   **HW 8 assigned: DP II (2D DP problems; stuff related to MCM or F-W)
+
+** M 10/23 - Intro to amortized analysis, accounting method   (P*)
+** W 10/25 - Direct counting method.  Some further problems   (L/P?)
+** F 10/27 - Amortized problem workshop                       (P)
+   HW 9 assigned: amortized
+   include binomial trees & heaps implementation?
+
+** M 10/30 - Introduction to network flow                     (P*)
+** W 11/1  - Network flow: F-F algo, examples, flows and cuts (P/L?)
+** F 11/3  - Network flow: max flow/min cut theorem I         (L)
+   Exam 2 out
+
+** M 11/6  - Network flow: max flow/min cut theorem II        (L)
+** W 11/8  - ???
+** F 11/10 - Exam 2
+   HW 10 assigned (Potpourri)
+
+** M 11/13 - Reductions                                       (P*)
+** W 11/15 - Reductions, decision problems                    (?)
+** F 11/17 - SAT, 3-SAT                                       (L)
+   HW 11+12 assigned (NP-completeness, reductions, graph color / SAT)
+
+** M 11/20 - NP, NP-completeness                              (P?)
+**   [W 11/22, F 11/24: Thanksgiving]
+Final exam out
+
+** M 11/27 - CIRCUIT-SAT is NP-complete, other things are too (L)
+** W 11/29 - Bucket sort     (P)
+** F 12/1  - Radix sort      (P)
+   HW 11+12 due
+
+** M 12/4 - slack
+
+
+* F '17 activities/modules developed
+** 1 Intro to POGIL, intro to algorithms
+*** Notes
+
+    Idea:
+    - Introduce POGIL format
+    - Introduce basic themes/ideas of the course
+      - What is a problem/solution? (Search, optimization)
+      - Algorithms, pseudocode
+      - Basic big-O analysis (review)
+      - Correctness analysis
+*** Content objectives
+    - Describe POGIL format, process, and benefits
+    - Explain what a brute-force solution is, and conduct a basic
+      big-O analysis to express the time taken for a given brute-force
+      solution
+    - ?
+*** Process objective
+*** Brainstorming POGIL materials
+
+    Basic POGIL activity first.
+
+    A problem consists of
+    - a description of the set of possible inputs
+    - a description of the desired output for a given input
+
+    The problems we want to solve almost all fall into the form "Find
+    the best X with property P."
+
+    - Give some examples of problems, have them describe "best", "X",
+      "P"?  Note there is not always a clean distinction between X and
+      P (we could always take "X-such-that-P" as the set X).
+
+** 2 GCD analysis (intro; rest lecture)
+** 3 Asymptotic analysis I
+** 4 Asymptotic analysis II (proofs, zoo)
+* Most important activities to develop next:
+** Intro to graphs
+** Dijkstra I
+** Intro to D&C
+** Intro to DP
+** Intro to amortized analysis
+** Intro to network flow
+
+* Activity sequence
+  - POGIL-intro
+  - brute-force (above two on same day)
+  - why-POGIL
+  - GCD-analysis (two same day)
+  - AA
+  - AA-proofs

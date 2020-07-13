@@ -1,0 +1,126 @@
+% -*- compile-command: "stack exec -- rubber -d --unsafe three-proofs.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Some asymptotic sums}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model}{Three proofs}{proofs}
+\begin{center}
+\begin{diagram}[width=200]
+  proofDots :: Int -> Diagram B
+  proofDots n =
+    [ [(x,y) | x <- [0 .. n-1] ] | y <- [n-1, n-2 .. 0] ]
+    # map (map drawPt)
+    # map (hcat' opts)
+    # vcat' opts
+    where
+      opts = with & catMethod .~ Distrib & sep .~ 1
+      drawPt (x,y)
+        | y > x     = circle 0.1
+        | x >= n `div` 2 && y < n `div` 2 = circle 0.2 # fc black
+        | otherwise = circle 0.1 # fc black
+
+  dia :: Diagram B
+  dia = [proofDots 4, proofDots 8]
+    # map centerY
+    # hsep 3
+\end{diagram}
+\end{center} \bigskip
+
+\vspace{0.7in}
+
+\[ \begin{array}{ccccccccccc}
+     1 &+& 2 &+& 3 &+& \dots &+& (n-1) &+& n \\
+     n &+& (n-1) &+& (n-2) &+& \dots &+& 2 &+& 1 \\
+     \hline
+     (n+1) &+& (n+1) &+& (n+1) &+& \dots &+& (n+1) &+& (n+1)
+   \end{array}
+\]
+
+\vspace{0.7in}
+
+\begin{align}
+  1 + 2 + \dots + n &< n + n + \dots + n \label{eq:ltns} \\
+                    &= n^2 \label{eq:nsqr} \\[1em]
+  1 + 2 + \dots + n &> n/2 + (n/2 + 1) + \dots + n \label{eq:halfzero} \\
+                    &> n/2 + n/2 + \dots +
+                      n/2 \label{eq:downtohalves} \\
+                    &= (n/2)^2 \label{eq:sqrhalf} \\
+                    &= n^2/4 \label{eq:quartersqr}
+\end{align}
+\end{model}
+
+\begin{objective}
+  Students will understand and prove the asymptotic behavior of $1 + 2
+  + 3 + \dots + n$..
+\end{objective}
+
+\begin{objective}
+  Students will apply geometric, algebraic, and inequational reasoning
+  to asymptotic behavior.
+\end{objective}
+
+The first row of \pref{model:proofs} actually shows two similar
+diagrams at different sizes, one $4 \times 4$ and one $8 \times 8$.
+Each diagram consists of a bunch of dots---some hollow and some filled;
+and the filled dots come in two varieties, big and small.
+\begin{questions}
+  \item How many dots are there in total in the first diagram?  In the
+    second diagram?
+  \item How many big dots are there (\ie the lower-right square) in the
+    first diagram?  How many are in the second?
+  \item How many filled dots are there in total (both big and small
+    filled dots, \ie the lower-right triangle) in the first diagram?
+    In the second?
+\end{questions}
+Now suppose that we abstract away the specific sizes of the diagrams
+and imagine a generic $n \times n$ version of the same diagram.  To
+make things slightly simpler, assume that $n$ is even.
+\begin{questions}
+\item In terms of $n$, how many dots would there be in total?
+\item In terms of $n$, how many big dots would there be in the lower right?
+\item Explain why the number of filled-in dots is equal to \[ 1 + 2 + 3
+  + \dots + n. \]
+\item Based on the diagrams, what can you say about the relationship
+  between these three quantities?
+  \newpage
+\item In terms of concepts you explored on the previous activity, what
+  does this prove about the sum $1 + 2 + 3 + \dots + n$?
+\end{questions}
+Now consider the second proof.
+\begin{questions}
+\item Notice that the top row is our friend $1 + 2 + 3 + \dots + n$.
+  What is the second row?
+\item Why does the bottom row consist of copies of $(n+1)$?
+\item What is the sum of the bottom row?
+\item Use this to derive a formula for $1 + 2 + \dots + n$ in
+  terms of $n$.
+\item What does this formula imply about the asymptotic behavior of $1
+  + 2 + \dots + n$?  Justify your answer.
+\end{questions}
+
+Finally, consider the third proof.  Surprise!---once again it has to
+do with the sum $1 + 2 + 3 + \dots + n$.  For this proof we will
+again assume $n$ is even.\footnote{It is not hard to fix the proof to work
+  for odd $n$ as well, but the details would end up obscuring the main
+  idea somewhat.}
+\begin{questions}
+  \item Why is step \eqref{eq:ltns} true?
+  \item Why is the right-hand side of \eqref{eq:ltns} equal to
+    \eqref{eq:nsqr} ?
+  \item What does this prove about $1 + 2 + \dots + n$?
+  \item Now, what is happening in step \eqref{eq:halfzero}?
+  \item Why is the right-hand side of \eqref{eq:halfzero} greater than
+    \eqref{eq:downtohalves}?
+  \item Why is \eqref{eq:downtohalves} equal to \eqref{eq:sqrhalf}?
+  \item What does this prove about $1 + 2 + \dots + n$?
+  \item Two of these three proofs are in some sense the same.  Which two?
+  \end{questions}
+
+\end{document}

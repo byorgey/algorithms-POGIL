@@ -1,0 +1,74 @@
+% -*- compile-command: "pdflatex 05-LSS.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{../algo-activity}
+
+\title{\thecourse\ Activity nn: Largest Sum Subsequence}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Model 1}
+
+Consider these sequences of integers:
+\begin{align*}
+  A &= [10, 20, -50, 40] \\
+  B &= [-5, 3, -2, 4, -1, 8, -20] \\
+  C &= [1, 2, 3, 4] \\
+  D &= [-1, -2, -3, -4]
+\end{align*}
+
+\begin{questions}
+  \item Find the sum of each of the XXX
+  \item What do these have in common: (some subsequences, some
+    not subsequences.
+\end{questions}
+
+Let $A = [a_1, a_2, \dots, a_n]$ be a sequence of $n$ integers.
+
+XXX
+
+\begin{defn}
+  A \term{subsequence} of $A$ is defined to be a sequence $[a_i,
+  a_{i+1}, \dots, a_j]$ of zero or more \emph{consecutive} elements
+  from $A$.
+\end{defn}
+
+\begin{questions}
+  \item How many different subsequences does $A$ have?
+  \item How many different subsequences does $B$ have?
+  \item In general, how many different subsequences does a sequence of
+    length $n$ have? \marginnote{Don't worry about the fact that some
+      of the subsequences might not be distinct---we'll suppose that
+      all of the elements of the sequence are distinct.}
+\end{questions}
+
+\begin{defn}
+  The \term{largest sum subsequence} (LSS) is defined to be the
+  subsequence with the largest possible sum.
+\end{defn}
+
+\begin{questions}
+  \item Find the LSS for each of $A$, $B$, $C$, and $D$.
+  \item Explain why finding the LSS becomes boring if we have
+    sequences of \emph{natural numbers} instead of \emph{integers}.
+\end{questions}
+
+\begin{defn}
+  The \term{LSS problem}, given a sequence of integers $A$, is to find
+  the indices $i, j$ such that $a_i, \dots, a_j$ is the LSS of $A$.
+\end{defn}
+
+\begin{questions}
+\item Explain how this problem fits into our framework for algorithmic
+  problems. (XXX check this)
+\item Describe a brute-force solution in English.
+\item Now write some pseudocode for your brute-force algorithm. \vspace{2in}
+\item Using big-$O$ notation, derive an upper bound for the running
+  time of your algorithm.
+\item XXX Wolfram Alpha --- derive big-Theta?
+\end{questions}
+
+\end{document}

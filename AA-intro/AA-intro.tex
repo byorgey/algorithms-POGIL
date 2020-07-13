@@ -1,0 +1,336 @@
+% -*- compile-command: "stack exec -- rubber -d --unsafe AA.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\title{\thecourse: Asymptotic Analysis}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\definecolor{cb_orange}{RGB}{230,159,0}
+\definecolor{cb_skyblue}{RGB}{86,180,233}
+\definecolor{cb_bluegreen}{RGB}{0,158,115}
+\definecolor{cb_yellow}{RGB}{240,228,66}
+\definecolor{cb_blue}{RGB}{0,114,178}
+\definecolor{cb_vermillion}{RGB}{213,94,0}
+\definecolor{cb_redpurple}{RGB}{204,121,167}
+
+\begin{model}{Big-O and Big-$\Omega$}{bigO}
+\begin{center}
+\begin{diagram}[width=300]
+  dia :: Diagram B
+  dia = mconcat
+    [ bigO # centerY # translateX (-15)
+    , bigTheta # centerY # translateX 15  -- # translateY (-5)
+    , bigOmega # centerY # translateX 45
+    , circle 30
+    , circle 30 # translateX 30
+    , text "$O(n^2)$" # fontSizeL 4 # translate ((-6) ^& 20)
+    -- , text "$\\Theta(n^2)$" # fontSizeL 4 # translate (15 ^& 15)
+    , text "$\\Omega(n^2)$" # fontSizeL 4 # translate (36 ^& 20)
+    ]
+    where
+      mkColumn = vsep 7 . map (fontSizeL 3 . text . ("$"++) . (++"$"))
+      bigO = mkColumn
+        [ "6"
+        , "n"
+        , "2\\sqrt n"
+        , "\\frac{n^2 + 2}{n}"
+        ]
+      bigTheta = mkColumn
+        [ "n^2"
+        , "n^2 + 3"
+        , "2n^2 + n + 1"
+        , "\\frac{n^2}{2} - n"
+        ]
+      bigOmega = mkColumn
+        [ "n^3"
+        , "n^4 - 3n^2"
+        , "\\frac{n^3}{1000}"
+        , "2^n"
+        ]
+\end{diagram}
+
+\vspace{0.5in}
+
+\begin{minipage}{\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = $n$,
+%    ylabel = {$f(n)$},
+    width = 5.5cm, height = 5.5cm,
+    every axis plot/.append style={thick},
+    legend style={at={(0.5, -0.7)},anchor=south},
+]
+\addplot [
+    domain=1:5,
+    samples=100,
+    color=cb_blue,
+    ]
+    {(x^2+2)/x};
+\addlegendentry{$f(n) = (n^2+2)/n$}
+\addplot [
+    domain=1:5,
+    samples=100,
+    color=cb_redpurple,
+    style=densely dotted,
+]
+{(x^2)/2 - x};
+\addlegendentry{$g(n) = n^2/2 - n$}
+\addplot [
+    domain=1:5,
+    samples=100,
+    color=cb_orange,
+    style=densely dashed,
+]
+{x^3 / 1000};
+\addlegendentry{$h(n) = n^3/1000$}
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = $n$,
+%    ylabel = {$f(n)$},
+    width = 5.5cm, height = 5.5cm,
+    every axis plot/.append style={thick},
+    legend style={at={(0.5, -0.7)},anchor=south},
+]
+\addplot [
+    domain=1:40,
+    samples=100,
+    color=cb_blue,
+    ]
+    {(x^2+2)/x};
+\addlegendentry{$f$}
+\addplot [
+    domain=1:20,
+    samples=100,
+    color=cb_redpurple,
+    style=densely dotted,
+]
+{(x^2)/2 - x};
+\addlegendentry{$g$}
+\addplot [
+    domain=1:40,
+    samples=100,
+    color=cb_orange,
+    style=densely dashed,
+]
+{x^3 / 1000};
+\addlegendentry{$h$}
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = $n$,
+%    ylabel = {$f(n)$},
+    width = 5.5cm, height = 5.5cm,
+    every axis plot/.append style={thick},
+    legend style={at={(0.5, -0.7)},anchor=south},
+]
+\addplot [
+    domain=1:550,
+    samples=100,
+    color=cb_blue,
+    ]
+    {(x^2+2)/x};
+\addlegendentry{$f$}
+\addplot [
+    domain=1:550,
+    samples=100,
+    color=cb_redpurple,
+    style=densely dotted,
+]
+{(x^2)/2 - x};
+\addlegendentry{$g$}
+\addplot [
+    domain=1:550,
+    samples=100,
+    color=cb_orange,
+    style=densely dashed,
+]
+{x^3 / 1000};
+\addlegendentry{$h$}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\end{center}
+\end{model}
+
+\newpage
+\section{Critical Thinking Questions I}
+\begin{objective}
+  Students will describe asymptotic behavior of functions
+  using big-$O$, big-$\Theta$, and big-$\Omega$ notation.
+\end{objective}
+\begin{questions}
+\item Based on the Venn diagram in the model, say whether each
+  function is $O(n^2)$, $\Omega(n^2)$, or both.
+  \begin{enumerate}[label=(\alph*)]
+    \item $2\sqrt n$
+    \item $n^3$
+    \item $2n^2 + n + 1$
+    \item $2^n$
+    \end{enumerate}
+\end{questions}
+Consider the functions
+\begin{align*}
+  f(n) &= (n^2 + 2)/n, \\ g(n) &= n^2/2 - n, \text{and} \\ h(n) &= n^3/1000
+\end{align*}
+for which graphs are shown in the model.
+\begin{questions}
+  \item On each of the following intervals, list the functions $f$,
+    $g$, and $h$ from largest to smallest.
+  \begin{subquestions}
+  \item $n \in [2,4]$
+  \item $n \in [5,30]$
+  \item $n \in [35,450]$
+  \end{subquestions}
+\item Which function is largest, and which the smallest, at $n = 600$?
+\item Does this relative order continue for all $n \geq 600$, or do
+  the functions ever change places again?  Justify your answer.
+  \newpage
+\item How do you think your answers to the previous questions relate
+  to whether each of $f$, $g$, and $h$ is $O(n^2)$, $\Omega(n^2)$, or both?
+\end{questions}
+
+\noindent Say whether you think each of the following statements is
+true or false.  Give a short justification for each answer.
+
+\begin{questions}
+\item If $f(n)$ is $O(n^2)$, then it has $n^2$ in its definition.
+\item If $f(n)$ has $n^2$ in its definition, then $f(n)$ is $O(n^2)$.
+\item If $f(n)$ is both $O(n^2)$ and $\Omega(n^2)$, then it has $n^2$
+  in its definition.
+\item If $f(n) \leq n^2$ for all $n \geq 0$, then $f(n)$ is $O(n^2)$.
+\item If $f(n)$ is $O(n^2)$, then $f(n) \leq n^2$ for all $n \geq 0$.
+\item If $f(n) \leq n^2$ for all $n$ that are sufficiently large, then
+  $f(n)$ is $O(n^2)$.
+\item If $f(n)$ is $O(n^2)$ and $g(n)$ is $\Omega(n^2)$, then $f(n)
+  \leq g(n)$ for all $n \geq 0$.
+\item Every function $f(n)$ is either $O(n^2)$ or $\Omega(n^2)$ (or
+  both).
+  \newpage
+\item Using one or more complete English sentences and appropriate
+  mathematical formalism, propose a definition of $O(n^2)$ by
+  completing the following statement.
+
+  \emph{A function $f(n)$ is $O(n^2)$ if and only if\dots}
+\end{questions}
+
+\pause
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Fall 2017: skipped these questions
+
+% \section{Critical Thinking Questions II}
+
+% \begin{questions}
+% \item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
+%   that of $O(n^2)$?
+% \item In what way(s) do you think it is different?
+% \item Using complete English sentences, propose a definition for
+%   $\Omega(n^2)$.
+% \item If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
+%   $\Theta(n^2)$.  For each of the below functions, say whether you
+%   think it is $\Theta(n^2)$.  Justify your answers.
+%   \begin{subquestions}
+%   \item $3n^2 + 2n - 10$
+%   \item $\displaystyle \frac{n^3 - 5}{n}$
+%   \item $\displaystyle \frac{n^3 - 5}{\sqrt n}$
+%   \item $(n+1)(n-2)$
+%   \item $n + n \sqrt n$
+%   \end{subquestions}
+% \item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
+%   both?  Why?
+% \end{questions}
+
+\newpage
+\begin{model*}{Definitions}{defns}
+  \begin{defn}[Big-O] \mlabel{defn:bigO}
+    $T(n)$ is $O(g(n))$ if there exist a real number $c > 0$ and an
+    integer $n_0 \geq 0$ such that for all $n \geq n_0$,
+    \[ T(n) \leq c \cdot g(n). \]
+  \end{defn}
+
+  \begin{defn}[Big-Omega] \mlabel{defn:bigOmega}
+    $T(n)$ is $\Omega(g(n))$ if there exist a real number $c > 0$ and an
+    integer $n_0 \geq 0$ such that
+    for all $n \geq n_0$, \[ T(n) \geq c \cdot g(n). \]
+  \end{defn}
+
+  \begin{defn}[Big-Theta] \mlabel{defn:bigTheta}
+    $T(n)$ is $\Theta(g(n))$ if it is both $O(g(n))$ and $\Omega(g(n))$.
+  \end{defn}
+
+  \emph{Sample proof} that $n^2 + 2n$ is $\Theta(n^2)$:
+  \begin{itemize}
+  \item First, $n^2 + 2n \leq n^2 + 2n^2 = 3n^2$ for $n \geq 1$ (since
+    $n^2 \geq n$ when $n \geq 1$).  Hence $n^2 + 2n$ is $O(n^2)$
+    according to the definition if we pick $c = 3$ and $n_0 = 1$.
+  \item Next, $n^2 + 2n \geq n^2$ as long as $n \geq 0$.  So by
+    picking $c = 1$ and $n_0 = 0$, we see that $n^2 + 2n$ is also
+    $\Omega(n^2)$.
+  \end{itemize}
+\end{model*}
+
+\begin{questions}
+\item Compare our class consensus definition of $O(n^2)$ with the
+  formal definition of $O(g(n))$ above.  List one way in which they
+  are similar, and one way in which they are different. \vspace{0.5in}
+\item \label{q:phrasing} Consider the following three more intuitive
+  phrasings.  Match each one with its corresponding definition.
+    \begin{itemize}
+    \item $T(n)$ is eventually bounded below by some constant multiple
+      of $g(n)$.
+    \item $T(n)$ is eventually bounded between two constant multiples
+      of $g(n)$.
+    \item $T(n)$ is eventually bounded above by some constant multiple
+      of $g(n)$.
+    \end{itemize}
+
+  \item Which part of the definitions corresponds to the word
+    ``eventually'' in \pref{q:phrasing}?
+
+  \item \label{q:alt-proof} In the sample proof that $n^2 + 2n$ is $O(n^2)$, the given
+    values of $c$ and $n_0$ are not the only values that would work.
+    Given an alternate proof that $n^2 + 2n$ is $O(n^2)$ using
+    different values of $c$ and $n_0$.
+  \item Prove that $f(n) = 20n - 1$ is $O(n^2)$ by applying the formal
+    definition.
+    \vspace{0.5in}
+  \item Prove that $f(n) = n^3/10$ is $\Omega(n^2)$ by applying the
+    formal definition.
+    \vspace{0.5in}
+  \item \label{q:last-formal-proof} Prove that $f(n) = 3n^2 - n + 1$ is
+    $\Theta(n^2)$ by applying the formal definition.  \vspace{0.5in}
+
+  % \item Consider this definition\sidenote{Unlike the definitions of
+  %     $O$, $\Omega$, and $\Theta$, this definition is not standard; I
+  %     just made it up.}: $T(n)$ is $\aleph(g(n))$ if there
+  %   exist a real number $c > 0$ and an integer $n_0 \geq 0$ such that
+  %   for all $n \geq n_0$, \[ T(n) = c \cdot g(n). \]
+  %   \begin{subquestions}
+  %   \item True or false: if $T(n)$ is $\aleph(g(n))$, then $T(n)$ is
+  %     $\Theta(g(n))$.  Justify your answer.
+  %   \item True or false: if $T(n)$ is $\Theta(g(n))$, then $T(n)$ is
+  %     $\aleph(g(n))$.  Justify your answer.
+  %   \end{subquestions}
+\end{questions}
+
+\end{document}

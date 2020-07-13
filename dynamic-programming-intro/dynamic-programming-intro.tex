@@ -1,0 +1,106 @@
+% -*- compile-command: "rubber -d --unsafe dynamic-programming-intro.tex" -*-
+\documentclass{tufte-handout}
+
+% F'19:
+% This one seems short but working through it completely, then having
+% reporters compare with other teams took until around the 40-minute
+% mark or so.  And it was really good, they all got it.  Took the last
+% 10 minutes to sum up what we had done and put everything in a
+% big-picture context.
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Introduction to Dynamic Programming}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{objective}
+  Students will apply memoization techniques to speed up overlapping
+  recursion.
+\end{objective}
+
+\begin{model}{Fibonaccis}{fibonaccis}
+Here are three functions to compute Fibonacci numbers, implemented in
+Python.  You may assume that they are all correct.
+
+\begin{verbatim}
+def fib1(n):
+    if n <= 1:
+        return n
+    else:
+        return fib1(n-1) + fib1(n-2)
+
+
+def fib2(n):
+    fibs = [0] * (n+1)   # Create initial array of all 0s
+    fibs[1] = 1
+
+    for i in range(2, n+1):
+        fibs[i] = fibs[i-1] + fibs[i-2]
+
+    return fibs[n]
+
+
+fibtable = [0,1]
+
+def fib3(n):
+
+    while len(fibtable) < n+1:
+        fibtable.append(-1)
+
+    if fibtable[n] == -1:
+        fibtable[n] = fib3(n-1) + fib3(n-2)
+
+    return fibtable[n]
+\end{verbatim}
+\end{model}
+
+\begin{questions}
+\item Recall that the Fibonacci numbers are defined by the recurrence
+  \begin{align*}
+    F_0 &=& 0 \\ F_1 &=& 1 \\ F_n &=& F_{n-1} + F_{n-2}
+  \end{align*}
+  Which of the three implementations corresponds most directly to
+  this definition?
+\item Draw the call tree for \verb|fib1(5)|. \vspace{1in}
+\item How many times does \verb|fib1(2)| occur in the call tree?
+  What about \verb|fib1(1)|?  \verb|fib1(0)|?
+\item It turns out that \verb|fib1| is extremely slow.\footnote{In
+    fact it takes $\Theta(\varphi^n)$ time.}  Intuitively, why is it
+  so slow?
+\item Trace the execution of \verb|fib2(5)| and explain how it works. \vspace{1in}
+\item Which does more work, \verb|fib2(5)| or \verb|fib1(5)|?  Why?
+\newpage
+\item In terms of $\Theta$, how long does \verb|fib2(n)|
+  take?\footnote{For the purposes of this activity, you should assume
+    that each addition takes constant time.  However, as you know from
+    a previous activity, it is more accurate to say that addition
+    takes linear time in the number of bits, which actually makes a
+    difference here since Fibonacci numbers can get quite large.  You
+    will analyze the situation more precisely on the HW.}
+\item Suppose we switch the direction of the \verb|for| loop in
+  \verb|fib2|, so \verb|i| loops from \verb|n| down to \verb|2|.
+  Would it still work?  Why or why not?
+\item Trace the execution of \verb|fib3(5)| and explain how it works. \vspace{1in}
+\item In terms of $\Theta$, how long does \verb|fib3(n)| take?
+\item Fill in this statement: \verb|fib3| is just like \verb|fib1|
+  except that \\ \blank.
+\item Fill in this statement: \verb|fib2| is just like \verb|fib3|
+  except that \\ \blank.
+\item Why don't we do something akin to \verb|fib2| or \verb|fib3| for
+  merge sort?
+\item Consider the following recursive definition of $Q(n)$ for $n
+  \geq 0$:
+  \begin{align*}
+    Q(0) &= 0 \\
+    Q(1) &= Q(2) = 1 \\
+    Q(n) &= \max \begin{cases} Q(n - 3)^2 \\ Q(n-1) + Q(n-2) \end{cases}
+  \end{align*}
+  (Note that there are \emph{three} base cases.)  Using pseudocode,
+  write an algorithm to calculate $Q(n)$ efficiently.
+\end{questions}
+
+\end{document}

@@ -1,0 +1,69 @@
+% -*- compile-command: "pdflatex --enable-write18 09-divide-and-conquer-practice-plan.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{../algo-activity}
+\usepackage{../acode}
+
+\title{\thecourse\ Activity 9: Divide \& Conquer Practice
+  (Facilitation Plan)}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Remember the 3 components of divide \& conquer:
+\begin{itemize}
+\item \emph{Divide} input into subproblems somehow (split, partition, \dots)
+\item \emph{Recursively} solve the subproblems (\emph{have faith} they
+  are correct!)
+\item \emph{Combine} the answers
+\end{itemize}
+
+Don't forget base case(s) as well.
+
+To prove (by induction on size of input!):
+\begin{itemize}
+\item Prove base case(s) are correct
+\item Prove: \emph{if} answers to subproblems are correct, \emph{then}
+  answer to whole problem is correct.
+\end{itemize}
+
+\section{Array Median}
+
+\noindent
+\textbf{Input}: array of $n$ integers. \\
+\noindent
+\textbf{Output}: the median element, \emph{i.e.} the $\lfloor n/2
+\rfloor$-smallest. \bigskip
+
+\textbf{In groups}: what's the first algorithm you think of?  How long
+does it take? (Probably sort + return middle, $\Theta(n \lg n)$.)
+
+Can we do better?  Get ideas.
+
+Problem: if we \emph{e.g.} split the array in half somehow and get the
+median of both, that wouldn't really help.  The medians of the
+subarrays are not likely to have any relationship to the median of the
+whole.
+
+Solution: generalize!  Let's find not just the median, but take $k$ as
+an input and return the $k$th-smallest.  $\textsc{Select}(A,k)$:
+return the $k$th-smallest element of array $A$.  We can get median by
+calling $\textsc{Select}(A, \lfloor n/2 \rfloor)$.
+
+Question: how should we split up the array?  Just splitting down the
+middle doesn't really help.  What's a different way we could split up
+$A$ (think in groups). Hint: think of other divide \& conquer
+algorithms you know. (Quicksort.)
+
+Solution: pick a pivot element $p$ (random!) and partition into $A_1$
+= all elements $<p$
+and $A_2 =$ all elements $\geq p$.  Then if $k < |A_1|$ return
+$\textsc{Select}(A_1, k)$, else return $\textsc{Select}(A_2, k - |A_1|)$.
+
+Prove correct.  Analyze time complexity.
+
+If time left, think about maximal subarray problem.
+
+\end{document}

@@ -1,0 +1,170 @@
+% -*- compile-command: "./build.sh" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Linear-time Sorting}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\vspace{0.1in}
+\begin{objective}
+  Students will prove an $\Omega(n \lg n)$ lower bound on the runtime
+  of a comparison-based sort.
+\end{objective}
+
+\begin{model*}{Decision trees}{decisions}
+  \begin{center}
+  \begin{diagram}[width=300]
+    import Diagrams.TwoD.Layout.Tree
+    import Diagrams.Prelude hiding (Empty)
+
+    drawT = maybe mempty (renderTree renderNode renderEdge)
+      . symmLayoutBin' (with & slVSep .~ 4 & slHSep .~ 8)
+
+    renderNode t = mconcat
+      [ text t
+      , rect 5 1.5 # lw none # fc white
+      ]
+
+    renderEdge p q = mconcat
+      [ p ~~ q
+      , (if (p ^. _x > q ^. _x) then text "Y" else text "N")
+        # fontSizeL 0.75
+        # moveTo (lerp 0.5 p q .+^ ((1.2 * signum (p^._x - q^._x)) *^ unit_X))
+      ]
+
+    t1 =
+      BNode "Is $a < b$?"
+        (BNode "Is $b < c$?"
+          (leaf "$[a,b,c]$")
+          (BNode "Is $a < c$?"
+            (leaf "$[a,c,b]$")
+            (leaf "$[c,a,b]$")
+          )
+        )
+        (BNode "Is $a < c$?"
+          (leaf "$[b,a,c]$")
+          (BNode "Is $b < c$?"
+            (leaf "$[b,c,a]$")
+            (leaf "$[c,b,a]$")
+          )
+        )
+
+    dia = drawT t1
+  \end{diagram}
+  \bigskip
+  \end{center}
+
+  Above is shown a \emph{decision tree}.  To use the tree, start at
+  the root and answer the yes-or-no question at each node you
+  encounter, then take the appropriate path depending on the answer,
+  either to the left (Yes) or right (No).  Repeat until reaching a leaf.
+\end{model*}
+
+\begin{questions}
+\item Use the decision tree shown above with $a = 2$, $b = 9$,
+  $c = 1$.  What is the output?
+\item Now try with $a = 7$, $b = 4$, $c = 12$.
+\item In general, what does this decision tree accomplish?
+\item \label{q:height} In the worst case, how many questions will you
+  have to answer when using this decision tree?  How can you tell?
+\item How many leaves does this decision tree have?
+\item Why does it need that many leaves?
+\item What is the highest number of leaves it could have without changing
+  your answer to \pref{q:height}?
+\item Suppose there is some other decision tree such that when using
+  it you have to answer a maximum of seven questions.  What is the
+  maximum number of leaves it could have?\marginnote{Note this could
+    be \emph{any} decision tree, not necessarily one that sorts.}
+\end{questions}
+
+The tree from the model---call it $T_3$---concerns a set of three
+numbers $a$, $b$, and $c$. Let's consider making a similar decision
+tree $T_4$ for a set of four numbers $a$, $b$, $c$, and $d$.  (You do
+\textbf{not} have to actually draw it, unless you are in the mood for
+some tedium!)
+
+\begin{questions}
+  \item How many leaves will $T_4$ need? Why?
+  \item Suppose we try to make $T_4$ as balanced as possible.  Given
+    such a balanced $T_4$, how many questions might we need to answer,
+    in the worst case, to use it?  How do you know?
+  \item Now consider making a decision tree $T_n$, which takes $n$
+    numbers and asks questions until it is able to put them in the
+    correct order.  How many leaves does $T_n$ need?
+  \item Assuming $T_n$ is as balanced as possible, what is the
+    worst-case number of questions one would need to answer when using
+    it? \label{q:tn}
+  \end{questions}
+\pause
+\begin{model*}{Lower bound proof}{lbproof}
+  \begin{sproof}
+    \stmt{\log (n!)}
+    \reason{=}{(a)}
+    \stmt{\log (n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot 3 \cdot 2 \cdot 1)}
+    \reason{=}{(b)}
+    \stmt{\log n + \log (n-1) + \log (n-2) + \dots + \log (n/2) + \log
+      (n/2 - 1) + \dots + \log 3 + \log 2 + \log 1}
+    \reason{\geq}{(c)}
+    \stmt{\log n + \log (n-1) + \log (n-2) + \dots + \log (n/2)}
+    \reason{\geq}{(d)}
+    \stmt{\log (n/2) + \log (n/2) + \log (n/2) + \dots + \log (n/2)}
+    \reason{\geq}{(e)}
+    \stmt{\frac{n}{2} \log (n/2)}
+  \end{sproof}
+\end{model*}
+\begin{questions}
+\item Fill in a reason for each step in the proof above.
+  \begin{subquestions}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \item \mbox{}
+  \end{subquestions}
+\item Explain why this shows that $\log(n!)$ is $\Omega(n \log n)$.
+\newpage
+\item Explain what this has to do with decision trees.\marginnote{\emph{Hint}: look at
+  your answer to Question~\ref{q:tn}.}
+\item Explain (not prove) why this implies the following theorem:
+\end{questions}
+\begin{thm} \label{thm:compsort}
+  Any sorting algorithm which works by only performing comparisons
+  between elements takes $\Omega(n \log n)$ time on a list of length
+  $n$.
+\end{thm}
+\pause
+
+Suppose you are given a list of $n$ records, where each record
+\begin{objective}
+  Students will describe and analyze bucket sort.
+\end{objective}
+contains information about a single person. (Assume $n$ could be very
+large, say, $100$ million.)  You are tasked with sorting the records
+by birthday.  That is, everyone whose birthday is January 1
+(regardless of year) should come first, then everyone with a birthday
+of January 2, and so on.
+
+\begin{questions}
+\item Describe the most efficient algorithm possible to accomplish
+  this task. \vspace{1in}
+\item What is the running time of your algorithm in terms of $n$?
+\item Why doesn't this contradict \pref{thm:compsort}?
+\end{questions}
+
+Suppose we introduce the additional requirement that the birthday
+sorting is \emph{stable}, that is, whenever $a$ and $b$ have the same
+birthday, if $a$ comes before $b$ in the original input list, then $a$
+still comes before $b$ in the sorted output list.  Put another way,
+for any particular birthday, all the people with that birthday have to
+stay in the same order that they started in.
+
+  \begin{questions}
+  \item Is the sorting algorithm you described above stable?  If so,
+    explain why; if not, explain how to modify it to make it so.
+  \end{questions}
+\end{document}

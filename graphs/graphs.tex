@@ -1,0 +1,258 @@
+% -*- compile-command: "pdflatex --enable-write18 graphs.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Graphs}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model}{Graphs and graph terms}{graphs}
+  \begin{center}
+  \begin{minipage}{0.45\textwidth}
+  \begin{diagram}[width=150]
+    import Graphs
+    dia :: Diagram B
+    dia = graph
+      [(0,1),(0,2),(1,2), (1,3),(3,4),(2,5),(5,6),(6,7),(7,8),(8,5),(3,9)]
+      (\i -> "$" ++ show i ++ "$")
+    \end{diagram}
+  \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+  \begin{diagram}[width=150]
+    import Graphs
+    import Data.Char (chr, ord)
+    dia :: Diagram B
+    dia = graph
+      [(0,2), (1,2), (2,3), (3,4), (4,5), (3,6), (6,7), (6,8), (6,9)]
+      (\i -> [chr (i + ord 'a')])
+    \end{diagram}
+  \end{minipage}
+
+  \vspace{1em}
+  \begin{minipage}{0.45\textwidth}
+    \begin{diagram}[width=150]
+      import Graphs
+      import Data.Char (chr, ord)
+      dia :: Diagram B
+      dia = graph
+        [ (0,1), (1,2), (2,0)
+        , (3,4), (4,5)
+        , (6,6), (7,7)
+        ]
+        (\i -> [chr (i + ord 'A')])
+    \end{diagram}
+  \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+    \begin{align*}
+      G &= (V,E) \\
+      V &= \{\alpha, \beta, \gamma, \delta, \epsilon, \zeta, \eta,
+          \theta\} \\
+      E &= \{\{\alpha, \delta\}, \{\theta, \eta\}, \{\beta, \alpha\},
+          \{\zeta, \delta\}, \{\epsilon, \eta\}, \{\gamma, \alpha\}\}
+    \end{align*}
+  \end{minipage}
+  \end{center}
+
+  \vspace{1em}
+  \begin{defn}
+    A \term{graph} $G = (V,E)$ is a set of \term{vertices} $V$
+    together with a set $E$ of \term{edges}, where each edge consists
+    of a set of two vertices.
+  \end{defn}
+
+  Above are shown four example graphs.  In clockwise order from the
+  upper-left, we will refer to them as the numeric graph, the
+  lowercase graph, the Greek graph, and the uppercase graph.  Here are
+  some facts about the graphs:
+
+  \begin{itemize}
+  \item $C$ and $B$ are \term{adjacent} (aka \term{neighbors}).  So
+    are $6$ and $5$.  $C$ and $F$ are not adjacent.  $f$ and $d$ are
+    not adjacent.  $H$ is not adjacent to itself.
+  \item The \term{degree} of vertex $C$ is 2.  The degree of vertex $H$ is
+    0.  The degree of vertex $g$ is 4.
+  \item Vertices $D$, $F$, $4$, $9$, $a$, $b$, $f$, $h$, $i$, $j$ are
+    \term{leaves}.  No other vertex is a leaf.
+  \end{itemize}
+\end{model}
+
+Don't worry if you don't remember all these graph terms!  In fact you
+should probably try to forget what you think you might remember and
+just focus on the information in the model. Part of the point of this
+exercise is to help you either recall these terms, or learn them for
+the first time.
+
+\begin{objective}
+  Students will understand and apply graph terms \term{edge},
+  \term{vertex}, \term{adjacent}/\term{neighbor}, \term{degree}, \term{leaf},
+  \term{path}, \term{connected}, \term{connected component},
+  \term{cycle}, \term{cyclic}, \term{acyclic}, and \term{tree}.
+\end{objective}
+
+\begin{questions}
+\item What does it mean for two vertices to be \term{adjacent}?
+\item Are $\alpha$ and $\beta$ adjacent?   What about $\alpha$ and $\zeta$?
+\item What is the \term{degree} of a vertex?  Use the term
+  \term{adjacent} in your answer.
+\item What is the degree of $\alpha$?
+\item What is the definition of a \term{leaf}?  Use the term
+  \term{degree} in your answer.
+\item Which vertices are leaves in the Greek graph?
+\end{questions}
+
+\newpage
+\begin{model*}{More graph terms}{graph-terms}
+Here are a few more facts about the graphs from
+Model~\ref{model:graphs}:
+
+\begin{itemize}
+\item Vertices $7$--$8$--$5$--$2$--$0$ are a \term{path}.
+  $2$--$1$--$0$--$2$--$1$ is also a path.  $H$ by itself is a
+  path. $H$--$F$--$B$ is not a path.  $8$--$2$--$1$ is also not a path.
+\item Vertices $f$ and $g$ are \term{connected}.  So are $7$ and $8$.
+  $C$ and $F$ are not connected.  $H$ is connected to itself.
+\item The graph with numbers is a \term{connected graph}.  So is the
+  graph with lowercase letters.  The graph with uppercase letters is
+  not a connected graph (it is \term{disconnected}).
+\item The numeric and lowercase graphs have one \term{connected
+    component} each.  The uppercase graph has four connected
+  components.
+\item $0$--$1$--$2$--$0$ is a \term{cycle}.  So is $C$--$A$--$B$--$C$.
+  $h$--$g$--$i$--$h$ is not a cycle.  $h$--$g$--$h$ is not a cycle
+  either.  Nor is $H$--$H$.
+\item The numeric graph and uppercase graph are \term{cyclic} graphs.
+  The lowercase graph is \term{acyclic}.
+\item The lowercase graph is a \term{tree}.  None of the other graphs
+  are trees (not even the Greek one).
+\end{itemize}
+\end{model*}
+
+\begin{questions}
+\item How many vertices can be in a \term{path}?
+\item What do you think is the definition of a \term{path}?
+\item Give an example of a path in the Greek graph.
+\item Can two vertices be connected but not adjacent?  If so, give an
+  example.
+\item Can two vertices be adjacent but not connected?  If so, give an
+  example.
+\item What do you think it means for two vertices to be connected?  Be
+  sure to use the term \term{path} in your answer.
+\item Is the Greek graph connected?
+\item What do you think is the definition of a \term{connected graph}?
+\item How many vertices can be in a connected component?
+\item How many \term{connected components} does the Greek graph have?
+\item Is the set of vertices $\{E, F\}$ a connected component?  Why or
+  why not?
+\item Write a definition for \term{connected component}.
+\item Write an ``if and only if'' statement using the terms
+  \term{connected graph} and \term{connected component}.
+\item What is a \term{cycle}?  Use the term \term{path} in your
+  answer.
+\item Does your definition for \term{cycle} correctly explain why
+  $h$--$g$--$h$ is not a cycle?  If not, revise it so it does.
+\item Does the Greek graph have a cycle?
+\item Is the Greek graph cyclic or acyclic?
+\item What do you think is the definition of a tree?  You should use
+  two of the other graph terms in your
+  definition.\marginnote{Warning---a tree graph is not quite the same
+    thing as a tree data structure!}
+\end{questions}
+
+\pause
+
+\section{Some proofs about graphs}
+
+\begin{objective}
+  Students will write proofs about graphs.
+\end{objective}
+
+\begin{thm}[Trees]
+  Let $G = (V,E)$ be a graph with $|V| = n \geq 1$.  Any two of the following
+  imply the third:
+  \begin{enumerate}
+  \item $G$ is connected.
+  \item $G$ is acyclic.
+  \item $G$ has $n-1$ edges.
+  \end{enumerate}
+\end{thm}
+
+We will take each pair of statements in turn and show that they imply
+the third.  Fill in the blanks to complete the following proofs!  Note
+that the size of a blank does not necessarily correspond to the
+amount of stuff you should write in it.
+
+\begin{lem} \label{lem:onetwothree}
+  $(1), (2) \implies (3)$.  That is: let $G = (V,E)$ be a graph with $|V|
+  = n \geq 1$.  If \blank\linebreak and \blank,\linebreak then \blank.
+\end{lem}
+
+\begin{proof}
+  Let $P(n)$ denote the statement ``Any graph $G$ with $n$ vertices
+  which is \blank and \blank\linebreak
+  must have \blank.''\linebreak  We wish to show
+  that $P(n)$ holds for all $n \geq 1$.
+
+  The proof is by \blank.
+  \begin{itemize}
+  \item The base case is when \blank.\linebreak In this case, $G$ must
+    be \blank\linebreak which indeed \blank.
+  \item In the inductive case, suppose $P(k)$ holds for some $k \geq
+    1$.  That is, suppose that any graph with \blank vertices\linebreak which is
+    \blank\linebreak must have \blank.\linebreak  Then we wish to show
+    \blank.
+
+    So, let $G$ be a graph with \blank vertices which is\linebreak
+    \mbox{}\blank and \blank.\linebreak  We claim that $G$
+    must have some vertex which is a leaf, that is, a vertex of degree \blank:
+    \begin{itemize}
+    \item $G$ cannot have any vertices of degree \blank\linebreak because
+      \blank.
+    \item It also cannot be the case that every vertex of $G$ has
+      degree $\geq$ \blank.  If they did, then we could find a \blank
+      by starting at any\linebreak vertex and walking along edges
+      randomly until \blank;\linebreak we would never get stuck
+      because \blank.\linebreak However, this is impossible because we
+      assumed \blank.
+    \end{itemize}
+    Hence, $G$ must have some vertex which \blank.\linebreak If we
+    delete this vertex along with the edge adjacent to it, it results
+    in a graph $G'$ with only \blank vertices;\linebreak we note that
+    $G'$ is still \blank\linebreak because \blank\linebreak and also
+    \blank\linebreak because \blank.\linebreak  Hence we may apply the
+    inductive hypothesis to conclude that $G'$\linebreak \mbox{}\blank.
+    Adding the deleted vertex and edge\linebreak back to $G'$ shows that $G$
+    \blank,\linebreak which is what we wanted to show.
+  \end{itemize}
+\end{proof}
+
+Let's do one more!  (You will do the third on your HW.)
+
+\begin{lem}
+  $(2),(3) \implies (1)$, that is, \blank\linebreak \mbox{}\blank.
+\end{lem}
+
+\begin{proof}
+  This proof uses a \term{counting argument}: we will show what we
+  wish to show by counting things in multiple ways.
+
+  Let $c$ denote the number of connected components of $G$.  We want
+  to show that \blank.
+
+  Number the components of $G$ from $1 \dots c$, and say that
+  component $i$ has $n_i$ vertices.  Then \[ \sum_{i=1}^c n_i =
+    \underline{\phantom{XXXXXXXXXX}} \] because \blank.\linebreak  Each
+  connected component is by definition a \blank graph;\linebreak each
+  component must also be \blank\linebreak since we assumed that $G$ is.  Hence
+  we may apply \pref{lem:onetwothree} to conclude that component $i$
+  \blank.\linebreak
+  Adding these up, the total number of edges in $G$ is
+  \[ |E| = \sum_{i=1}^c \underline{\phantom{XXXXXX}} =
+    \underline{\phantom{XXXXXXXXXXXXX}} \] But we already assumed the
+  number of edges in $G$ is \blank,\linebreak and hence \blank as desired.
+\end{proof}
+
+\end{document}

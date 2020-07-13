@@ -1,0 +1,53 @@
+% -*- compile-command: "pdflatex --enable-write18 13-flow-applications.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{../algo-activity}
+
+\title{\thecourse\ Activity 13: Applications of flow networks}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% \begin{objective}
+%   Students will XXX.
+% \end{objective}
+
+\begin{model}{Networks and flows}{networksandflows}
+  \begin{center}
+  {\huge A}
+  \begin{diagram}[width=300]
+    import FlowIntro
+    import qualified Data.Map as M
+    dia = drawFlow False flowExample
+  \end{diagram}
+  \end{center}
+  \bigskip \bigskip
+
+  \hrule \bigskip
+
+  \begin{center}
+  {\huge B}
+  \begin{diagram}[width=300]
+    import FlowIntro
+    import qualified Data.Map as M
+
+    flow = M.fromList $  -- $
+      [ (('s','a'), 2)
+      , (('s','b'), 3)
+      , (('a','d'), 1)
+      , (('d','t'), 1)
+      , (('a','b'), 1)
+      , (('b','e'), 4)
+      , (('e','f'), 2)
+      , (('e','t'), 2)
+      , (('f','t'), 2)
+      ]
+    dia = drawFlow True (flowExample # withFlow flow)
+  \end{diagram}
+  \end{center}
+\end{model}
+
+
+\end{document}
