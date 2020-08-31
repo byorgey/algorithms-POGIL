@@ -1,0 +1,91 @@
+% -*- compile-command: "rubber -d AA-definitions.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\title{\thecourse: Asymptotic Analysis: definitions}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model*}{Definitions}{defns}
+  \begin{defn}[Big-O] \mlabel{defn:bigO}
+    $T(n)$ is $O(g(n))$ if there exist a real number $c > 0$ and an
+    integer $n_0 \geq 0$ such that for all $n \geq n_0$,
+    \[ T(n) \leq c \cdot g(n). \]
+  \end{defn}
+
+  \begin{defn}[Big-Omega] \mlabel{defn:bigOmega}
+    $T(n)$ is $\Omega(g(n))$ if there exist a real number $c > 0$ and an
+    integer $n_0 \geq 0$ such that
+    for all $n \geq n_0$, \[ T(n) \geq c \cdot g(n). \]
+  \end{defn}
+
+  \begin{defn}[Big-Theta] \mlabel{defn:bigTheta}
+    $T(n)$ is $\Theta(g(n))$ if it is both $O(g(n))$ and $\Omega(g(n))$.
+  \end{defn}
+
+  \emph{Sample proof} that $n^2 + 2n$ is $\Theta(n^2)$:
+  \begin{itemize}
+  \item First, $n^2 + 2n \leq n^2 + 2n^2 = 3n^2$ for $n \geq 1$ (since
+    $n^2 \geq n$ when $n \geq 1$).  Hence $n^2 + 2n$ is $O(n^2)$
+    according to the definition if we pick $c = 3$ and $n_0 = 1$.
+  \item Next, $n^2 + 2n \geq n^2$ as long as $n \geq 0$.  So by
+    picking $c = 1$ and $n_0 = 0$, we see that $n^2 + 2n$ is also
+    $\Omega(n^2)$.
+  \end{itemize}
+\end{model*}
+
+\begin{questions}
+\item Compare our class consensus definition of $O(n^2)$ from the
+  previous activity with the formal definition of $O(g(n))$ above.
+  List one way in which they are similar, and one way in which they
+  are different. \vspace{0.5in}
+\item \label{q:phrasing} Consider the following three more intuitive
+  phrasings.  Match each one with its corresponding definition.
+    \begin{itemize}
+    \item $T(n)$ is eventually bounded below by some constant multiple
+      of $g(n)$.
+    \item $T(n)$ is eventually bounded between two constant multiples
+      of $g(n)$.
+    \item $T(n)$ is eventually bounded above by some constant multiple
+      of $g(n)$.
+    \end{itemize}
+
+  \item Which part of the definitions corresponds to the word
+    ``eventually'' in \pref{q:phrasing}?
+
+  \item \label{q:alt-proof} In the sample proof that $n^2 + 2n$ is $O(n^2)$, the given
+    values of $c$ and $n_0$ are not the only values that would work.
+    Given an alternate proof that $n^2 + 2n$ is $O(n^2)$ using
+    different values of $c$ and $n_0$.
+  \item Prove that $f(n) = 20n - 1$ is $O(n^2)$ by applying the formal
+    definition.
+    \vspace{0.5in}
+  \item Prove that $f(n) = n^3/10$ is $\Omega(n^2)$ by applying the
+    formal definition.
+    \vspace{0.5in}
+  \item \label{q:last-formal-proof} Prove that $f(n) = 3n^2 - n + 1$ is
+    $\Theta(n^2)$ by applying the formal definition.  \vspace{0.5in}
+
+  \item Consider this definition\sidenote{Unlike the definitions of
+      $O$, $\Omega$, and $\Theta$, this definition is not standard; I
+      just made it up.}: $T(n)$ is $\aleph(g(n))$ if there
+    exist a real number $c > 0$ and an integer $n_0 \geq 0$ such that
+    for all $n \geq n_0$, \[ T(n) = c \cdot g(n). \]
+    \begin{subquestions}
+    \item True or false: if $T(n)$ is $\aleph(g(n))$, then $T(n)$ is
+      $\Theta(g(n))$.  Justify your answer.
+    \item True or false: if $T(n)$ is $\Theta(g(n))$, then $T(n)$ is
+      $\aleph(g(n))$.  Justify your answer.
+    \end{subquestions}
+\end{questions}
+
+\end{document}

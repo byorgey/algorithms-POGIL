@@ -1,4 +1,4 @@
-% -*- compile-command: "stack exec -- rubber -d --unsafe AA.tex" -*-
+% -*- compile-command: "stack exec -- rubber -d --unsafe AA-intro.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
@@ -8,7 +8,7 @@
 \usepgfplotslibrary{external}
 \tikzexternalize
 
-\title{\thecourse: Asymptotic Analysis}
+\title{\thecourse: Introduction to Asymptotic Analysis}
 \date{}
 
 \begin{document}
@@ -177,6 +177,13 @@
   Students will describe asymptotic behavior of functions
   using big-$O$, big-$\Theta$, and big-$\Omega$ notation.
 \end{objective}
+
+\textbf{Important note}: although your previous experience with
+big-$O$ notation will certainly be helpful, I am not assuming that you
+remember anything in particular.  When answering the following
+questions, as much as possible, try to rely on the information
+provided in Model 1 rather than on your memory.
+
 \begin{questions}
 \item Based on the Venn diagram in the model, say whether each
   function is $O(n^2)$, $\Omega(n^2)$, or both.
@@ -238,99 +245,26 @@ true or false.  Give a short justification for each answer.
 
 % Fall 2017: skipped these questions
 
-% \section{Critical Thinking Questions II}
-
-% \begin{questions}
-% \item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
-%   that of $O(n^2)$?
-% \item In what way(s) do you think it is different?
-% \item Using complete English sentences, propose a definition for
-%   $\Omega(n^2)$.
-% \item If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
-%   $\Theta(n^2)$.  For each of the below functions, say whether you
-%   think it is $\Theta(n^2)$.  Justify your answers.
-%   \begin{subquestions}
-%   \item $3n^2 + 2n - 10$
-%   \item $\displaystyle \frac{n^3 - 5}{n}$
-%   \item $\displaystyle \frac{n^3 - 5}{\sqrt n}$
-%   \item $(n+1)(n-2)$
-%   \item $n + n \sqrt n$
-%   \end{subquestions}
-% \item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
-%   both?  Why?
-% \end{questions}
-
-\newpage
-\begin{model*}{Definitions}{defns}
-  \begin{defn}[Big-O] \mlabel{defn:bigO}
-    $T(n)$ is $O(g(n))$ if there exist a real number $c > 0$ and an
-    integer $n_0 \geq 0$ such that for all $n \geq n_0$,
-    \[ T(n) \leq c \cdot g(n). \]
-  \end{defn}
-
-  \begin{defn}[Big-Omega] \mlabel{defn:bigOmega}
-    $T(n)$ is $\Omega(g(n))$ if there exist a real number $c > 0$ and an
-    integer $n_0 \geq 0$ such that
-    for all $n \geq n_0$, \[ T(n) \geq c \cdot g(n). \]
-  \end{defn}
-
-  \begin{defn}[Big-Theta] \mlabel{defn:bigTheta}
-    $T(n)$ is $\Theta(g(n))$ if it is both $O(g(n))$ and $\Omega(g(n))$.
-  \end{defn}
-
-  \emph{Sample proof} that $n^2 + 2n$ is $\Theta(n^2)$:
-  \begin{itemize}
-  \item First, $n^2 + 2n \leq n^2 + 2n^2 = 3n^2$ for $n \geq 1$ (since
-    $n^2 \geq n$ when $n \geq 1$).  Hence $n^2 + 2n$ is $O(n^2)$
-    according to the definition if we pick $c = 3$ and $n_0 = 1$.
-  \item Next, $n^2 + 2n \geq n^2$ as long as $n \geq 0$.  So by
-    picking $c = 1$ and $n_0 = 0$, we see that $n^2 + 2n$ is also
-    $\Omega(n^2)$.
-  \end{itemize}
-\end{model*}
+\section{Critical Thinking Questions II}
 
 \begin{questions}
-\item Compare our class consensus definition of $O(n^2)$ with the
-  formal definition of $O(g(n))$ above.  List one way in which they
-  are similar, and one way in which they are different. \vspace{0.5in}
-\item \label{q:phrasing} Consider the following three more intuitive
-  phrasings.  Match each one with its corresponding definition.
-    \begin{itemize}
-    \item $T(n)$ is eventually bounded below by some constant multiple
-      of $g(n)$.
-    \item $T(n)$ is eventually bounded between two constant multiples
-      of $g(n)$.
-    \item $T(n)$ is eventually bounded above by some constant multiple
-      of $g(n)$.
-    \end{itemize}
-
-  \item Which part of the definitions corresponds to the word
-    ``eventually'' in \pref{q:phrasing}?
-
-  \item \label{q:alt-proof} In the sample proof that $n^2 + 2n$ is $O(n^2)$, the given
-    values of $c$ and $n_0$ are not the only values that would work.
-    Given an alternate proof that $n^2 + 2n$ is $O(n^2)$ using
-    different values of $c$ and $n_0$.
-  \item Prove that $f(n) = 20n - 1$ is $O(n^2)$ by applying the formal
-    definition.
-    \vspace{0.5in}
-  \item Prove that $f(n) = n^3/10$ is $\Omega(n^2)$ by applying the
-    formal definition.
-    \vspace{0.5in}
-  \item \label{q:last-formal-proof} Prove that $f(n) = 3n^2 - n + 1$ is
-    $\Theta(n^2)$ by applying the formal definition.  \vspace{0.5in}
-
-  % \item Consider this definition\sidenote{Unlike the definitions of
-  %     $O$, $\Omega$, and $\Theta$, this definition is not standard; I
-  %     just made it up.}: $T(n)$ is $\aleph(g(n))$ if there
-  %   exist a real number $c > 0$ and an integer $n_0 \geq 0$ such that
-  %   for all $n \geq n_0$, \[ T(n) = c \cdot g(n). \]
-  %   \begin{subquestions}
-  %   \item True or false: if $T(n)$ is $\aleph(g(n))$, then $T(n)$ is
-  %     $\Theta(g(n))$.  Justify your answer.
-  %   \item True or false: if $T(n)$ is $\Theta(g(n))$, then $T(n)$ is
-  %     $\aleph(g(n))$.  Justify your answer.
-  %   \end{subquestions}
+\item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
+  that of $O(n^2)$?
+\item In what way(s) do you think it is different?
+% \item Using complete English sentences, propose a definition for
+%   $\Omega(n^2)$.
+\item If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
+  $\Theta(n^2)$.  For each of the below functions, say whether you
+  think it is $\Theta(n^2)$.  Justify your answers.
+  \begin{subquestions}
+  \item $3n^2 + 2n - 10$
+  \item $\displaystyle \frac{n^3 - 5}{n}$
+  \item $\displaystyle \frac{n^3 - 5}{\sqrt n}$
+  \item $(n+1)(n-2)$
+  \item $n + n \sqrt n$
+  \end{subquestions}
+\item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
+  both?  Why?
 \end{questions}
 
 \end{document}
