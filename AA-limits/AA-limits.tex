@@ -28,14 +28,14 @@ the functions
 \item What is \[ \lim_{n \to \infty} \frac{f(n)}{n^2}? \]
 \item What is \[ \lim_{n \to \infty} \frac{g(n)}{n^2}? \]
 \item What is \[ \lim_{n \to \infty} \frac{h(n)}{n^2}? \]
-\item In general, consider the limit \[ \lim_{n \to \infty} T(n)/g(n). \]
+\item In general, consider the limit \[ \lim_{n \to \infty} T(n)/p(n). \]
   Intuitively, what can you say about the long-term behavior of $T(n)$
-  relative to $g(n)$ if\dots
+  relative to $p(n)$ if\dots
   \begin{subquestions}
     \item \dots the limit exists and is equal to $0$?  Draw a picture.
     \item \dots the limit exists and is equal to some positive
       constant $c$?  Draw a picture.
-    \item \dots the limit does not exist since $T(n)/g(n)$ diverges to
+    \item \dots the limit does not exist since $T(n)/p(n)$ diverges to
       $+\infty$?  Draw a picture.
     \end{subquestions}
 \item Fill in the statements of the following theorems:\marginnote{We
@@ -43,7 +43,7 @@ the functions
     you might like to try proving them yourself, based on the formal
     definitions of $O$ and $\Omega$.}
 \begin{thm}
-  If \[ 0 \leq \lim_{n \to \infty} \frac{T(n)}{g(n)} < \infty, \]
+  If \[ 0 \leq \lim_{n \to \infty} \frac{T(n)}{p(n)} < \infty, \]
   \\[2em] then $T(n)$ \uline{\hfill}.
 \end{thm} \vspace{0.2in}
 \marginnote{Optional challenge problem to think about later: why do
@@ -51,11 +51,11 @@ the functions
   consider a function like \[ f(n) = \begin{cases} n^2 & \text{$n$ is
         even} \\ 0 & \text{$n$ is odd} \end{cases}. \] }
 \begin{thm}
-  If \\[6em] then $T(n)$ is $\Omega(g(n))$.
+  If \\[6em] then $T(n)$ is $\Omega(p(n))$.
 \end{thm} \vspace{0.2in}
 \begin{thm}
-  If the limit \[ \lim_{n \to \infty} \frac{T(n)}{g(n)} \] \\[2em]
-  exists and \uline{\hfill}, then $T(n)$ is $\Theta(g(n))$.
+  If the limit \[ \lim_{n \to \infty} \frac{T(n)}{p(n)} \] \\[2em]
+  exists and \uline{\hfill}, then $T(n)$ is $\Theta(p(n))$.
 \end{thm}
 
 \item Describe the asymptotic behavior of \[ f(n) = 2n + \sqrt{3n} + 2 \]
