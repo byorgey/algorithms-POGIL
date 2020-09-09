@@ -59,7 +59,7 @@
 
   \vspace{1em}
   \begin{defn}
-    A \term{graph} $G = (V,E)$ is a set of \term{vertices} $V$
+    A (simple) \term{graph} $G = (V,E)$ is a set of \term{vertices} $V$
     together with a set $E$ of \term{edges}, where each edge consists
     of a set of two vertices.
   \end{defn}
@@ -200,10 +200,11 @@ amount of stuff you should write in it.
   \begin{itemize}
   \item The base case is when \blank.\linebreak In this case, $G$ must
     be \blank\linebreak which indeed \blank.
-  \item In the inductive case, suppose $P(k)$ holds for some $k \geq
+  \item For the induction step, suppose $P(k)$ holds for some $k \geq
     1$.  That is, suppose that any graph with \blank vertices\linebreak which is
     \blank\linebreak must have \blank.\linebreak  Then we wish to show
-    \blank.
+    $P(k+1)$, that is, any graph with \blank\linebreak vertices which is
+    connected and acyclic must have \blank.
 
     So, let $G$ be a graph with \blank vertices which is\linebreak
     \mbox{}\blank and \blank.\linebreak  We claim that $G$
