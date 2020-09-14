@@ -19,7 +19,10 @@ import           Data.Ord             (comparing)
 import           Physics.ForceLayout
 
 graph :: _ => [(Int,Int)] -> (Int -> String) -> Diagram PGF
-graph es vLabel = drawEnsemble es vLabel $
+graph = graph' False
+
+graph' :: _ => Bool -> [(Int,Int)] -> (Int -> String) -> Diagram PGF
+graph' dir es vLabel = drawEnsemble dir es vLabel $
   forceLayout
     ( with
     & damping     .~ 0.8
@@ -40,8 +43,8 @@ graph es vLabel = drawEnsemble es vLabel $
     particleMap :: M.Map Int (Particle V2 Double)
     particleMap = M.fromList $ zip vs (map initParticle (regPoly (length vs) 4))
 
-drawEnsemble :: _ => [(Int,Int)] -> (Int -> String) -> Ensemble V2 Double -> Diagram PGF
-drawEnsemble es vLabel ens
+drawEnsemble :: _ => Bool -> [(Int,Int)] -> (Int -> String) -> Ensemble V2 Double -> Diagram PGF
+drawEnsemble dir es vLabel ens
   = applyAll (map drawEdge es) . mconcat . map drawPt $ ps
   where
     drawPt (pid, p) = mconcat
@@ -64,7 +67,12 @@ drawEnsemble es vLabel ens
             # snd
     pmap = ens ^. particles
     ps = (map . second) (view pos) . M.assocs $ pmap
-    drawEdge (v1,v2) = withNames [v1,v2] $ \[s1,s2] -> beneath (location s1 ~~ location s2)
+    drawEdge (v1,v2)
+      | v1 == v2 = id
+      | otherwise = case dir of
+          True -> connectOutside v1 v2
+          False -> withNames [v1,v2] $ \[s1,s2] ->
+            beneath (location s1 ~~ location s2)
 
 pip :: _ => Diagram PGF
 pip = circle 0.2 # fc black
