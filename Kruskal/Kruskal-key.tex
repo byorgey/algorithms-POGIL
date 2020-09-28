@@ -1,0 +1,77 @@
+
+\newpage
+\begin{model*}{The Cut Property (15 mins)}{cut-property}
+  \begin{defn}
+    A \term{cut} in a graph $G = (V,E)$ is a partition of the vertices
+    $V$ into two sets $S$ and $T$, that is, every vertex is in either
+    $S$ or $T$ but not both.  We say that an edge $e$ \term{crosses}
+    the cut $(S,T)$ if one vertex of $e$ is in $S$ and the other is in
+    $T$.
+  \end{defn}
+
+  \begin{thm}[Cut Property]
+    Given a weighted, undirected graph $G = (V,E)$, let $S$ and $T$ be
+    any partition of $V$, and suppose $e$ is the smallest-weight edge
+    crossing the $(S,T)$ cut.  Then every minimum spanning tree of $G$
+    must include $e$.
+  \end{thm}
+\end{model*}
+
+\begin{questions}
+\item Give three examples of cuts in the graph from \pref{model:mwss}
+  and identify the smallest edge crossing each cut.
+\end{questions}
+
+Let's prove the cut property.
+
+\begin{proof}
+  Let $G$ be a weighted, undirected graph $G = (V,E)$, let $S$ and $T$
+  be an arbitrary partition of $V$ into two sets, and suppose
+  $e = (x,y)$ is the smallest-weight edge with one endpoint in $S$ and
+  one in $T$.  We wish to show that \emph{every MST of $G$ must
+    include $e$}.
+
+  Suppose $M$ is a spanning tree of $G$ which does \textbf{not}
+  contain the edge $e$.  Since $M$ is a \emph{tree} it contains a unique
+  \emph{path} between any two \emph{vertices}. So consider the unique
+  \emph{path} in $M$ between \emph{$x$ and $y$}.  \marginnote{\emph{Hint}:
+    draw a picture!} It must cross
+  the cut at least once since \emph{$x \in S$ and $y \in T$}; suppose it
+  crosses at $e' = (x',y')$, with $x' \in X$ and $y' \in Y$.
+  We know that $w_e < w_{e'}$ since \emph{we assumed $e$ is the
+    smallest-weight edge crossing the cut}. Now take $M$ and
+  replace $e'$ with $e$; the resulting graph is still
+  \emph{connected} because \emph{any path that went through $e'$ can
+    detour through $e$}, but it has a smaller total \emph{weight}
+  because \emph{we removed $e'$ and replaced it with $e$ which has a
+    smaller weight}.
+
+  So, we have shown that any spanning tree $M$ which does not contain
+  the edge $e$ can be made into a \emph{smaller-weight spanning tree},
+  which means that $M$ is not a \emph{minimum spanning tree}. This
+  proves what we wanted to show, since \emph{any tree not containing
+    $e$ is not an MST}.
+\end{proof}
+
+The cut property can be used to directly show the correctness of
+several MST algorithms.  Let's prove the correctness of Kruskal's
+Algorithm; the proofs for the other algorithms are similar.
+
+\begin{thm}
+  Kruskal's Algorithm is correct.
+\end{thm}
+
+\begin{proof}
+  Suppose at some step the algorithm picks the edge $e = (x,y)$.  Let
+  $X$ be the set of vertices connected to $x$ by edges which have been
+  picked so far (not including $e$), and let $Y$ be all other
+  vertices. $x \in X$ by definition.  We know that $y \notin X$ since
+  if it was, $e$ would \emph{create a cycle} but then Kruskal's
+  Algorithm wouldn't \emph{pick it}. $e$ therefore crosses the cut
+  $(X,Y)$. No other edges which have been picked previously cross the
+  cut, since \emph{by definition all the edges go between vertices in
+    $X$}. Therefore $e$ must be the \emph{smallest edge crossing the
+    cut} because \emph{the edges are chosen in order from smallest to
+    biggest weight}. Therefore by the Cut Property $e$ must be in any
+  MST and Kruskal's Algorithm is correct to pick it.
+\end{proof}

@@ -1,0 +1,89 @@
+% -*- compile-command: "rubber -d --unsafe Kruskal.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Kruskal's Algorithm}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+XXX we will focus on Kruskal's Algorithm, prove it correct.
+XXX remind what Kruskal's Algorithm is.
+XXX include graph from previous activity
+XXX put in an aside about exchange properties, used to prove greedy algorithms.
+XXX add something at the end about analysis of time complexity?  Or
+just do that as a bit of lecture at the end?
+
+\begin{model*}{The Cut Property (15 mins)}{cut-property}
+  \begin{defn}
+    A \term{cut} in a graph $G = (V,E)$ is a partition of the vertices
+    $V$ into two sets $S$ and $T$, that is, every vertex is in either
+    $S$ or $T$ but not both.  We say that an edge $e$ \term{crosses}
+    the cut $(S,T)$ if one vertex of $e$ is in $S$ and the other is in
+    $T$.
+  \end{defn}
+
+  \begin{thm}[Cut Property]
+    Given a weighted, undirected graph $G = (V,E)$, let $S$ and $T$ be
+    any partition of $V$, and suppose $e$ is the smallest-weight edge
+    crossing the $(S,T)$ cut.  Then every minimum spanning tree of $G$
+    must include $e$.
+  \end{thm}
+\end{model*}
+
+\begin{questions}
+\item Give three examples of cuts in the graph from \pref{model:mwss}
+  and identify the smallest edge crossing each cut.
+\end{questions}
+
+Let's prove the cut property.
+
+\begin{proof}
+  Let $G$ be a weighted, undirected graph $G = (V,E)$, let $S$ and $T$
+  be an arbitrary partition of $V$ into two sets, and suppose
+  $e = (x,y)$ is the smallest-weight edge with one endpoint in $S$ and
+  one in $T$.  We wish to show that \blank.
+
+  Suppose $M$ is a spanning tree of $G$ which does \textbf{not}
+  contain the edge $e$.  Since $M$ is a \blank it contains a unique
+  \blank\linebreak between any two \blank. So consider the unique
+  \blank\linebreak in $M$ between \blank.  \marginnote{\emph{Hint}:
+    draw a picture!} It must cross
+  the cut at least once since\linebreak \mbox{} \blank; suppose it
+  crosses at $e' = (x',y')$,\linebreak with $x' \in X$ and $y' \in Y$.
+  We know that $w_e < w_{e'}$ since \blank.\linebreak Now take $M$ and
+  replace \blank with \blank; the resulting graph is\linebreak still
+  \blank because \blank,\linebreak but it has a smaller total \blank
+  because \blank.
+
+  So, we have shown that any spanning tree $M$ which does not contain
+  the edge $e$ can be made into a \blank,\linebreak which means that
+  $M$ is not a \blank. This proves what\linebreak we wanted to show, since
+  \blank.
+\end{proof}
+
+The cut property can be used to directly show the correctness of
+several MST algorithms.  Let's prove the correctness of Kruskal's
+Algorithm; the proofs for the other algorithms are similar.
+
+\begin{thm}
+  Kruskal's Algorithm is correct.
+\end{thm}
+
+\begin{proof}
+  Suppose at some step the algorithm picks the edge $e = (x,y)$.  Let
+  $X$ be the set of vertices connected to $x$ by edges which have been
+  picked so far (not including $e$), and let $Y$ be all other
+  vertices. $x \in X$ by definition.  We know that $y \notin X$ since
+  if it was, $e$ would \blank\linebreak but then Kruskal's Algorithm
+  wouldn't \blank.\linebreak $e$ therefore crosses the cut $(X,Y)$. No
+  other edges which have been picked previously cross the cut, since
+  \blank.\linebreak Therefore $e$ must be the \blank\linebreak because
+  \blank.\linebreak Therefore by the Cut Property $e$ must
+  be in any MST and Kruskal's Algorithm is correct to pick it.
+\end{proof}
+
+\end{document}
