@@ -22,7 +22,7 @@
 %   your group has four members, the remaining person is the reporter.
 % \end{itemize}
 
-\begin{model*}{Minimum-weight Spanning Subgraphs (13 mins)}{mwss}
+\begin{model*}{Minimum-weight Spanning Subgraphs (20  mins)}{mwss}
   \begin{defn}
     Given an undirected graph $G = (V,E)$, a \term{spanning
       subgraph} of $G$ is a connected subgraph $G' = (V,E')$ of $G$;
@@ -111,7 +111,7 @@
 \item Can a graph $G$ have more than one minimum-weight spanning
   subgraph?  Give an example, or explain why it is not possible.
 \item Find a MWSS for the graph in~\pref{model:mwss}. Does it have
-  more than one?\marginnote{Don't spend too much time on this
+  more than one?\marginnote{\textbf{Note}: don't spend too much time on this
     question; just find a spanning subgraph which you reasonably think
     is the minimum, and move on.}
 \item \label{q:scenarios} Which of the following scenarios could be
@@ -145,8 +145,9 @@
   \end{subquestions}
 
 \item (Review) What is the definition of a \term{tree} graph?
-\item \label{q:mwss-tree} Prove: a MWSS must always be a tree. \marginnote{Hint: use a
-    proof by contradiction.}
+\item \label{q:mwss-tree} Prove: in a weighted, undirected graph with
+  positive weights, a MWSS must always be a tree. \marginnote{Hint:
+    use a proof by contradiction.}
 \end{questions}
 
 % \begin{figure*}
@@ -176,12 +177,13 @@ algorithms for finding them.
     connects any visited vertex to any unvisited vertex and which would
     not complete a cycle with previously chosen edges; mark the other
     end of the edge visited.
-  \item (\textbf{Johnson's}) Choose any vertex to start.  At each step,
-    pick the smallest edge connected to the current vertex which has
-    not already been chosen and would not complete a cycle with
-    previously chosen edges.  Repeat until running out of options;
-    then pick a new starting vertex and repeat the entire process.  Do
-    this until all vertices are connected.
+  \item (\textbf{Johnson's}) Choose any vertex to start.  At each
+    step, pick the smallest edge connected to the current vertex which
+    has not already been chosen and would not complete a cycle with
+    previously chosen edges.  The other end of the edge becomes the
+    new current vertex.  Repeat until running out of options; then
+    pick a new starting vertex and repeat the entire process, until
+    all vertices are connected.
   \item (\textbf{Reverse delete}) Start with all edges initially
     ``picked'', and consider them in order from biggest to smallest
     weight.  For each edge, throw it out (\ie ``unpick'' it) if and
@@ -226,75 +228,5 @@ algorithms for finding them.
 \item One of these algorithms is fake.  Which one?  Give an example
   showing why it does not work.
 \end{questions}
-
-\newpage
-\begin{model*}{The Cut Property (15 mins)}{cut-property}
-  \begin{defn}
-    A \term{cut} in a graph $G = (V,E)$ is a partition of the vertices
-    $V$ into two sets $S$ and $T$, that is, every vertex is in either
-    $S$ or $T$ but not both.  We say that an edge $e$ \term{crosses}
-    the cut $(S,T)$ if one vertex of $e$ is in $S$ and the other is in
-    $T$.
-  \end{defn}
-
-  \begin{thm}[Cut Property]
-    Given a weighted, undirected graph $G = (V,E)$, let $S$ and $T$ be
-    any partition of $V$, and suppose $e$ is the smallest-weight edge
-    crossing the $(S,T)$ cut.  Then every minimum spanning tree of $G$
-    must include $e$.
-  \end{thm}
-\end{model*}
-
-\begin{questions}
-\item Give three examples of cuts in the graph from \pref{model:mwss}
-  and identify the smallest edge crossing each cut.
-\end{questions}
-
-Let's prove the cut property.
-
-\begin{proof}
-  Let $G$ be a weighted, undirected graph $G = (V,E)$, let $S$ and $T$
-  be an arbitrary partition of $V$ into two sets, and suppose
-  $e = (x,y)$ is the smallest-weight edge with one endpoint in $S$ and
-  one in $T$.  We wish to show that \blank.
-
-  Suppose $M$ is a spanning tree of $G$ which does \textbf{not}
-  contain the edge $e$.  Since $M$ is a \blank it contains a unique
-  \blank\linebreak between any two \blank. So consider the unique
-  \blank\linebreak in $M$ between \blank.  \marginnote{\emph{Hint}:
-    draw a picture!} It must cross
-  the cut at least once since\linebreak \mbox{} \blank; suppose it
-  crosses at $e' = (x',y')$,\linebreak with $x' \in X$ and $y' \in Y$.
-  We know that $w_e < w_{e'}$ since \blank.\linebreak Now take $M$ and
-  replace \blank with \blank; the resulting graph is\linebreak still
-  \blank because \blank,\linebreak but it has a smaller total \blank
-  because \blank.
-
-  So, we have shown that any spanning tree $M$ which does not contain
-  the edge $e$ can be made into a \blank,\linebreak which means that
-  $M$ is not a \blank. This proves what\linebreak we wanted to show, since
-  \blank.
-\end{proof}
-
-The cut property can be used to directly show the correctness of
-several MST algorithms.  Let's prove the correctness of Kruskal's
-Algorithm; the proofs for the other algorithms are similar.
-
-\begin{thm}
-  Kruskal's Algorithm is correct.
-\end{thm}
-
-\begin{proof}
-  Suppose at some step the algorithm picks the edge $e = (x,y)$.  Let
-  $X$ be the set of vertices connected to $x$ by edges which have been
-  picked so far (not including $e$), and let $Y$ be all other
-  vertices. $x \in X$ by definition.  We know that $y \notin X$ since
-  if it was, $e$ would \blank\linebreak but then Kruskal's Algorithm
-  wouldn't \blank.\linebreak $e$ therefore crosses the cut $(X,Y)$. No
-  other edges which have been picked previously cross the cut, since
-  \blank.\linebreak Therefore $e$ must be the \blank\linebreak because
-  \blank.\linebreak Therefore by the Cut Property $e$ must
-  be in any MST and Kruskal's Algorithm is correct to pick it.
-\end{proof}
 
 \end{document}

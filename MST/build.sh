@@ -1,4 +1,4 @@
 #!/bin/sh
 
 stack build diagrams diagrams-builder
-stack exec -- pdflatex --enable-write18 *.tex
+stack exec -- pdflatex --enable-write18 MST.tex
