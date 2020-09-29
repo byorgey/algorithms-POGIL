@@ -1,7 +1,9 @@
-% -*- compile-command: "rubber -d --unsafe Kruskal.tex" -*-
+% -*- compile-command: "./build.sh" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
+\usepackage{algorithm, algorithmicx}
+\usepackage[noend]{algpseudocode}
 
 \title{\thecourse: Kruskal's Algorithm}
 \date{}
@@ -10,14 +12,170 @@
 
 \maketitle
 
-XXX we will focus on Kruskal's Algorithm, prove it correct.
-XXX remind what Kruskal's Algorithm is.
-XXX include graph from previous activity
-XXX put in an aside about exchange properties, used to prove greedy algorithms.
-XXX add something at the end about analysis of time complexity?  Or
-just do that as a bit of lecture at the end?
+In the previous activity you learned about minimum spanning trees and
+experimented with several different algorithms for finding them.  In
+today's activity we will focus on Kruskal's Algorithm and prove that
+it works correctly.
 
-\begin{model*}{The Cut Property (15 mins)}{cut-property}
+\begin{model*}{Kruskal's Algorithm (12 mins)}{kruskal}
+  \begin{center}
+    \begin{diagram}[width=300]
+      {-# LANGUAGE ViewPatterns #-}
+
+      import GraphDiagrams
+      import Data.Bifunctor
+      import System.Random
+
+      perturb :: P2 Double -> IO (P2 Double)
+      perturb (coords -> (x :& y)) = do
+        dx <- randomRIO (-0.3, 0.3)
+        dy <- randomRIO (-0.3, 0.3)
+        return ((x + dx) ^& (y + dy))
+
+      mvertices :: [(Char, P2 Double)]
+      mvertices =
+        [ ('a', 1 ^& 2)
+        , ('b', 0 ^& 1)
+        , ('c', 1 ^& 0)
+        , ('d', 2 ^& 1)
+        , ('i', 3 ^& 0)
+        , ('f', 3 ^& 2)
+        , ('e', 4 ^& 1)
+        , ('j', 4 ^& (-1))
+        , ('g', 5 ^& 2)
+        , ('h', 5 ^& 0)
+        ]
+
+      mvertices' :: IO [(Char, P2 Double)]
+      mvertices' = (traverse . traverse) perturb mvertices
+
+      medges =
+        [ (('a','b'), 3)
+        , (('b','c'), 17)
+        , (('b','d'), 16)
+        , (('a','f'), 2)
+        , (('c','d'), 8)
+        , (('c','i'), 18)
+        , (('d','i'), 4)
+        , (('d','e'), 11)
+        , (('i','e'), 10)
+        , (('f','e'), 1)
+        , (('f','g'), 7)
+        , (('e','g'), 6)
+        , (('e','h'), 5)
+        , (('i','h'), 12)
+        , (('i','j'), 9)
+        , (('j','h'), 13)
+        , (('g','h'), 15)
+        ]
+
+      g :: IO (Graph Char Int)
+      g = do
+        vs <- mvertices'
+        return $ wgraph vs medges
+
+      dia :: IO (Diagram B)
+      dia = drawGraph (drawVTeX . first (:[])) (drawUWE (tex . show)) <$> g
+  \end{diagram}
+
+  \end{center}
+
+  \begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \Require Undirected, weighted graph $G = (V,E)$
+      \State $T \gets \varnothing$   \Comment{$T$ holds the set of
+        edges in the MST}
+      \State Sort $E$ from smallest to biggest weight
+      \For{each edge $e \in E$}
+        \If{$e$ does not make a cycle with other edges in $T$}
+          \State Add $e$ to $T$
+        \EndIf
+      \EndFor
+    \end{algorithmic}
+    \label{alg:kruskal}
+  \end{algorithm}
+\end{model*}
+
+\begin{questions}
+\item Simulate Kruskal's Algorithm on the graph in
+  \pref{model:kruskal}.  What is the total weight of the resulting
+  spanning tree?
+\item The way the algorithm is written in \pref{model:kruskal}, one
+  must iterate through every single edge in $E$.  However, this is not
+  always necessary.  Can you think of a simple way to tell when we can
+  stop the loop early?
+\item Explain why even in the worst case,
+  $\Theta(\lg V) = \Theta(\lg E)$ in any graph.
+\item In the above algorithm, how long does line 2 take?  Simplify
+  your answer using the observation from the previous question.
+\item Can you think of a way to implement line 4?  How long would it take?
+\end{questions}
+
+\pause
+
+\begin{model*}{The Cut Property (20 mins)}{cut-property}
+  \begin{center}
+    \begin{diagram}[width=300]
+      {-# LANGUAGE ViewPatterns #-}
+
+      import GraphDiagrams
+      import Data.Bifunctor
+      import System.Random
+
+      perturb :: P2 Double -> IO (P2 Double)
+      perturb (coords -> (x :& y)) = do
+        dx <- randomRIO (-0.3, 0.3)
+        dy <- randomRIO (-0.3, 0.3)
+        return ((x + dx) ^& (y + dy))
+
+      mvertices :: [(Char, P2 Double)]
+      mvertices =
+        [ ('a', 1 ^& 2)
+        , ('b', 0 ^& 1)
+        , ('c', 1 ^& 0)
+        , ('d', 2 ^& 1)
+        , ('i', 3 ^& 0)
+        , ('f', 3 ^& 2)
+        , ('e', 4 ^& 1)
+        , ('j', 4 ^& (-1))
+        , ('g', 5 ^& 2)
+        , ('h', 5 ^& 0)
+        ]
+
+      mvertices' :: IO [(Char, P2 Double)]
+      mvertices' = (traverse . traverse) perturb mvertices
+
+      medges =
+        [ (('a','b'), 3)
+        , (('b','c'), 17)
+        , (('b','d'), 16)
+        , (('a','f'), 2)
+        , (('c','d'), 8)
+        , (('c','i'), 18)
+        , (('d','i'), 4)
+        , (('d','e'), 11)
+        , (('i','e'), 10)
+        , (('f','e'), 1)
+        , (('f','g'), 7)
+        , (('e','g'), 6)
+        , (('e','h'), 5)
+        , (('i','h'), 12)
+        , (('i','j'), 9)
+        , (('j','h'), 13)
+        , (('g','h'), 15)
+        ]
+
+      g :: IO (Graph Char Int)
+      g = do
+        vs <- mvertices'
+        return $ wgraph vs medges
+
+      dia :: IO (Diagram B)
+      dia = drawGraph (drawVTeX . first (:[])) (drawUWE (tex . show)) <$> g
+  \end{diagram}
+
+  \end{center}
+
   \begin{defn}
     A \term{cut} in a graph $G = (V,E)$ is a partition of the vertices
     $V$ into two sets $S$ and $T$, that is, every vertex is in either
@@ -28,15 +186,17 @@ just do that as a bit of lecture at the end?
 
   \begin{thm}[Cut Property]
     Given a weighted, undirected graph $G = (V,E)$, let $S$ and $T$ be
-    any partition of $V$, and suppose $e$ is the smallest-weight edge
-    crossing the $(S,T)$ cut.  Then every minimum spanning tree of $G$
-    must include $e$.
+    any partition of $V$, and suppose $e$ is some edge crossing the
+    $(S,T)$ cut, such that the weight of $e$ is strictly smaller than
+    the weight of any other edge crossing the $(S,T)$ cut.  Then every
+    minimum spanning tree of $G$ must include $e$.
   \end{thm}
 \end{model*}
 
 \begin{questions}
-\item Give three examples of cuts in the graph from \pref{model:mwss}
-  and identify the smallest edge crossing each cut.
+\item Give three examples of cuts in the graph from
+  \pref{model:cut-property} and identify the smallest edge crossing
+  each cut.
 \end{questions}
 
 Let's prove the cut property.
@@ -47,22 +207,21 @@ Let's prove the cut property.
   $e = (x,y)$ is the smallest-weight edge with one endpoint in $S$ and
   one in $T$.  We wish to show that \blank.
 
-  Suppose $M$ is a spanning tree of $G$ which does \textbf{not}
-  contain the edge $e$.  Since $M$ is a \blank it contains a unique
-  \blank\linebreak between any two \blank. So consider the unique
-  \blank\linebreak in $M$ between \blank.  \marginnote{\emph{Hint}:
-    draw a picture!} It must cross
-  the cut at least once since\linebreak \mbox{} \blank; suppose it
-  crosses at $e' = (x',y')$,\linebreak with $x' \in X$ and $y' \in Y$.
-  We know that $w_e < w_{e'}$ since \blank.\linebreak Now take $M$ and
-  replace \blank with \blank; the resulting graph is\linebreak still
-  \blank because \blank,\linebreak but it has a smaller total \blank
-  because \blank.
+  We will prove the contrapositive. Suppose $M$ is a spanning tree of
+  $G$ which does \textbf{not} contain the edge $e$.  Since $M$ is a
+  \blank it contains a unique \blank\linebreak between any two
+  \blank. So consider the unique \blank\linebreak in $M$ between
+  \blank.  \marginnote{\emph{Hint}: draw a picture!} It must cross the
+  cut at least once since\linebreak \mbox{} \blank; suppose it crosses
+  at $e' = (x',y')$,\linebreak with $x' \in X$ and $y' \in Y$.  We
+  know that the weight of $e$ is smaller than the weight of $e'$,
+  since \blank.\linebreak Now take $M$ and replace \blank with \blank;
+  the result is\linebreak still \blank because
+  \blank,\linebreak but it has a smaller total \blank because \blank.
 
   So, we have shown that any spanning tree $M$ which does not contain
   the edge $e$ can be made into a \blank,\linebreak which means that
-  $M$ is not a \blank. This proves what\linebreak we wanted to show, since
-  \blank.
+  $M$ is not a \blank.
 \end{proof}
 
 The cut property can be used to directly show the correctness of
@@ -78,12 +237,13 @@ Algorithm; the proofs for the other algorithms are similar.
   $X$ be the set of vertices connected to $x$ by edges which have been
   picked so far (not including $e$), and let $Y$ be all other
   vertices. $x \in X$ by definition.  We know that $y \notin X$ since
-  if it was, $e$ would \blank\linebreak but then Kruskal's Algorithm
-  wouldn't \blank.\linebreak $e$ therefore crosses the cut $(X,Y)$. No
-  other edges which have been picked previously cross the cut, since
-  \blank.\linebreak Therefore $e$ must be the \blank\linebreak because
-  \blank.\linebreak Therefore by the Cut Property $e$ must
-  be in any MST and Kruskal's Algorithm is correct to pick it.
+  if it was, $e$ would\linebreak make a \blank but then Kruskal's
+  Algorithm wouldn't \blank.\linebreak $e$ therefore crosses the cut
+  $(X,Y)$. No other edges which have been picked previously cross the
+  cut, since \blank.\linebreak Therefore $e$ must be the smallest
+  \blank\linebreak because \blank.\linebreak Therefore by the Cut
+  Property $e$ must be in any MST and Kruskal's Algorithm is correct
+  to pick it.
 \end{proof}
 
 \end{document}
