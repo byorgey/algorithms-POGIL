@@ -61,10 +61,10 @@ binary counter is shown at the left.
     state $1$?
   \item How many bits differ between states $1$ and $2$?  Between $2$
     and $3$?  Between $3$ and $4$?
-  \item In general, describe which bits need to flip to go from state
-    $n$ to state $n+1$.
   \item Write pseudocode to perform an increment operation, given an
-    array of bits $b$ as an input.\marginnote{You do not need to worry about
+    array of bits $b$ as an input.\marginnote{\emph{Hint}: either look
+      for patterns, or think about how the grade school addition
+      algorithm works in binary when adding 1. You do not need to worry about
     overflowing the array.}
   \item \label{q:inc-best} If we assume that changing the value of a
     bit takes 1 time step, what is the best-case runtime of your
@@ -77,12 +77,12 @@ binary counter is shown at the left.
     notation.\marginnote{Careful!  $n$ is the \emph{number
         represented by} the bits, not the number of bits.}
   \item Give an example of a worst-case input for your algorithm.
-  \item Based on your answer to \pref{q:inc-best}, what is the
-    best-case total running time for a sequence of $n$ increment
-    operations?
+  \item Based on your answer to \pref{q:inc-best}, what is the best
+    total running time we could possibly hope for a sequence of $n$
+    increment operations?
   \item \label{q:worst-total} Based on your answer to
-    \pref{q:inc-worst}, what is the worst-case total running time for
-    a sequence of $n$ increment operations?
+    \pref{q:inc-worst}, what is the worst possible total running time
+    for a sequence of $n$ increment operations?
   \end{questions}
 
 \pause
