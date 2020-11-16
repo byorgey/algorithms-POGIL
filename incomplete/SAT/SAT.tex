@@ -1,25 +1,30 @@
-% -*- compile-command: "pdflatex --enable-write18 15-SAT.tex" -*-
+% -*- compile-command: "./build.sh" -*-
 \documentclass{tufte-handout}
 
-\usepackage{../algo-activity}
+\usepackage{algo-activity}
 \usepackage{booktabs}
 
-\title{\thecourse\ Activity 15: SAT}
+\title{\thecourse: SAT and 3-SAT}
 \date{}
 
 \begin{document}
 
 \maketitle
 
-XXX THIS ACTIVITY NEEDS REVISING
-
 % \begin{objective}
 %   Students will XXX.
 % \end{objective}
 
+\newcommand{\True}{\ensuremath{\mathsf{T}}\xspace}
+\newcommand{\False}{\ensuremath{\mathsf{F}}\xspace}
+
 \begin{model*}{SAT}{SAT}
-  Recall that $\land$ denotes logical AND, and $\lor$ denotes logical
-  OR. $\overline{x}$ denotes logical negation. \bigskip
+  Each variable $x_i$ represents a Boolean value (\True or \False).
+  An \emph{assignment} consists in specifying a \True or \False value
+  for each variable.  Recall that $\land$ denotes logical AND, and
+  $\lor$ denotes logical OR. $\overline{x}$ denotes logical
+  negation. For example, $x_1 \land \overline{x_3}$ means ``$x_1$ and
+  not $x_3$''.\bigskip
 
   \begin{tabular}{l|p{2.5in}|p{2.5in}}
     & Examples & Non-examples \\ \hline
@@ -33,35 +38,27 @@ XXX THIS ACTIVITY NEEDS REVISING
     & $x_1 \land x_2$ \newline $x_2 \lor \overline{x_3} \land x_4$
       \newline $x_1 \Rightarrow x_5$ \\ \hline
     \emph{CNF}
-    & $x_1$ \newline $x_2 \lor x_5 \lor \overline{x_1}$ \newline $x_1 \land \overline{x_3}$ \newline $(x_1 \lor
+    & $x_1$ \newline $x_2 \lor x_5 \lor \overline{x_1}$ \newline $(x_1 \lor
       x_2) \land (\overline{x_3} \lor x_5 \lor x_9 \lor x_8 \lor x_2)$ \newline $x_4
       \land (x_1 \lor x_2) \land \overline{x_5} \land (x_1 \lor
       \overline{x_3} \lor x_5)$ \newline $x_1 \land (\overline{x_1}
-      \lor x_3) \land (\overline{x_1} \lor \overline{x_3})$
+      \lor x_3) \land (\overline{x_1} \lor \overline{x_3})$ \newline $x_1 \land \overline{x_3}$
     & $(x_1 \land x_3) \lor (x_2 \land x_5)$ \newline $x_1 \land (x_2
       \lor (x_3 \land (x_4 \lor (x_5 \land x_6))))$
   \end{tabular}
 \end{model*}
 
-\newcommand{\true}{\textsf{T}\xspace}
-\newcommand{\false}{\textsf{F}\xspace}
-
-Each variable $x_i$ represents a Boolean value (\true or \false).  An
-\emph{assignment} consists in specifying a \true or \false value for
-each variable.
-
 \begin{questions}
-\item Based on the examples and non-examples of \emph{terms} in the first row
-  of the chart, write down a definition of a term.
+\item Based on the examples and non-examples of \term{terms} in the first row
+  of the chart, write down a definition of a \term{term}.
 \item Based on the examples and non-examples, write a definition of
-  a \term{clause}.
+  a \term{clause}. Be sure to use the word \term{term} in your definition.
 \item Again based on the model, write a definition of a
-  CNF.\marginnote{CNF stands for \term{conjunctive normal form}.}
-\item Consider the assignment setting each $x_i$ to \true when $i$ is
-  even, and \false otherwise.  For each CNF in the left-hand
-  column,
-  say whether it evaluates to \true or \false under this assignment
-  (using the usual rules of Boolean logic).
+  CNF. Be sure to use the word \term{clause}.\marginnote{CNF stands for \term{conjunctive normal form}.}
+\item Consider the assignment setting each $x_i$ to \True when $i$ is
+  even, and \False when $i$ is odd.  For each CNF in the left-hand
+  column, say whether it evaluates to \True or \False under this
+  assignment (using the usual rules of Boolean logic).
 \item Find an assignment that makes $x_1 \land (\overline{x_2} \lor
   \overline{x_3} \lor \overline{x_1}) \land (x_2 \lor \overline{x_1})$
   true. (You only need to specify values for $x_1$, $x_2$, and $x_3$.)
@@ -81,10 +78,73 @@ corresponding decision problem is known as \textsc{3-SAT}.
 \item Explain why $\textsc{3-SAT} \leq_P \textsc{SAT}$.
 \end{questions}
 
-XXX expand this part---get them to write down proof!
+It turns out that $\textsc{SAT} \leq_P \textsc{3-SAT}$ as well, although
+this is extremely nonobvious!  In fact, $3$ is the smallest $k$ for
+which $\textsc{SAT} \leq_P k\textsc{-SAT}$ (\textsc{1-SAT} is trivial
+(think about it) and \textsc{2-SAT} can be solved in linear time by a
+very clever application of DFS).
+
+\pause
+
+It turns out that we can relate $\textsc{3-SAT}$ to another problem we
+have studied before:
 
 \begin{thm}
   $\textsc{3-SAT} \leq_P \textsc{Independent-Set}$.
 \end{thm}
 
+Let's prove it!
+
+\begin{model*}{}{SATtoIS}
+  \[ (x_1 \lor \overline{x_3} \lor x_4) \land (x_2 \lor x_1 \lor x_3) \land
+    (\overline{x_1} \lor x_3 \lor \overline{x_4}) \]
+
+  \begin{center}
+  \begin{diagram}[width=200]
+    import SAT
+    dia = [[p 1, n 3, p 4], [p 2, p 1, p 3], [n 1, p 3, n 4]]
+      # map vtri
+      # map centerY
+      # hsep 2
+      # frame 2
+      where
+        p i = "x_" ++ show i
+        n i = "\\overline{x_" ++ show i ++ "}"
+  \end{diagram}
+
+  \begin{diagram}[width=200]
+    import SAT
+    dia = [[p 1, n 3, p 4], [p 2, p 1, p 3], [n 1, p 3, n 4]]
+      # zipWith (\c vs -> c .>> vtri vs) ["a", "b", "c"]
+      # map centerY
+      # hsep 2
+      # connectPerim' styleA
+          ("a" .> (1 :: Int)) ("c" .> (1 :: Int)) (1/8 @@ turn) (3/8 @@ turn)
+      # connectPerim' (with & arrowHead .~ noHead)
+          ("b" .> (2 :: Int)) ("c" .> (1 :: Int)) (1/8 @@ turn) (1/2 @@ turn)
+      # connectPerim' styleB
+          ("a" .> (2 :: Int)) ("b" .> (3 :: Int)) (7/8 @@ turn) (5/8 @@ turn)
+      # connectPerim' styleB
+          ("a" .> (2 :: Int)) ("c" .> (2 :: Int)) (7/8 @@ turn) (5/8 @@ turn)
+      # connectPerim' styleB
+          ("a" .> (3 :: Int)) ("c" .> (3 :: Int)) (7/8 @@ turn) (5/8 @@ turn)
+      # frame 2
+      where
+        styleA = (with & arrowShaft .~ arc xDir (-1/8 @@ turn) & arrowHead .~ noHead)
+        styleB = (with & arrowShaft .~ arc xDir (1/4 @@ turn) & arrowHead .~ noHead)
+        p i = "x_" ++ show i
+        n i = "\\overline{x_" ++ show i ++ "}"
+  \end{diagram}
+  \end{center}
+\end{model*}
+
+\begin{proof}
+  To show $\textsc{3-SAT} \leq_P \textsc{Independent-Set}$, we assume
+  that we have a black box to solve \blank, and show\\ how we can
+  use it to construct a solution to \blank, \\ with only a polynomial
+  amount of additional work.
+
+  So suppose we have a logical formula in CNF, where every clause has
+  exactly three terms.
+\end{proof}
 \end{document}
