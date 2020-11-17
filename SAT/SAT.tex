@@ -26,7 +26,7 @@
   negation. For example, $x_1 \land \overline{x_3}$ means ``$x_1$ and
   not $x_3$''.\bigskip
 
-  \begin{tabular}{l|p{2.5in}|p{2.5in}}
+  \begin{tabular}{p{0.5in}|p{2.7in}|p{2.5in}}
     & Examples & Non-examples \\ \hline
     \emph{Term}
     & $x_1$ \newline $x_3$ \newline $\overline{x_3}$
@@ -37,14 +37,23 @@
       \lor x_3 \lor \overline{x_7} \lor x_9$
     & $x_1 \land x_2$ \newline $x_2 \lor \overline{x_3} \land x_4$
       \newline $x_1 \Rightarrow x_5$ \\ \hline
-    \emph{CNF}
+    \emph{CNF formula}
     & $x_1$ \newline $x_2 \lor x_5 \lor \overline{x_1}$ \newline $(x_1 \lor
       x_2) \land (\overline{x_3} \lor x_5 \lor x_9 \lor x_8 \lor x_2)$ \newline $x_4
       \land (x_1 \lor x_2) \land \overline{x_5} \land (x_1 \lor
       \overline{x_3} \lor x_5)$ \newline $x_1 \land (\overline{x_1}
       \lor x_3) \land (\overline{x_1} \lor \overline{x_3})$ \newline $x_1 \land \overline{x_3}$
     & $(x_1 \land x_3) \lor (x_2 \land x_5)$ \newline $x_1 \land (x_2
-      \lor (x_3 \land (x_4 \lor (x_5 \land x_6))))$
+      \lor (x_3 \land (x_4 \lor (x_5 \land x_6))))$ \\ \hline
+    \emph{3-CNF formula}
+    & $x_2 \lor x_5 \lor \overline{x_1}$ \newline
+      $(x_1 \lor x_2 \lor
+      x_3) \land (\overline{x_2} \lor x_3 \lor \overline{x_1})$ \newline
+      $(x_4 \lor \overline{x_2} \lor x_3) \land (x_2 \lor \overline{x_3}
+      \lor x_1) \land (x_2 \lor x_2 \lor x_3)$
+    & $x_1$ \newline $x_1 \lor x_2$ \newline
+      $(x_4 \lor \overline{x_2} \lor x_3) \land (x_2 \lor
+      \overline{x_3}) \land (x_2 \lor x_2 \lor x_3)$
   \end{tabular}
 \end{model*}
 
@@ -53,68 +62,90 @@
   of the chart, write down a definition of a \term{term}.
 \item Based on the examples and non-examples, write a definition of
   a \term{clause}. Be sure to use the word \term{term} in your definition.
-\item Again based on the model, write a definition of a
-  CNF. Be sure to use the word \term{clause}.\marginnote{CNF stands for \term{conjunctive normal form}.}
+\item Again based on the model, write a definition of a \term{CNF
+    formula}.\marginnote{CNF stands for \term{conjunctive normal
+      form}.} Be sure to use the word \term{clause}.
 \item Consider the assignment setting each $x_i$ to \True when $i$ is
-  even, and \False when $i$ is odd.  For each CNF in the left-hand
-  column, say whether it evaluates to \True or \False under this
-  assignment (using the usual rules of Boolean logic).
+  even, and \False when $i$ is odd.  For each CNF formula in the
+  left-hand column, say whether it evaluates to \True or \False
+  (\emph{i.e.}  whether it is \term{satisfied}) under this assignment
+  using the usual rules of Boolean logic.
 \item Find an assignment that makes $x_1 \land (\overline{x_2} \lor
   \overline{x_3} \lor \overline{x_1}) \land (x_2 \lor \overline{x_1})$
   true. (You only need to specify values for $x_1$, $x_2$, and $x_3$.)
+  Such an assignment is called a \term{satisfying assignment}.
 \item Does every \term{clause} have some assignment which makes it
-  true?  If so, explain why; if not, give a counterexample.
-\item Does every \term{CNF} have some assignment which makes it
-  true?  If so, explain why; if not, give a counterexample.
+  true (\emph{i.e.} a satisfying assignment)?  If so, explain why; if
+  not, give a counterexample.
+\item Does every \term{CNF formula} have a satisfying assignment?  If
+  so, explain why; if not, give a counterexample.
 \item Based on your previous answer, state an interesting decision
   problem about CNF formulas.
 \end{questions}
 
 This is a famous decision problem called \textsc{SAT}.  If we restrict
-every \term{clause} to have \emph{exactly three} terms, the
-corresponding decision problem is known as \textsc{3-SAT}.
+every \term{clause} to have \emph{exactly three} terms---as in the
+\term{3-CNF formulas} shown in the model---the corresponding decision
+problem is known as \textsc{3-SAT}.
 
 \begin{questions}
 \item Explain why $\textsc{3-SAT} \leq_P \textsc{SAT}$.
+\marginnote{It turns out that $\textsc{SAT} \leq_P \textsc{3-SAT}$ as well, although
+this is extremely nonobvious!  In fact, $3$ is the smallest $k$ for
+which $\textsc{SAT} \leq_P k\textsc{-SAT}$.  \textsc{1-SAT} is trivial
+(think about it) and \textsc{2-SAT} can be solved in linear time by a
+very clever application of DFS.}
 \end{questions}
 
-It turns out that $\textsc{SAT} \leq_P \textsc{3-SAT}$ as well, although
-this is extremely nonobvious!  In fact, $3$ is the smallest $k$ for
-which $\textsc{SAT} \leq_P k\textsc{-SAT}$ (\textsc{1-SAT} is trivial
-(think about it) and \textsc{2-SAT} can be solved in linear time by a
-very clever application of DFS).
 
 \pause
 
-It turns out that we can relate $\textsc{3-SAT}$ to another problem we
+It turns out that we can reduce $\textsc{3-SAT}$ to another problem we
 have studied before:
 
 \begin{thm}
   $\textsc{3-SAT} \leq_P \textsc{Independent-Set}$.
 \end{thm}
 
-Let's prove it!
+\noindent Let's prove it!
 
+\begin{questions}
+\item In order to show
+  $\textsc{3-SAT} \leq_P \textsc{Independent-Set}$, we need to assume that we
+  have a black box to solve \blank, and show\\ how we can use it to
+  construct a solution to \blank.
+\item Draw a picture of the situation using nested boxes.  What are
+  the inputs and outputs?
+\item Fill in this statement based on your picture: given a \blank,\\ we
+  have to construct a \blank\\ and pick a \blank such that\\ the newly constructed \blank\\
+  has \blank\\ if and only if the original input \blank.
+\end{questions}
+
+\newpage
 \begin{model*}{}{SATtoIS}
-  \[ (x_1 \lor \overline{x_3} \lor x_4) \land (x_2 \lor x_1 \lor x_3) \land
+  \[ F = (x_1 \lor \overline{x_3} \lor x_4) \land (x_2 \lor x_1 \lor x_3) \land
     (\overline{x_1} \lor x_3 \lor \overline{x_4}) \]
 
   \begin{center}
   \begin{diagram}[width=200]
     import SAT
-    dia = [[p 1, n 3, p 4], [p 2, p 1, p 3], [n 1, p 3, n 4]]
+
+    dia :: Diagram B
+    dia = vsep 2
+      [ hsep 3 [ text "$A$" # fontSizeL 2, baretris ]
+      , hsep 3 [ text "$B$" # fontSizeL 2, connectedtris ]
+      ]
+      # frame 2
+
+    baretris = [[p 1, n 3, p 4], [p 2, p 1, p 3], [n 1, p 3, n 4]]
       # map vtri
       # map centerY
       # hsep 2
-      # frame 2
       where
         p i = "x_" ++ show i
         n i = "\\overline{x_" ++ show i ++ "}"
-  \end{diagram}
 
-  \begin{diagram}[width=200]
-    import SAT
-    dia = [[p 1, n 3, p 4], [p 2, p 1, p 3], [n 1, p 3, n 4]]
+    connectedtris = [[p 1, n 3, p 4], [p 2, p 1, p 3], [n 1, p 3, n 4]]
       # zipWith (\c vs -> c .>> vtri vs) ["a", "b", "c"]
       # map centerY
       # hsep 2
@@ -128,7 +159,6 @@ Let's prove it!
           ("a" .> (2 :: Int)) ("c" .> (2 :: Int)) (7/8 @@ turn) (5/8 @@ turn)
       # connectPerim' styleB
           ("a" .> (3 :: Int)) ("c" .> (3 :: Int)) (7/8 @@ turn) (5/8 @@ turn)
-      # frame 2
       where
         styleA = (with & arrowShaft .~ arc xDir (-1/8 @@ turn) & arrowHead .~ noHead)
         styleB = (with & arrowShaft .~ arc xDir (1/4 @@ turn) & arrowHead .~ noHead)
@@ -138,13 +168,13 @@ Let's prove it!
   \end{center}
 \end{model*}
 
-\begin{proof}
-  To show $\textsc{3-SAT} \leq_P \textsc{Independent-Set}$, we assume
-  that we have a black box to solve \blank, and show\\ how we can
-  use it to construct a solution to \blank, \\ with only a polynomial
-  amount of additional work.
+Let's first consider
+\begin{questions}
+  \item What is the relationship of formula $F$ to graph $A$?
+  \item What is the size of a maximum independent set in
+    graph $A$?
+  \item In general, if we started with a 3-CNF formula having $k$
+    clauses, 
+\end{questions}
 
-  So suppose we have a logical formula in CNF, where every clause has
-  exactly three terms.
-\end{proof}
 \end{document}
