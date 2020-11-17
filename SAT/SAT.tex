@@ -90,11 +90,11 @@ problem is known as \textsc{3-SAT}.
 
 \begin{questions}
 \item Explain why $\textsc{3-SAT} \leq_P \textsc{SAT}$.
-\marginnote{It turns out that $\textsc{SAT} \leq_P \textsc{3-SAT}$ as well, although
-this is extremely nonobvious!  In fact, $3$ is the smallest $k$ for
-which $\textsc{SAT} \leq_P k\textsc{-SAT}$.  \textsc{1-SAT} is trivial
-(think about it) and \textsc{2-SAT} can be solved in linear time by a
-very clever application of DFS.}
+  \marginnote{It turns out that $\textsc{SAT} \leq_P \textsc{3-SAT}$
+    as well, although this is extremely nonobvious!  In fact, $3$ is
+    the smallest $k$ for which $\textsc{SAT} \leq_P k\textsc{-SAT}$.
+    \textsc{1-SAT} is trivial and \textsc{2-SAT} can be solved in
+    linear time by a very clever application of DFS.}
 \end{questions}
 
 
@@ -122,7 +122,7 @@ have studied before:
 \end{questions}
 
 \newpage
-\begin{model*}{}{SATtoIS}
+\begin{model*}{$\textsc{3-SAT} \leq_P \textsc{Independent-Set}$}{SATtoIS}
   \[ F = (x_1 \lor \overline{x_3} \lor x_4) \land (x_2 \lor x_1 \lor x_3) \land
     (\overline{x_1} \lor x_3 \lor \overline{x_4}) \]
 
@@ -132,8 +132,8 @@ have studied before:
 
     dia :: Diagram B
     dia = vsep 2
-      [ hsep 3 [ text "$A$" # fontSizeL 2, baretris ]
-      , hsep 3 [ text "$B$" # fontSizeL 2, connectedtris ]
+      [ hsep 3 [ text "$A$" # fontSizeL 1.5, baretris ]
+      , hsep 3 [ text "$B$" # fontSizeL 1.5, connectedtris ]
       ]
       # frame 2
 
@@ -168,13 +168,36 @@ have studied before:
   \end{center}
 \end{model*}
 
-Let's first consider
+Let's first consider formula $F$ and graph $A$.
 \begin{questions}
   \item What is the relationship of formula $F$ to graph $A$?
+  \item How many clauses does $F$ have?  How many vertices does $A$
+    have?
   \item What is the size of a maximum independent set in
     graph $A$?
-  \item In general, suppose we started with a 3-CNF formula having $k$
-    clauses instead of formula $F$.  
+  \item In general, instead of formula $F$, suppose we started with a
+    3-CNF formula $F'$ having $k$ clauses.  How would we make the
+    corresponding graph $A'$?
+  \item How many vertices would $A'$ have?
+  \item What would be the size of a maximum independent set in $A'$?
+\end{questions}
+
+Now consider graph $B$.
+\begin{questions}
+\item How is graph $B$ related to graph $A$?
+\item In general, if we started with some 3-CNF formula $F'$ and made it
+  into a graph $A'$ of triangles, what do you think we would add to
+  turn it into a corresponding graph $B'$?
+\item Find a maximal independent set in $B$.
+\item Explain how you can use your independent set to find a
+  satisfying assignment for $F$.
+\item Explain why in a satisfying assignment, at least one term must
+  be true in each clause.
+\item Explain how you could use any satisfying assignment for $F$ to
+  find an independent set of size $3$ in $B$.
+\item Would the previous arguments still work if we used graph $A$
+  instead of graph $B$? In other words, what is the importance of the
+  edges added in graph $B$?
 \end{questions}
 
 \end{document}
