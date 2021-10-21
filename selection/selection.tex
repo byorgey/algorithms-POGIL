@@ -22,7 +22,7 @@ Case 3: If $a > b$, $T(n) \in O(n^{log_b a})$
 \end{figure}
 
 \begin{objective}
-  Students will derive an efficient algorithm for finding the $k$th largest item in an array.
+  Students will derive an efficient algorithm for finding the $k$th largest item in an array. Students will practice using the Master Theorem to solve practical divide-and-conquer recurrences.
 \end{objective}
 
 
@@ -72,13 +72,13 @@ partition(items, start, end)
 
 How can we build a simple divide-and-conquer sorting algorithm using \emph{partition}? 
 
-\item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that partition returns $\lfloor \frac{n}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem. 
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that partition always returns $\lfloor \frac{start + end}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem. 
 
-\item Finding the $k$ largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build an algorithm that correctly finds the $k$th largest item without completely sorting the array?
+\item Finding the $k$ largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build a recursive algorithm that correctly finds the $k$th largest item without completely sorting the array? \label{select_question}
 
 \item Give an informal argument for the correctness of your algorithm.
 
-\item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that partition returns $\lfloor \frac{n}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem.
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that partition always returns $\lfloor \frac{start + end}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem. \label{select_recurrence}
 
 \item How much of an improvement in asymptotic time complexity do we gain by avoiding a complete sort of the array?
 
@@ -86,11 +86,9 @@ How can we build a simple divide-and-conquer sorting algorithm using \emph{parti
 
 \item Imagine adding some code to the start of \emph{partition} that swaps the last element with a randomly chosen element. On average, how would you expect this to affect the fraction of each part of the array?
 
-\item Imagine that \emph{partition} returns $\lfloor \frac{n}{4} \rfloor$ as its index. Rewrite the recurrence for both sorting and selection to take this into account, and solve it using the Master Theorem.
+\item Imagine that your algorithm from Question \ref{select_question} examines $\lfloor \frac{3}{4} n \rfloor$ of the subarray under consideration on each recursive call. Rewrite the recurrence for Question \ref{select_recurrence} take this into account, and solve it using the Master Theorem.
 
-\item Repeat the previous question with $\lfloor \frac{3}{4} n \rfloor$ as the returned index. 
-
-\item What can we conclude about the impact of randomly selecting the partition?
+\item What can we conclude about the impact on the expected time complexity of selection of randomly selecting the partition?
 
 
 \end{questions}

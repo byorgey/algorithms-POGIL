@@ -146,16 +146,7 @@ If the array is already sorted and you are looking for the median, it will take 
 
 {\color{red} At best, it divides it in half; at worst, it peels off one element. So, on average, it would balance about $\frac{1}{4}n$ on one side and $\frac{3}{4}n$ on the other.}
 
-\item Imagine that \emph{partition} returns $\lfloor \frac{n}{4} \rfloor$ as its index. Rewrite the recurrence for both sorting and selection to take this into account, and solve it using the Master Theorem.
-
-{\color{red} 
-\[ T(n) = T(\frac{n}{4}) + \Theta(n) \]
-\[a = 1, b = 4, d = 1\] 
-\[1 < 4^1\]
-Case 1: $O(n)$
-}
-
-\item Repeat the previous question with $\lfloor \frac{3}{4} n \rfloor$ as the returned index. 
+\item Imagine that your algorithm from Question \ref{select_question} examines $\lfloor \frac{3}{4} n \rfloor$ of the array on each recursive call. Rewrite the recurrence for Question \ref{select_recurrence} take this into account, and solve it using the Master Theorem.
 
 {\color{red} 
 \[ T(n) = T(\frac{n}{\frac{4}{3}}) + \Theta(n) \]
@@ -166,7 +157,7 @@ Case 1: $O(n)$
 
 \item What can we conclude about the impact of randomly selecting the partition?
 
-{\color{red} Random partition selection ensures that, on average, the algorithm performs as to the best case. The worst case should be vanishingly rare, and (importantly) not triggered by any specific input.}
+{\color{red} Random partition selection ensures that, on average, the algorithm performs in linear time. The worst case should be vanishingly rare, and (importantly) not triggered by any specific input.}
 
 \end{questions}
 
