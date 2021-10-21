@@ -1,0 +1,91 @@
+% -*- compile-command: "pdflatex --enable-write18 XXX.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{Algorithms: Selection}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{figure}
+\caption{The Master Theorem}
+Let $T(n) = a T(\frac{n}{b}) + O(n^d)$ 
+
+Case 1: If $a < b$, $T(n) \in O(n^d)$
+
+Case 2: If $a = b$, $T(n) \in O(n^d \log n)$
+
+Case 3: If $a > b$, $T(n) \in O(n^{log_b a})$
+\end{figure}
+
+\begin{objective}
+  Students will derive an efficient algorithm for finding the $k$th largest item in an array.
+\end{objective}
+
+
+\begin{questions}
+\item The \emph{median} of a totally ordered sequence of $n$ elements is the $\lfloor \frac{n}{2} \rfloor$ element. Design a brute-force algorithm for finding the median of such a sequence stored in an array.
+
+\item What is the worst-case asymptotic time complexity of your median-finding algorithm?
+
+\item Modify your algorithm to find the $k$th largest item in the array. What impact does this modification have upon its time complexity?
+
+\item Consider the array $a$ below:
+
+\begin{verbatim}
+[2, 4, 7, 5, 13, 11, 15, 12, 3, 10, 14, 0, 6, 9, 1, 8]
+\end{verbatim}
+
+Rearrange $a$ according to the following algorithm, called \emph{partition}:
+\begin{itemize}
+    \item Let $i = 0$
+    \item Let $j = 14$ (i.e., the length of $a - 2$)
+    \item While $i \le j$
+    \begin{itemize}
+        \item if $a_i$ > $a_{15}$, swap elements $i$ and $j$, and decrement $j$.
+        \item Otherwise, increment $i$.
+    \end{itemize}
+    \item Swap element $i$ and the final element in the array.
+\end{itemize}
+
+\item After rearranging the array, what elements of the array are in the position they would be in after fully sorting the array?
+
+\item Formulate a statement about what array element will be in its correct sorted position after running \emph{partition}. Give an informal argument as to why this will always be true after the \emph{partition} runs.
+
+\item Consider the following pseudocode for the \emph{partition} function:
+\begin{verbatim}
+partition(items, start, end)
+  i = start
+  j = end - 1
+  while i <= j
+    if items[i] > items[end]
+      swap(items, i, j)
+      j -= 1
+    else
+      i -= 1
+  swap(items, i, end)
+  return i
+\end{verbatim}
+
+How can we build a simple divide-and-conquer sorting algorithm using \emph{partition}? 
+
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm in a typical case. Solve the recurrence relation by using the Master Theorem. 
+
+\item Finding the $k$ largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build an algorithm that correctly finds the $k$th largest item without completely sorting the array?
+
+\item Give an informal argument for the correctness of your algorithm.
+
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm for a typical case. Solve the recurrence relation by using the Master Theorem.
+
+\item How much of an improvement in asymptotic time complexity do we gain by avoiding a complete sort of the array?
+
+\item What is the worst-case behavior of this algorithm? When does this behavior emerge? 
+
+\item How might this worst-case behavior be made as rare as possible?
+
+\end{questions}
+
+\end{document}

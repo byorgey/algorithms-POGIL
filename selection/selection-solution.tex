@@ -1,0 +1,152 @@
+% -*- compile-command: "pdflatex --enable-write18 XXX.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+\usepackage{xcolor}
+
+\title{Algorithms: Selection}
+\date{}
+
+\begin{document}
+
+\maketitle
+\begin{figure}
+\caption{The Master Theorem}
+Let $T(n) = a T(\frac{n}{b}) + O(n^d)$ 
+
+Case 1: If $a < b$, $T(n) \in O(n^d)$
+
+Case 2: If $a = b$, $T(n) \in O(n^d \log n)$
+
+Case 3: If $a > b$, $T(n) \in O(n^{log_b a})$
+\end{figure}
+
+\begin{objective}
+  Students will derive an efficient algorithm for finding the $k$th largest item in an array.
+\end{objective}
+
+\begin{questions}
+\item The \emph{median} of a totally ordered sequence of $n$ elements is the $\lfloor \frac{n}{2} \rfloor$ element. Design a brute-force algorithm for finding the median of such a sequence stored in an array.
+
+{\color{red} Use merge sort to sort the array. Then, return array element $\lfloor \frac{n}{2} \rfloor$.}
+
+\item What is the worst-case asymptotic time complexity of your median-finding algorithm?
+
+{\color{red} Merge sort requires $O(n \log n)$ time, and the array lookup is constant time, so $O(n \log n)$.}
+
+\item Modify your algorithm to find the $k$th largest item in the array. What impact does this modification have upon its time complexity?
+
+{\color{red} Just look up element $k$ of the array instead of the median. This has no effect on time complexity.}
+
+\item Consider the following array $a$:
+
+\begin{verbatim}
+[2, 4, 7, 5, 13, 11, 15, 12, 3, 10, 14, 0, 6, 9, 1, 8]
+\end{verbatim}
+
+Rearrange $a$ according to the following algorithm, called \emph{partition}:
+\begin{itemize}
+    \item Let $i = 0$
+    \item Let $j = 14$ (i.e., the length of $a - 2$)
+    \item While $i \le j$
+    \begin{itemize}
+        \item if $a_i$ > $a_{15}$, swap elements $i$ and $j$, and decrement $j$.
+        \item Otherwise, increment $i$.
+    \end{itemize}
+    \item Swap element $i$ and the final element in the array.
+\end{itemize}
+
+{\color{red} 
+\begin{verbatim}
+[2, 4, 7, 5, 1, 6, 0, 3, 8, 14, 12, 15, 9, 11, 13, 10]
+\end{verbatim}
+}
+
+\item After rearranging the array, what elements of the array are in the position they would be in after fully sorting the array?
+
+{\color{red} Only element 8 is in the correct position. Note that it was originally the final element of the array.}
+
+\item Formulate a statement about what array element will be in its correct sorted position after running \emph{partition}. Give an informal argument as to why this will always be true after the \emph{partition} runs.
+
+{\color{red} The last element of the array will be in the correct sorted position. Every value smaller than it gets swapped to the left half of the array. Values bigger than it eventually get swapped to the right half of the array. It then gets swapped into the index after the last item that was smaller than it.}
+
+\item Consider the following pseudocode for a \emph{partition} function:
+\begin{verbatim}
+partition(items, start, end)
+  i = start
+  j = end - 1
+  while i <= j
+    if items[i] > items[end]
+      swap(items, i, j)
+      j -= 1
+    else
+      i -= 1
+  swap(items, i, end)
+  return i
+\end{verbatim}
+
+How can we build a divide-and-conquer sorting algorithm using \emph{partition}? 
+
+{\color{red} 
+\begin{verbatim}
+quicksort(items, start, end)
+  if start < end
+    pivot = partition(items, start, end)
+    quicksort(items, start, pivot - 1)
+    quicksort(items, pivot + 1, end)
+\end{verbatim}
+}
+
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm in a typical case. Solve the recurrence relation by using the Master Theorem.
+
+{\color{red} 
+\[ T(n) = 2 T(\frac{n}{2}) + \Theta(n) \]
+\[a = 2, b = 2, d = 1\] 
+\[2 = 2^1\]
+Case 2: $O(n \log n)$
+}
+
+\item Finding the $k$ largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build an algorithm that correctly finds the $k$th largest item without completely sorting the array?
+
+{\color{red} 
+Partition the array. 
+If the index returned is k, return array[k].
+If the index returned is less than k, recursively select from the part of the array after the index returned. Otherwise, recursively select from the part of the array before the index returned.
+}
+
+
+\item Give an informal argument for the correctness of your algorithm.
+
+{\color{red} 
+Partitioning puts the last element in the correct position. If that's the index we're looking for, we've found it! Otherwise, akin to binary search, its target position must be higher if the index is below $k$ and lower if it is above $k$.
+}
+
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm for a typical case. Solve the recurrence relation by using the Master Theorem.
+
+{\color{red} 
+\[ T(n) = T(\frac{n}{2}) + \Theta(n) \]
+\[a = 1, b = 2, d = 1\] 
+\[1 < 2^1\]
+Case 1: $O(n)$
+}
+
+\item How much of an improvement in asymptotic time complexity do we gain by avoiding a complete sort of the array?
+
+{\color{red} 
+It is faster by a factor of $\log n$.
+}
+
+\item What is the worst-case behavior of this algorithm? When does this behavior emerge? 
+
+{\color{red} 
+If the array is already sorted and you are looking for the median, it will take $\frac{n}{2}$ calls to \emph{partition} to find the median. That is bad news: $O(n^2)$.
+}
+
+\item How might this worst-case behavior be made as rare as possible?
+{\color{red}
+Pick a random element on each call to partition, and swap it over to \verb+end+. That way, if it is already sorted, it is still a random element around which we partition, and the pivot should land somewhere in the middle.
+}
+
+\end{questions}
+
+\end{document}
