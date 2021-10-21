@@ -22,7 +22,7 @@ Case 3: If $a > b$, $T(n) \in O(n^{log_b a})$
 \end{figure}
 
 \begin{objective}
-  Students will derive an efficient algorithm for finding the $k$th largest item in an array.
+  Students will derive an efficient algorithm for finding the $k$th largest item in an array. Students will practice using the Master Theorem to solve practical divide-and-conquer recurrences.
 \end{objective}
 
 \begin{questions}
@@ -142,10 +142,31 @@ It is faster by a factor of $\log n$.
 If the array is already sorted and you are looking for the median, it will take $\frac{n}{2}$ calls to \emph{partition} to find the median. That is bad news: $O(n^2)$.
 }
 
-\item How might this worst-case behavior be made as rare as possible?
-{\color{red}
-Pick a random element on each call to partition, and swap it over to \verb+end+. That way, if it is already sorted, it is still a random element around which we partition, and the pivot should land somewhere in the middle.
+\item Imagine adding some code to the start of \emph{partition} that swaps the last element with a randomly chosen element. On average, how would you expect this to affect the fraction of each part of the array?
+
+{\color{red} At best, it divides it in half; at worst, it peels off one element. So, on average, it would balance about $\frac{1}{4}n$ on one side and $\frac{3}{4}n$ on the other.}
+
+\item Imagine that \emph{partition} returns $\lfloor \frac{n}{4} \rfloor$ as its index. Rewrite the recurrence for both sorting and selection to take this into account, and solve it using the Master Theorem.
+
+{\color{red} 
+\[ T(n) = T(\frac{n}{4}) + \Theta(n) \]
+\[a = 1, b = 4, d = 1\] 
+\[1 < 4^1\]
+Case 1: $O(n)$
 }
+
+\item Repeat the previous question with $\lfloor \frac{3}{4} n \rfloor$ as the returned index. 
+
+{\color{red} 
+\[ T(n) = T(\frac{n}{\frac{4}{3}}) + \Theta(n) \]
+\[a = 1, b = \frac{4}{3}, d = 1\] 
+\[1 < \frac{4}{3}^1\]
+Case 1: $O(n)$
+}
+
+\item What can we conclude about the impact of randomly selecting the partition?
+
+{\color{red} Random partition selection ensures that, on average, the algorithm performs as to the best case. The worst case should be vanishingly rare, and (importantly) not triggered by any specific input.}
 
 \end{questions}
 
