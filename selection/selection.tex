@@ -53,7 +53,7 @@ Rearrange $a$ according to the following algorithm, called \emph{partition}:
 
 \item After rearranging the array, what elements of the array are in the position they would be in after fully sorting the array?
 
-\item Formulate a statement about what array element will be in its correct sorted position after running \emph{partition}. Give an informal argument as to why this will always be true after the \emph{partition} runs.
+\item Formulate a statement about what array element will be in its correct sorted position after running \emph{partition}. Give an informal argument as to why this will always be true after  \emph{partition} runs.
 
 \item Consider the following pseudocode for the \emph{partition} function:
 \begin{verbatim}
@@ -72,9 +72,9 @@ partition(items, start, end)
 
 How can we build a simple divide-and-conquer sorting algorithm using \emph{partition}? 
 
-\item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that partition always returns $\lfloor \frac{start + end}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem. 
+\item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that \emph{partition} always returns $\lfloor \frac{start + end}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem. 
 
-\item Finding the $k$ largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build a recursive algorithm that correctly finds the $k$th largest item without completely sorting the array? \label{select_question}
+\item Finding the $k$th largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build a recursive algorithm that correctly finds the $k$th largest item without completely sorting the array? \label{select_question}
 
 \item Give an informal argument for the correctness of your algorithm.
 
@@ -84,9 +84,9 @@ How can we build a simple divide-and-conquer sorting algorithm using \emph{parti
 
 \item What is the worst-case behavior of this algorithm? When does this behavior emerge?
 
-\item Imagine adding some code to the start of \emph{partition} that swaps the last element with a randomly chosen element. On average, how would you expect this to affect the fraction of each part of the array?
+\item Imagine adding some code to the start of \emph{partition} that swaps the last element with a randomly chosen element. On average, how would you expect this to affect the fraction of each part of the array? \label{unbalanced}
 
-\item Imagine that your algorithm from Question \ref{select_question} examines $\lfloor \frac{3}{4} n \rfloor$ of the subarray under consideration on each recursive call. Rewrite the recurrence for Question \ref{select_recurrence} take this into account, and solve it using the Master Theorem.
+\item Rewrite the recurrence for Question \ref{select_recurrence} to take your answer to Question \ref{unbalanced} into account, and solve it using the Master Theorem.
 
 \item What can we conclude about the impact on the expected time complexity of selection of randomly selecting the partition?
 
