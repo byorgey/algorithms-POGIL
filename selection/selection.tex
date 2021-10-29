@@ -18,7 +18,7 @@ Case 1: If $a < b$, $T(n) \in O(n^d)$
 
 Case 2: If $a = b$, $T(n) \in O(n^d \log n)$
 
-Case 3: If $a > b$, $T(n) \in O(n^{log_b a})$
+Case 3: If $a > b$, $T(n) \in O(n^{\log_b a})$
 \end{figure}
 
 \begin{objective}
@@ -27,25 +27,24 @@ Case 3: If $a > b$, $T(n) \in O(n^{log_b a})$
 
 
 \begin{questions}
-\item The \emph{median} of a totally ordered sequence of $n$ elements is the $\lfloor \frac{n}{2} \rfloor$ element. Design a brute-force algorithm for finding the median of such a sequence stored in an array.
+\item We can find the median of a sorted array of $n$ elements in $O(1)$ time by accessing the $\lfloor \frac{n}{2} \rfloor$ element. What is a straightforward algorithm for  finding the median of an unsorted array of $n$ elements? What is its time complexity? \label{start}
 
-\item What is the worst-case asymptotic time complexity of your median-finding algorithm?
+\item If, instead of finding the median, we wish to find the $k$th smallest item in the array, how might our answer to Question \ref{start} change?
 
-\item Modify your algorithm to find the $k$th largest item in the array. What impact does this modification have upon its time complexity?
-
-\item Consider the array $a$ below:
+\item Consider the arrays $a$ and $b$ below:
 
 \begin{verbatim}
-[2, 4, 7, 5, 13, 11, 15, 12, 3, 10, 14, 0, 6, 9, 1, 8]
+a = [7, 1, 0, 2, 6, 5, 4, 3]
+b = [5, 4, 2, 1, 7, 3, 6, 0]
 \end{verbatim}
 
-Rearrange $a$ according to the following algorithm, called \emph{partition}:
+Rearrange $a$ and $b$ according to the following algorithm, called \emph{partition}:
 \begin{itemize}
     \item Let $i = 0$
-    \item Let $j = 14$ (i.e., the length of $a - 2$)
+    \item Let $j = 6$ (i.e., the second-to-last element index)
     \item While $i \le j$
     \begin{itemize}
-        \item if $a_i$ > $a_{15}$, swap elements $i$ and $j$, and decrement $j$.
+        \item if element $i$ > element $7$, swap elements $i$ and $j$, and decrement $j$.
         \item Otherwise, increment $i$.
     \end{itemize}
     \item Swap element $i$ and the final element in the array.
@@ -65,7 +64,7 @@ partition(items, start, end)
       swap(items, i, j)
       j -= 1
     else
-      i -= 1
+      i += 1
   swap(items, i, end)
   return i
 \end{verbatim}
@@ -74,7 +73,7 @@ How can we build a simple divide-and-conquer sorting algorithm using \emph{parti
 
 \item Write a recurrence relation for the number of key comparisons performed by this algorithm, assuming that \emph{partition} always returns $\lfloor \frac{start + end}{2} \rfloor$ as the index. Solve the recurrence relation by using the Master Theorem. 
 
-\item Finding the $k$th largest item in the array need not require sorting the entire array. How can we use \emph{partition} to build a recursive algorithm that correctly finds the $k$th largest item without completely sorting the array? \label{select_question}
+\item Finding the $k$th smallest item in the array need not require sorting the entire array. How can we use \emph{partition} to build a recursive algorithm that correctly finds the $k$th smallest item without completely sorting the array? \label{select_question}
 
 \item Give an informal argument for the correctness of your algorithm.
 
