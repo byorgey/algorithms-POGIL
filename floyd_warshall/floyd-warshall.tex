@@ -18,23 +18,34 @@
   Students will derive an efficient algorithm for finding the shortest paths between all pairs of vertices in a directed, weighted graph.
 \end{objective}
 
-The table below lists each pair of vertices and the weight of the edge from the first vertex to the second. It then lists the possible intermediate vertices. Find the distance for each path. Then write the minimum distance in the final column. The first row is completed for you as an example.\label{by_hand}
+The table below lists each pair of vertices and the weight of the edge from the first vertex to the second. It then lists the possible intermediate vertices. Find the distance for each path. Then write the minimum distance in the final column. The first row is completed for you as an example.  Feel free to divide up the work among the group members!\label{by_hand}
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 \hline
 Pair & $w_{v_i v_j}$ & $x_1$ & $x_2$ & $v_i$ $x_1$ $v_j$ & $v_i$ $x_2$ $v_j$ &$v_i$ $x_1$ $x_2$ $v_j$ &$v_i$ $x_2$ $x_1$ $v_j$ & Minimum\\
 \hline
 $v_1$ $v_2$ & 8 & $v_3$ & $v_4$ & 10 & 3 & 10 & 10 & 3 \\
+\hline
 $v_2$ $v_1$ & 3 & $v_3$ & $v_4$ &  &  &  &  &  \\
+\hline
 $v_1$ $v_3$ & 7 & $v_2$ & $v_4$ &  &  &  &  &  \\ 
+\hline
 $v_3$ $v_1$ & 8 & $v_2$ & $v_4$ &  &  &  &  &  \\ 
+\hline
 $v_1$ $v_4$ & 2 & $v_2$ & $v_3$ &  &  &  &  & \\ 
+\hline
 $v_4$ $v_1$ & 6 & $v_2$ & $v_3$ &  &  &  &  & \\ 
+\hline
 $v_2$ $v_3$ & 3 & $v_1$ & $v_4$ &  &  &  &  & \\ 
+\hline
 $v_3$ $v_2$ & 3 & $v_1$ & $v_4$ &  &  &  &  & \\ 
+\hline
 $v_2$ $v_4$ & 6 & $v_1$ & $v_3$ &  &  &  &  & \\ 
+\hline
 $v_4$ $v_2$ & 1 & $v_1$ & $v_3$ &  &  &  &  & \\
+\hline
 $v_3$ $v_4$ & 2 & $v_1$ & $v_2$ &  &  &  &  & \\
+\hline
 $v_4$ $v_3$ & 5 & $v_1$ & $v_2$ &  &  &  &  & \\
 \hline
 \end{tabular}
