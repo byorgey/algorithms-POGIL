@@ -1,0 +1,97 @@
+% -*- compile-command: "pdflatex --enable-write18 XXX.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{Algorithms: Floyd-Warshall}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\item Consider the \emph{adjacency matrix} in Model \ref{adj_matrix}. (In an adjacency matrix for a directed graph, each entry is the weight of an edge in the graph.) Nodes on the left are originating vertices. Nodes on the top are destination vertices.
+
+\begin{objective}
+  Students will derive an efficient algorithm for finding the shortest paths between all pairs of vertices in a directed, weighted graph.
+\end{objective}
+
+The table below lists each pair of vertices and the weight of the edge from the first vertex to the second. It then lists the possible intermediate vertices. Find the distance for each path. Then write the minimum distance in the final column. The first row is completed for you as an example.\label{by_hand}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+Pair & $w_{v_i v_j}$ & $x_1$ & $x_2$ & $v_i$ $x_1$ $v_j$ & $v_i$ $x_2$ $v_j$ &$v_i$ $x_1$ $x_2$ $v_j$ &$v_i$ $x_2$ $x_1$ $v_j$ & Minimum\\
+\hline
+$v_1$ $v_2$ & 8 & $v_3$ & $v_4$ & 10 & 3 & 10 & 10 & 3 \\
+$v_2$ $v_1$ & 3 & $v_3$ & $v_4$ &  &  &  &  &  \\
+$v_1$ $v_3$ & 7 & $v_2$ & $v_4$ &  &  &  &  &  \\ 
+$v_3$ $v_1$ & 8 & $v_2$ & $v_4$ &  &  &  &  &  \\ 
+$v_1$ $v_4$ & 2 & $v_2$ & $v_3$ &  &  &  &  & \\ 
+$v_4$ $v_1$ & 6 & $v_2$ & $v_3$ &  &  &  &  & \\ 
+$v_2$ $v_3$ & 3 & $v_1$ & $v_4$ &  &  &  &  & \\ 
+$v_3$ $v_2$ & 3 & $v_1$ & $v_4$ &  &  &  &  & \\ 
+$v_2$ $v_4$ & 6 & $v_1$ & $v_3$ &  &  &  &  & \\ 
+$v_4$ $v_2$ & 1 & $v_1$ & $v_3$ &  &  &  &  & \\
+$v_3$ $v_4$ & 2 & $v_1$ & $v_2$ &  &  &  &  & \\
+$v_4$ $v_3$ & 5 & $v_1$ & $v_2$ &  &  &  &  & \\
+\hline
+\end{tabular}
+
+\begin{model}{Adjacency Matrix}{adj_matrix}
+\begin{tabular}{ l r r r r }
+      & $v_1$ & $v_2$ & $v_3$ & $v_4$ \\
+$v_1$ &       & 8     & 7     & 2 \\
+$v_2$ & 3     &       & 3     & 6 \\
+$v_3$ & 8     & 3     &       & 2 \\
+$v_4$ & 6     & 1     & 5     &   \\
+\end{tabular}
+\label{adj_matrix}
+\end{model}
+
+\item Inspired by your answers to Question \ref{adj_matrix}, fill in the base case and recursive cases of the algorithm below to find the shortest path distance between any pairs of vertices for a graph with $n$ vertices. \label{f-w-1}
+
+\begin{verbatim}
+shortest_path_distance(g, start, end, k)
+  if k == 0
+    return (                                               )
+  else 
+    return min(shortest_path_distance(g,     ,     ,    ),
+               shortest_path_distance(g,     ,     ,    ) 
+               + shortest_path_distance(g,     ,     ,    ))
+\end{verbatim}
+
+\item To prove the algorithm from Question \ref{f-w-1} correctly finds the shortest path from \verb|start| to \verb|end|, we need to use \emph{strong induction}.  What would the base cases be for a correctness proof by strong induction?
+
+\item How many base cases would there be?
+
+\item What would be the inductive hypothesis?
+
+\item What would we need to prove in the inductive step?
+
+\item Complete the proof by strong induction that this algorithm finds the shortest path from \verb|start| to \verb|end|.
+
+\item Write a recurrence for the asymptotic time complexity of the algorithm you wrote in Question \ref{f-w-1}. \label{recurrence}
+
+\item Estimate the asymptotic time complexity of your algorithm based on the recurrence from Question \ref{recurrence}.
+
+\item If an edge is missing between two vertices, how might the algorithm (or adjacency matrix) from Question \ref{f-w-1} be modified to handle this?
+
+\item If we were to rewrite the algorithm from Question \ref{f-w-1} as a bottom-up dynamic programming algorithm, how many dimensions would the table need to have? What would each dimension represent?
+
+\item Write pseudocode for a bottom-up dynamic programming version of the algorithm. (This is known as the Floyd-Warshall algorithm.) \label{f-w-2}
+
+\newpage
+
+\item What is the asymptotic time complexity of the algorithm from Question \ref{f-w-2}?
+
+\item How might we augment the dynamic programming table so that we can reconstruct the path between two vertices?
+
+\item Under what circumstances is Dijkstra's algorithm preferable to the Floyd-Warshall algorithm? Why?
+
+\item Under what circumstances is the Floyd-Warshall algorithm preferable to Dijkstra's algorithm? Why?
+
+\end{questions}
+
+\end{document}
