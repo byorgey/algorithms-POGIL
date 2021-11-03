@@ -19,28 +19,47 @@
   Students will derive an efficient algorithm for finding the shortest paths between all pairs of vertices in a directed, weighted graph.
 \end{objective}
 
-The table below lists each pair of vertices and the weight of the edge from the first vertex to the second. It then lists the possible intermediate vertices. Find the distance for each path. Then write the minimum distance in the final column. The first row is completed for you as an example.\label{by_hand}
-\\
-{\color{red} 
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-\hline
-Pair & $w_{v_i v_j}$ & $x_1$ & $x_2$ & $v_i$ $x_1$ $v_j$ & $v_i$ $x_2$ $v_j$ &$v_i$ $x_1$ $x_2$ $v_j$ &$v_i$ $x_2$ $x_1$ $v_j$ & Minimum\\
-\hline
-$v_1$ $v_2$ & 8 & $v_3$ & $v_4$ & 10 & 3 & 10 & 10 & 3 \\
-$v_2$ $v_1$ & 3 & $v_3$ & $v_4$ & 11 & 12 & 11 & 19 & 3 \\
-$v_1$ $v_3$ & 7 & $v_2$ & $v_4$ & 11 & 7 & 19 & 6 & 6 \\ 
-$v_3$ $v_1$ & 8 & $v_2$ & $v_4$ & 6 & 8 & 15 & 6 & 6 \\ 
-$v_1$ $v_4$ & 2 & $v_2$ & $v_3$ & 14 & 9 & 13 & 16 & 2\\ 
-$v_4$ $v_1$ & 6 & $v_2$ & $v_3$ & 4 & 13 & 12 & 11 & 4\\ 
-$v_2$ $v_3$ & 3 & $v_1$ & $v_4$ & 10 & 11 & 10 & 19 & 3\\ 
-$v_3$ $v_2$ & 3 & $v_1$ & $v_4$ & 16 & 3 & 11 & 16 & 3\\ 
-$v_2$ $v_4$ & 6 & $v_1$ & $v_3$ & 5 & 5 & 12 & 13 & 5 \\ 
-$v_4$ $v_2$ & 1 & $v_1$ & $v_3$ & 14 & 8 & 16 & 21 & 1\\
-$v_3$ $v_4$ & 2 & $v_1$ & $v_2$ & 10 & 9 & 22 & 8 & 2\\
-$v_4$ $v_3$ & 5 & $v_1$ & $v_2$ & 13 & 4 & 17 & 11 & 4\\
-\hline
-\end{tabular}
+Examining the graph, list all pairs of vertices for which  there is a path through an intermediate vertex that is shorter than tracing the edge from the first to the second vertex. For example, it is shorter to travel from $v_1$ to $v_2$ through intermediate vertex $v_4$ (total length: 2 ($v1$ to $v_4$) + 1 ($v_4$ to $v_2$) = 3) than directly from $v_1$ to $v_2$ (edge weight: 6). 
+
+Note that the graph is not symmetric; the shortest path from $v_1$ to $v_2$ need not be the same as the shortest path from $v_2$ to $v_1$. \label{inter_1}
+
+Be sure to list the pair, the intermediate vertex, and the total length of the path with the intermediate vertex. You should find a total of five pairs.
+
+{\color{red}
+ $v_1$, $v_2$: $v_1$, $v_4$, $v_2$: 3
+ $v_3$, $v_1$: $v_3$, $v_2$, $v_1$: 6
+ $v_4$, $v_1$: $v_4$, $v_2$, $v_1$: 4
+ $v_2$, $v_4$: $v_2$, $v_1$, $v_4$: 5
+ $v_4$, $v_3$: $v_4$, $v_2$, $v_3$: 4
 }
+
+\item Find an instance where taking a path that goes through a second intermediate vertex is shorter than both the path going through just one intermediate vertex as well as the edge between the starting and ending vertices. There is only one such instance. \label{inter_2}
+
+{\color{red}
+ $v_1$, $v_3$: $v_1$, $v_4$, $v_2$, $v_3$: 6
+}
+
+%The table below lists each pair of vertices and the weight of the edge from the first vertex to the second. It then lists the possible intermediate vertices. Find the distance for each path. Then write the minimum distance in the final column. The first row is completed for you as an example.\label{by_hand}
+%\\
+%{\color{red} 
+%\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+%\hline
+%Pair & $w_{v_i v_j}$ & $x_1$ & $x_2$ & $v_i$ $x_1$ $v_j$ & %$v_i$ $x_2$ $v_j$ &$v_i$ $x_1$ $x_2$ $v_j$ &$v_i$ $x_2$ %$x_1$ $v_j$ & Minimum\\
+%\hline
+%$v_1$ $v_2$ & 8 & $v_3$ & $v_4$ & 10 & 3 & 10 & 10 & 3 \\
+%$v_2$ $v_1$ & 3 & $v_3$ & $v_4$ & 11 & 12 & 11 & 19 & 3 \\
+%$v_1$ $v_3$ & 7 & $v_2$ & $v_4$ & 11 & 7 & 19 & 6 & 6 \\ 
+%$v_3$ $v_1$ & 8 & $v_2$ & $v_4$ & 6 & 8 & 15 & 6 & 6 \\ 
+%$v_1$ $v_4$ & 2 & $v_2$ & $v_3$ & 14 & 9 & 13 & 16 & 2\\ 
+%$v_4$ $v_1$ & 6 & $v_2$ & $v_3$ & 4 & 13 & 12 & 11 & 4\\ 
+%$v_2$ $v_3$ & 3 & $v_1$ & $v_4$ & 10 & 11 & 10 & 19 & 3\\ 
+%$v_3$ $v_2$ & 3 & $v_1$ & $v_4$ & 16 & 3 & 11 & 16 & 3\\ 
+%$v_2$ $v_4$ & 6 & $v_1$ & $v_3$ & 5 & 5 & 12 & 13 & 5 \\ 
+%$v_4$ $v_2$ & 1 & $v_1$ & $v_3$ & 14 & 8 & 16 & 21 & 1\\
+%$v_3$ $v_4$ & 2 & $v_1$ & $v_2$ & 10 & 9 & 22 & 8 & 2\\
+%$v_4$ $v_3$ & 5 & $v_1$ & $v_2$ & 13 & 4 & 17 & 11 & 4\\
+%%\end{tabular}
+%}
 
 \begin{model}{Adjacency Matrix}{adj_matrix}
 \begin{tabular}{ l r r r r }
@@ -53,20 +72,47 @@ $v_4$ & 6     & 1     & 5     &   \\
 \label{adj_matrix}
 \end{model}
 
-\item Inspired by your answers to Question \ref{adj_matrix}, fill in the base case and recursive cases of the algorithm below to find the shortest path distance between any pairs of vertices for a graph with $n$ vertices. \label{f-w-1}
+\item Inspired by your answers to Questions \ref{inter_1} and \ref{inter_2}, fill in the base case and recursive cases of the algorithm below to find the shortest path distance between any pairs of vertices for a graph with $n$ vertices. 
+
+The parameter \verb|g| refers to the graph being explored, and \verb|g.edge_weight(i, j)| returns the weight of the edge in graph $g$ from $v_i$ to $v_j$. The \verb|start| and \verb|end| parameters represent the indices of the vertices between which we seek the shortest path. The $k$ parameter represents the maximum vertex index under consideration as an intermediate node. When $k = 0$, no intermediate nodes will be considered; only the edge weight from \verb|start| to \verb|end| can be used. When $k=1$, $v_1$ can be considered. When $k=2$, $v_1$ and $v_2$ can be considered, and so forth. \label{f-w-1}
+
 {\color{red}
 \begin{verbatim}
 shortest_path_distance(g, start, end, k)
   if k == 0
-    return (edge weight in g from start to end)
+    return g.edge_weight(start, end)
   else 
-    return min(shortest_path_distance(g, start , end , k - 1),
-               shortest_path_distance(g, start, k, k - 1) 
-               + shortest_path_distance(g, k, end, k - 1))
+    let distance_ignoring_vertex_k = 
+       shortest_path_distance(g, start, end, k - 1)
+    let distance_using_vertex_k = 
+       shortest_path_distance(g, start, k, k - 1) 
+       + shortest_path_distance(g, k, end, k - 1)
+    if start == k or end == k or 
+       distance_ignoring_vertex_k < distance_using_vertex_k
+      return distance_ignoring_vertex_k
+    else 
+      return distance_using_vertex_k
 \end{verbatim}
 }
 
-\item To prove the algorithm from Question \ref{f-w-1} correctly finds the shortest path from \verb|start| to \verb|end|, we need to use \emph{strong induction}. What would the base cases be for a correctness proof by strong induction?  {\color{red} For every pair of vertices, we return the weight of the edge between them.}
+\item List every distinct base-case recursive call encountered when calling the algorithm on Model \ref{adj_matrix} with the call \verb|shortest_path_distance(model_1, 1, 4, 4)|.
+
+{\color{red}
+1, 4, 0
+1, 3, 0
+1, 2, 0
+2, 4, 0
+2, 3, 0
+2, 1, 0
+3, 4, 0
+3, 2, 0
+3, 1, 0
+4, 3, 0
+4, 2, 0
+4, 1, 0
+}
+
+\item To prove the algorithm from Question \ref{f-w-1} correctly finds the shortest path from \verb|start| to \verb|end|, we need to use \emph{strong induction} due to its multiple distinct recursive calls.  What would all the base cases be for a correctness proof by strong induction?  {\color{red} For every pair of vertices, we return the weight of the edge between them.}
 
 \item How many base cases would there be?  {\color{red} There will be $n^2$ base cases, as we need a base case for every possible edge.}
 
