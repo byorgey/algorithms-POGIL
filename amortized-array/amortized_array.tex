@@ -1,0 +1,84 @@
+% -*- compile-command: "pdflatex --enable-write18 XXX.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{Algorithms: Amortized Analysis of Arrays}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{objective}
+  Students will analyze the running time of two different strategies for resizing an array.
+\end{objective}
+
+
+\begin{questions}
+
+\item An $array$ is a data structure that corresponds to a fixed-size contiguous region of memory. If each element of an array $a$ requires $k$ consecutive memory locations for storage, how would one calculate the memory location corresponding to element $a[i]$, assuming that $a[0]$ is at location $M$?
+
+\item What is an asymptotic upper bound on the time necessary to compute this index? \label{asymptoticlookup}
+
+\item Assume an array with space reserved for $n$ elements. What is an asymptotic upper bound on the time necessary to assign one value to each element of the array?
+
+\item Write pseudocode for an \verb|append| operation for an array. Note that it will need to track both the number of stored elements as well as the amount of space available. If the current amount of space available is exceeded, it should allocate a new array with at least enough space to store both the original items and the newly appended item.
+
+\item What is the best-case running time for one call to \verb|append|?
+
+\item What is the worst-case running time for one call to \verb|append|?
+
+\item What is the best-case total running time for $n$ calls to \verb|append|?
+
+\item What is the worst-case total running time for $n$ calls to \verb|append|?
+
+\item One strategy for deciding how much space to make available for the new array when the original array of size $n$ fills up is to allocate a new array of size $n + c$, where $c$ is a constant integer value greater than zero.
+
+Let the initial value of $n = 4$ and $c = 2$. In the table in Model \ref{addc}, fill in the number of array assignments at each \verb|append| as well as the cumulative total number of array assignments.
+  
+\begin{model*}{Total cost of appending: $n_0 = 4$, $n + 2$ expansion}{addc}
+  \centering
+  % \tabcolsep=0.1cm
+  \begin{tabular}{c|ccccccccccccccccc}
+    $n$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$
+    & $11$ & $12$ & $13$ & $14$ & $15$ & $16$ \\[8pt]
+    cost of $(n-1) \to n$ &  & $1$ & $1$ & $1$ & $1$ & $5$ & $1$ & $7$ &  &  &
+    &  &  &  &  &  &  \\[8pt]
+    cumulative cost & $0$ & $1$ & $2$ & $3$ & $4$ & $9$ & $10$ & $17$ &
+    &  &  &  &  &  &  &  &
+  \end{tabular}
+  \label{addc}
+\end{model*}
+
+\item Make a conjecture: For $n$ calls to \verb|append|, what is an upper bound on the cumulative cost? \label{addcostquestion}
+
+\item Another strategy is to double the size of the array. For this strategy, in Model \ref{times2} fill in the number of array assignments at each \verb|append| as well as the cumulative total number of array assignments.
+  
+\begin{model*}{Total cost of appending:  $n_0 = 4$, $2n$ expansion}{times2}
+  \centering
+  % \tabcolsep=0.1cm
+  \begin{tabular}{c|ccccccccccccccccc}
+    $n$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$
+    & $11$ & $12$ & $13$ & $14$ & $15$ & $16$ \\[8pt]
+    cost of $(n-1) \to n$ &  & $1$ & $1$ & $1$ & $1$ & $5$ & $1$ & $1$ &  &  &
+    &  &  &  &  &  &  \\[8pt]
+    cumulative cost & $0$ & $1$ & $2$ & $3$ & $4$ & $9$ & $10$ & $11$ &
+    &  &  &  &  &  &  &  &
+  \end{tabular}
+  \label{times2}
+\end{model*}
+
+\item Make a conjecture: For $n$ calls to \verb|append|, what is an upper bound on the cumulative cost? \label{timescostquestion}
+
+\item Based on your answers to Question \ref{addcostquestion} and \ref{timescostquestion}, which of these two approaches is preferable?
+
+\item Let's bring back the accounting method we employed previously. Assume each array assignment costs us \$1 to perform. If we double the size of the array when it fills, how much money do we need to charge for each \verb|append| operation in order to avoid going broke at any point? Justify your answer.
+
+\item What can we conclude from this analysis about the amortized worst-case execution time of the \verb|append| operation?
+
+\end{questions}
+
+\end{document}
