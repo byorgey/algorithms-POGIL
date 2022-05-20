@@ -22,11 +22,8 @@
 \RequirePackage{version}
 
 \newif\ifalgoanswers\algoanswersfalse
-% \DeclareOption{answers}{
-%   \algoanswerstrue
-% }
+\DeclareOption{answers}{\algoanswerstrue}
 
-\ExecuteOptions{answers}
 \ProcessOptions\relax
 
 \newcommand{\theyear}{2020}
@@ -149,6 +146,8 @@
 
 \newlength{\algoitemsep}
 \setlength{\algoitemsep}{8ex}
+
+\newenvironment{answer}{\begin{mdframed}[linewidth=1pt]\itshape}{\end{mdframed}}
 
 \ifalgoanswers
 \setlength{\algoitemsep}{0pt}
