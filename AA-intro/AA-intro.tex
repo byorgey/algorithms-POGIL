@@ -222,20 +222,46 @@ true or false.  Give a short justification for each answer.
   in its definition.
   \begin{answer} False; \eg $\frac{n^3 + 3}{n}$. \end{answer}
 \item If $f(n) \leq n^2$ for all $n \geq 0$, then $f(n)$ is $O(n^2)$.
-  \begin{answer} This is true. XXX \end{answer}
+  \begin{answer} This is true. All the functions in the model with
+    this property are $O(n^2)$. \end{answer}
 \item If $f(n)$ is $O(n^2)$, then $f(n) \leq n^2$ for all $n \geq 0$.
+  \begin{answer}
+    False.  For example, $2n^2 + n + 1$ is $O(n^2)$ but it is never
+    $\leq n^2$.
+  \end{answer}
 \item If $f(n) \leq n^2$ for all $n$ that are sufficiently large, then
   $f(n)$ is $O(n^2)$.
+  \begin{answer}
+    True.  For example, $\frac{n^2 + 2}{n}$ is only $\leq n^2$ for $n
+    > 1$.
+  \end{answer}
 \item If $f(n)$ is $O(n^2)$ and $g(n)$ is $\Omega(n^2)$, then $f(n)
   \leq g(n)$ for all $n \geq 0$.
+  \begin{answer}
+    False.  For example, consider $(n^2 + 2)/n$ (which is $O(n^2)$)
+    and $n^3/1000$ (which is $\Omega(n^2)$).  From the graphs we know
+    that the first function is actually greater than the second until
+    around $n = 30$.
+  \end{answer}
 \item Every function $f(n)$ is either $O(n^2)$ or $\Omega(n^2)$ (or
   both).
-  \newpage
+  \begin{answer}
+    This is true, though there is no particular way to answer this
+    from the model alone; student answers may vary.
+  \end{answer}
 \item Using one or more complete English sentences and appropriate
   mathematical formalism, propose a definition of $O(n^2)$ by
   completing the following statement.
 
   \emph{A function $f(n)$ is $O(n^2)$ if and only if\dots}
+
+  \begin{answer}
+    Answers may vary.  Students may talk about how it only matters
+    what happens to $f(n)$ when $n$ is big enough; how $f(n)$ should
+    ``grow at a similar rate'' to $n^2$, or always be $\leq kn^2$ for
+    some constant $k$; they may note that only the ``biggest term'' of
+    $f(n)$ matters.
+  \end{answer}
 \end{questions}
 
 \pause
@@ -249,7 +275,16 @@ true or false.  Give a short justification for each answer.
 \begin{questions}
 \item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
   that of $O(n^2)$?
+  \begin{answer}
+    Answers may vary.  For example, the definitions both have
+    something to do with $n$ being ``sufficiently large'', and they
+    both involve comparing something to $n^2$.
+  \end{answer}
 \item In what way(s) do you think it is different?
+  \begin{answer}
+    One involves something being $\leq$ something else, and the other
+    involves $\geq$.
+  \end{answer}
 % \item Using complete English sentences, propose a definition for
 %   $\Omega(n^2)$.
 \item If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
@@ -259,13 +294,36 @@ true or false.  Give a short justification for each answer.
   think it is $\Theta(n^2)$.  Justify your answers.
   \begin{subquestions}
   \item $3n^2 + 2n - 10$
+    \begin{answer}
+      This is $\Theta(n)$.  It is very similar to $2n^2 + n + 1$ which
+      we know is $\Theta(n)$.
+    \end{answer}
   \item $\displaystyle \frac{n^3 - 5}{n}$
+    \begin{answer}
+      This is also $\Theta(n)$.  It is similar to $(n^3 + 3)/n$.
+    \end{answer}
   \item $\displaystyle \frac{n^3 - 5}{\sqrt n}$
+    \begin{answer}
+      This is $\Omega(n^2)$ but not $O(n^2)$.  Divding $n^3$ by $\sqrt
+      n$ produces something that still grows faster than $n^2$.
+    \end{answer}
   \item $(n+1)(n-2)$
+    \begin{answer}
+      This is $\Theta(n)$. It is equal to $n^2 - n - 2$.
+    \end{answer}
   \item $n + n \sqrt n$
+    \begin{answer}
+      This is $O(n^2)$ but not $\Omega(n^2)$.  $n \sqrt n = n \cdot
+      n^{1/2} = n^{1.5}$ which grows more slowly than $n^2$.
+    \end{answer}
   \end{subquestions}
 \item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
   both?  Why?
+  \begin{answer}
+    Answers may vary.  In fact, it is $\Omega(n^2)$ but not $O(n^2)$;
+    multiplying by $\log_2 n$ means it grows strictly faster than
+    $n^2$.
+  \end{answer}
 \end{questions}
 
 \end{document}
