@@ -1,4 +1,4 @@
-% -*- compile-command: "stack exec -- rubber -d --unsafe AA-intro.tex" -*-
+% -*- compile-command: "rubber -d --unsafe AA-intro.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
@@ -24,42 +24,10 @@
 \definecolor{cb_redpurple}{RGB}{204,121,167}
 
 \begin{model}{Big-O and Big-$\Omega$}{bigO}
-\begin{center}
-\begin{diagram}[width=300]
-  dia :: Diagram B
-  dia = mconcat
-    [ bigO # centerY # translateX (-15)
-    , bigTheta # centerY # translateX 15  -- # translateY (-5)
-    , bigOmega # centerY # translateX 45
-    , circle 30
-    , circle 30 # translateX 30
-    , text "$O(n^2)$" # fontSizeL 4 # translate ((-6) ^& 20)
-    -- , text "$\\Theta(n^2)$" # fontSizeL 4 # translate (15 ^& 15)
-    , text "$\\Omega(n^2)$" # fontSizeL 4 # translate (36 ^& 20)
-    ]
-    where
-      mkColumn = vsep 7 . map (fontSizeL 3 . text . ("$"++) . (++"$"))
-      bigO = mkColumn
-        [ "6"
-        , "n"
-        , "2\\sqrt n"
-        , "\\frac{n^2 + 2}{n}"
-        ]
-      bigTheta = mkColumn
-        [ "n^2"
-        , "\\frac{n^3 + 3}{n}"
-        , "2n^2 + n + 1"
-        , "\\frac{n^2}{2} - n"
-        ]
-      bigOmega = mkColumn
-        [ "n^3"
-        , "n^4 - 3n^2"
-        , "\\frac{n^3}{1000}"
-        , "2^n"
-        ]
-\end{diagram}
+  \begin{center}
+    \input{diagrams/VennModel.pgf}
 
-\vspace{0.5in}
+    \vspace{0.5in}
 
 \begin{minipage}{\textwidth}
 \begin{tikzpicture}
@@ -178,8 +146,8 @@
   using big-$O$, big-$\Theta$, and big-$\Omega$ notation.
 \end{objective}
 
-\textbf{Important note}: although your previous experience with
-big-$O$ notation will certainly be helpful, I am not assuming that you
+\textbf{Important note}: although any previous experience you have
+with big-$O$ notation may be helpful, I am not assuming that you
 remember anything in particular.  When answering the following
 questions, as much as possible, try to rely on the information
 provided in Model 1 rather than on your memory.
@@ -203,17 +171,19 @@ Consider the functions
 \end{align*}
 for which graphs are shown in the model.
 \begin{questions}
-  \item On each of the following intervals, list the functions $f$,
-    $g$, and $h$ from largest to smallest.
+\item On each of the following intervals, use the provided graphs to
+  list the functions $f$, $g$, and $h$ in order from largest to
+  smallest.
   \begin{subquestions}
-  \item $n \in [2,4]$
-  \item $n \in [5,30]$
-  \item $n \in [35,450]$
+  \item $2 \leq n \leq 4$
+  \item $5 \leq n \leq 30$
+  \item $35 \leq n \leq 450$
   \end{subquestions}
-\item Which function is largest, and which the smallest, at $n = 600$?
+\item Which function do you think is largest, and which the smallest,
+  at $n = 600$?
 \item Does this relative order continue for all $n \geq 600$, or do
   the functions ever change places again?  Justify your answer.
-  \newpage
+ \newpage
 \item How do you think your answers to the previous questions relate
   to whether each of $f$, $g$, and $h$ is $O(n^2)$, $\Omega(n^2)$, or both?
 \end{questions}
