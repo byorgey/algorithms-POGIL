@@ -26,7 +26,7 @@
 
 \ProcessOptions\relax
 
-\newcommand{\theyear}{2020}
+\newcommand{\theyear}{2022}
 \newcommand{\theseason}{Fall}
 \newcommand{\thesem}{\theseason\ \theyear}
 \newcommand{\thecourse}{Algorithms}
@@ -109,6 +109,10 @@
 
 \newenvironment{objective}%
   {\begin{lrbox}{0}\begin{minipage}{\marginparwidth}\@tufte@caption@font\textbf{Learning objective}: }%
+  {\end{minipage}\end{lrbox}\marginnote{\usebox{0}\vspace{0.3in}}}
+
+\newenvironment{pobjective}%
+  {\begin{lrbox}{0}\begin{minipage}{\marginparwidth}\@tufte@caption@font\textbf{Process objective}: }%
   {\end{minipage}\end{lrbox}\marginnote{\usebox{0}\vspace{0.3in}}}
 
 \mdfdefinestyle{modelframe}{innerleftmargin=0.7cm,innerrightmargin=0.7cm,%
