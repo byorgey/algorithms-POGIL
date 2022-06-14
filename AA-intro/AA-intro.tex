@@ -1,7 +1,7 @@
 % -*- compile-command: "rubber -d --unsafe AA-intro.tex" -*-
 \documentclass{tufte-handout}
 
-\usepackage[answers]{../algo-activity}
+\usepackage{../algo-activity}
 
 \usepackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
@@ -140,10 +140,10 @@
 \end{model}
 
 \newpage
-\section{Critical Thinking Questions I}
+\section{Critical Thinking Questions I (20 minutes)}
 \begin{objective}
 Students will develop intuitive mental models to classify
-  functions as $O(n^2)$, $\Omega(n^2)$, and/or $\Theta(n^2)$.
+  functions as $O(n^2)$, $\Omega(n^2)$, or $\Theta(n^2)$.
 \end{objective}
 
 \textbf{Important note}: although any previous experience you have
@@ -153,11 +153,11 @@ questions, as much as possible, try to rely on the information
 provided in Model 1 rather than on your memory.
 
 \begin{questions}
-\item Based on the Venn diagram in the model, say whether each
-  function is $O(n^2)$, $\Omega(n^2)$, or both. \marginnote{$\Omega$
-    is pronounced ``big omega'' (amusingly, ``o-mega'' is itself Greek
-    for ``big O'', although they meant ``big'' in the sense of a long
-    vowel, not uppercase).}
+\item \textbf{Based on the Venn diagram} in the model, say whether
+  each function is $O(n^2)$, $\Omega(n^2)$, or
+  both. \marginnote{$\Omega$ is pronounced ``big omega'' (amusingly,
+    ``o-mega'' is itself Greek for ``big O'', although they meant
+    ``big'' in the sense of a long vowel, not uppercase).}
   \begin{subquestions}
   \item $2\sqrt n$
     \begin{answer}According to the Venn diagram, $2\sqrt n$ is $O(n^2)$.\end{answer}
@@ -174,22 +174,44 @@ Consider the functions
 \begin{align*}
   f(n) &= (n^2 + 2)/n, \\ g(n) &= n^2/2 - n, \text{and} \\ h(n) &= n^3/1000
 \end{align*}
-for which graphs are shown in the model.
+for which graphs are shown in the model (really the same graph shown
+three times at different zoom levels).
 \begin{questions}
-\item On each of the following intervals, use the provided graphs to
-  list the functions $f$, $g$, and $h$ in order from largest to
-  smallest.
-  \begin{subquestions}
-  \item $2 \leq n \leq 4$
-    \begin{answer}On this interval, $h(n) \leq g(n) \leq f(n)$.\end{answer}
-  \item $5 \leq n \leq 30$
-    \begin{answer}On the interval $5 \leq n \leq 30$, $h(n) \leq f(n) \leq g(n)$.\end{answer}
-  \item $35 \leq n \leq 450$
-    \begin{answer}$f(n) \leq h(n) \leq g(n)$.\end{answer}
-  \end{subquestions}
-\item Which function do you think is largest, and which the smallest,
-  at $n = 600$?
-  \begin{answer}At $n = 600$, $h$ is largest and $f$ is smallest.\end{answer}
+\item
+  The following table has four columns representing different
+  intervals for $n$.  For each interval, the table is supposed to show
+  which function is smallest, which is biggest, and which is in
+  between.  For example, when $2 \leq n \leq 4$, we can see on the
+  leftmost graph that the blue line representing $f(n)$ is above the
+  other two lines, so $f(n)$ is biggest on this interval.  This has
+  already been filled in for you in the table.
+
+  \textbf{Using the graphs} in the model, fill in the rest of the
+  table. Note that the graphs do not quite show what happens at $n = 600$;
+  when filling in the last column of the table, simply use your best
+  judgment to predict what will happen.
+
+  \setlength{\tabcolsep}{20pt}
+  \renewcommand{\arraystretch}{2}
+  \begin{fullwidth}
+  \begin{tabular}{c|cccc}
+    biggest & $f$ & & & \\
+    middle & & $f$ & & \\
+    smallest & & & & \\
+    \hline
+        & $2 \leq n \leq 4$ & $5 \leq n \leq 30$ & $35 \leq n \leq 450$ & $n = 600$
+  \end{tabular}
+  \end{fullwidth}
+
+  \begin{answer}
+    \setlength{\tabcolsep}{20pt}
+    \renewcommand{\arraystretch}{1}
+    \begin{tabular}{cccc}
+    $f$ & $g$ & $g$ & $h$ \\
+    $g$ & $f$ & $h$ & $g$ \\
+    $h$ & $h$ & $f$ & $f$
+    \end{tabular}
+  \end{answer}
 
 \item Does this relative order continue for all $n \geq 600$, or do
   the functions ever change places again?  Justify your answer.
@@ -197,19 +219,36 @@ for which graphs are shown in the model.
     is proportional to $n^3$ it will continue to grow faster than
     $g$, which will in turn continue to grow faster than
     $f$.\end{answer}
-\item How do you think your answers to the previous questions relate
-  to whether each of $f$, $g$, and $h$ is $O(n^2)$, $\Omega(n^2)$, or
-  both?
+\item Again using the Venn diagram, for each function, say whether it is
+  $O(n^2)$, $\Omega(n^2)$, or both.
+  \begin{subquestions}
+  \item $f$
+    \begin{answer}
+      $f(n) = (n^2 + 2)/n$ is $O(n^2)$.
+    \end{answer}
+  \item $g$
+    \begin{answer}
+      $g(n) = n^2/2 - n$ is both $O(n^2)$ and $\Omega(n^2)$.
+    \end{answer}
+  \item $h$
+    \begin{answer}
+      $h(n) = n^3/1000$ is $\Omega(n^2)$.
+    \end{answer}
+  \end{subquestions}
+\item Based on your answers to the previous three questions, which
+  grow more quickly, functions which are $O(n^2)$, or functions which
+  are $\Omega(n^2)$? Write one or two sentences explaining your reasoning.
+
   \begin{answer}
-    From the Venn diagram we can see that $f$ is $O(n^2)$, $g$ is
-    both, and $h$ is $\Omega(n^2)$.  Eventually, $O(n^2)$ functions
-    will be smallest, $\Omega(n^2)$ functions will be biggest, and
-    functions that are both will be in the middle.
+    $f$, which is $O(n^2)$, is the smallest function for $n \geq 600$;
+    $h$, which is $\Omega(n^2)$, is the biggest.  Eventually, $\Omega(n^2)$
+    functions grow more quickly than $O(n^2)$ functions.
   \end{answer}
 \end{questions}
 
-\noindent Say whether you think each of the following statements is
-true or false.  Give a short justification for each answer.
+\noindent \textbf{Using evidence from the model}, say whether you
+think each of the following statements is true or false.  Give a short
+justification for each answer.
 
 \begin{questions}
 \item If $f(n)$ is $O(n^2)$, then it has $n^2$ in its definition.
@@ -222,8 +261,9 @@ true or false.  Give a short justification for each answer.
   in its definition.
   \begin{answer} False; \eg $\frac{n^3 + 3}{n}$. \end{answer}
 \item If $f(n) \leq n^2$ for all $n \geq 0$, then $f(n)$ is $O(n^2)$.
-  \begin{answer} This is true. All the functions in the model with
-    this property are $O(n^2)$. \end{answer}
+  \begin{answer} This is true; although we can't know for sure without
+    knowing the definition of $O(n^2)$, all the functions in the model
+    with this property are in fact $O(n^2)$. \end{answer}
 \item If $f(n)$ is $O(n^2)$, then $f(n) \leq n^2$ for all $n \geq 0$.
   \begin{answer}
     False.  For example, $2n^2 + n + 1$ is $O(n^2)$ but it is never
@@ -236,22 +276,15 @@ true or false.  Give a short justification for each answer.
     > 1$.
   \end{answer}
 \item If $f(n)$ is $O(n^2)$ and $g(n)$ is $\Omega(n^2)$, then $f(n)
-  \leq g(n)$ for all $n \geq 0$.
+  \leq g(n)$ for all $n$.
   \begin{answer}
     False.  For example, consider $(n^2 + 2)/n$ (which is $O(n^2)$)
     and $n^3/1000$ (which is $\Omega(n^2)$).  From the graphs we know
     that the first function is actually greater than the second until
     around $n = 30$.
   \end{answer}
-\item Every function $f(n)$ is either $O(n^2)$ or $\Omega(n^2)$ (or
-  both).
-  \begin{answer}
-    This is true, though there is no particular way to answer this
-    from the model alone; student answers may vary.
-  \end{answer}
-\item Using one or more complete English sentences and appropriate
-  mathematical formalism, propose a definition of $O(n^2)$ by
-  completing the following statement.
+\item Using one or more complete English sentences, propose a
+  definition of $O(n^2)$ by completing the following statement.
 
   \emph{A function $f(n)$ is $O(n^2)$ if and only if\dots}
 
@@ -266,11 +299,7 @@ true or false.  Give a short justification for each answer.
 
 \pause
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Fall 2017: skipped these questions
-
-\section{Critical Thinking Questions II}
+\section{Critical Thinking Questions II (10 minutes)}
 
 \begin{questions}
 \item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
@@ -291,7 +320,7 @@ true or false.  Give a short justification for each answer.
   $\Theta(n^2)$.
   \marginnote{$\Theta$ is pronounced ``big theta''.}
   For each of the below functions, say whether you
-  think it is $\Theta(n^2)$.  Justify your answers.
+  think it is $\Theta(n^2)$, $O(n^2)$, or $\Omega(n^2)$.  Justify your answers.
   \begin{subquestions}
   \item $3n^2 + 2n - 10$
     \begin{answer}
@@ -318,7 +347,7 @@ true or false.  Give a short justification for each answer.
     \end{answer}
   \end{subquestions}
 \item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
-  both?  Why?
+  $\Theta(n^2)$?  Why?
   \begin{answer}
     Answers may vary.  In fact, it is $\Omega(n^2)$ but not $O(n^2)$;
     multiplying by $\log_2 n$ means it grows strictly faster than
@@ -330,14 +359,6 @@ true or false.  Give a short justification for each answer.
 
 \section{Facilitation plan}
 \label{sec:facilitation}
-
-\section{Announcements}
-
-\begin{itemize}
-\item Remember HW 1 due Friday.  Start early, come ask for help if you
-  need it.
-\item Today, take a role you haven't had.  Review duties.
-\end{itemize}
 
 \section{Learning Objectives}
 
@@ -354,34 +375,65 @@ true or false.  Give a short justification for each answer.
 \item Information processing (interpreting Venn diagram and graph
   models)
 \item Critical thinking (finding counterexamples; synthesizing
-  examples to come up with intuitive
+  examples to come up with intuitive models for $O(n^2)$ and $\Omega(n^2)$)
 \end{itemize}
 
-\section{Reflection (5 mins)}
+\section{Announcements (2 minutes)}
 
 \begin{itemize}
-\item Tell reflectors to take a few minutes at the beginning to share
-  insight from last time, kick off discussion.
-\item Pick a new role.
+\item Remember HW 1 due Friday.  Start early, come ask for help if you
+  need it.
+\item Today, take a role you haven't had.  Review duties.
+\item Remind managers to look at the time limits on the activities,
+  make sure you stay on track!
 \end{itemize}
 
-\section{CTQs I (Big-O) (32 mins)}
+\section{CTQs I (Big-O) (30 mins: 20 activity + 10 discussion)}
 
 (Up to 3 minutes to get started, look at role cards, etc.)
 
 \begin{itemize}
 \item Make grid, go around and tell them put up answers to T/F
   questions once they get there.  Discuss as necessary.
-\item Also tell reflectors I will be asking them to share insights
-  with group later.  One strength, one improvement.
+\item Share and discuss proposed definitions of $O(n^2)$.
 \end{itemize}
 
+\section{CTQs II (Big-Theta, classification) (15 mins: 10 activity + wrap-up)}
+
+\begin{itemize}
+\item Discuss answers as necessary.
+\item Wrap-up: today was about building intuition and
+  examples. Promise we will see the real definition next time!
+\end{itemize}
 
 \newpage
 
 \section{Author notes}
 \label{sec:author}
 
+In the past when I have used a previous version of the activity in a
+50-minute class, I only made it through CTQ I and never made it to CTQ
+II.  I hope that
+\begin{itemize}
+\item This version is more streamlined
+\item Encouraging managers to keep track of time will help
+\end{itemize}
+so that we can get to the application questions.
+
+Some unused questions:
+
+\begin{itemize}
+\item $f(n)$ being $O(n^2)$ and/or $\Omega(n^2)$ has nothing to do
+  with whether it literally has $n^2$ in its definition.
+  \begin{answer} True. \end{answer}
+
+\item Every function $f(n)$ is either $O(n^2)$ or $\Omega(n^2)$ (or
+  both).
+  \begin{answer}
+    This is true, though there is no particular way to answer this
+    from the model alone; student answers may vary.
+  \end{answer}
+\end{itemize}
 
 
 \end{document}
