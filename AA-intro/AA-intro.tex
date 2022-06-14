@@ -153,8 +153,8 @@ questions, as much as possible, try to rely on the information
 provided in Model 1 rather than on your memory.
 
 \begin{questions}
-\item \textbf{Based on the Venn diagram} in the model, say whether
-  each function is $O(n^2)$, $\Omega(n^2)$, or
+\item \textbf{Working together}, based on the \textbf{Venn diagram} in
+  the model, say whether each function is $O(n^2)$, $\Omega(n^2)$, or
   both. \marginnote{$\Omega$ is pronounced ``big omega'' (amusingly,
     ``o-mega'' is itself Greek for ``big O'', although they meant
     ``big'' in the sense of a long vowel, not uppercase).}
@@ -177,7 +177,7 @@ Consider the functions
 for which graphs are shown in the model (really the same graph shown
 three times at different zoom levels).
 \begin{questions}
-\item
+\item \label{q:table}
   The following table has four columns representing different
   intervals for $n$.  For each interval, the table is supposed to show
   which function is smallest, which is biggest, and which is in
@@ -190,6 +190,8 @@ three times at different zoom levels).
   table. Note that the graphs do not quite show what happens at $n = 600$;
   when filling in the last column of the table, simply use your best
   judgment to predict what will happen.
+
+  \textbf{Make sure your group agrees} on the best way to fill in the table.
 
   \setlength{\tabcolsep}{20pt}
   \renewcommand{\arraystretch}{2}
@@ -219,7 +221,7 @@ three times at different zoom levels).
     is proportional to $n^3$ it will continue to grow faster than
     $g$, which will in turn continue to grow faster than
     $f$.\end{answer}
-\item Again using the Venn diagram, for each function, say whether it is
+\item \label{q:fgh} Again using the Venn diagram, for each function, say whether it is
   $O(n^2)$, $\Omega(n^2)$, or both.
   \begin{subquestions}
   \item $f$
@@ -235,7 +237,7 @@ three times at different zoom levels).
       $h(n) = n^3/1000$ is $\Omega(n^2)$.
     \end{answer}
   \end{subquestions}
-\item Based on your answers to the previous three questions, which
+\item \label{q:synthesize} Based on your answers to the previous three questions, which
   grow more quickly, functions which are $O(n^2)$, or functions which
   are $\Omega(n^2)$? Write one or two sentences explaining your reasoning.
 
@@ -244,11 +246,16 @@ three times at different zoom levels).
     $h$, which is $\Omega(n^2)$, is the biggest.  Eventually, $\Omega(n^2)$
     functions grow more quickly than $O(n^2)$ functions.
   \end{answer}
+
+\item Does your answer to \pref{q:synthesize} make use of evidence
+  from your answers to Questions \ref{q:table}--\ref{q:fgh}?  If not,
+  which ones were not used?  Could you modify your answer to take
+  them into account?
 \end{questions}
 
-\noindent \textbf{Using evidence from the model}, say whether you
-think each of the following statements is true or false.  Give a short
-justification for each answer.
+\noindent \textbf{Using evidence from the model}, come to a consensus
+within your group as to whether each of the following statements is
+true or false.  Write a short justification for each answer.
 
 \begin{questions}
 \item If $f(n)$ is $O(n^2)$, then it has $n^2$ in its definition.
@@ -303,20 +310,14 @@ justification for each answer.
 
 \begin{questions}
 \item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
-  that of $O(n^2)$?
+  and different from that of $O(n^2)$?
   \begin{answer}
     Answers may vary.  For example, the definitions both have
     something to do with $n$ being ``sufficiently large'', and they
-    both involve comparing something to $n^2$.
+    both involve comparing something to $n^2$; one involves something
+    being $\leq$ something else, and the other involves $\geq$.
   \end{answer}
-\item In what way(s) do you think it is different?
-  \begin{answer}
-    One involves something being $\leq$ something else, and the other
-    involves $\geq$.
-  \end{answer}
-% \item Using complete English sentences, propose a definition for
-%   $\Omega(n^2)$.
-\item If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
+\item \label{q:classify} If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
   $\Theta(n^2)$.
   \marginnote{$\Theta$ is pronounced ``big theta''.}
   For each of the below functions, say whether you
@@ -346,13 +347,10 @@ justification for each answer.
       n^{1/2} = n^{1.5}$ which grows more slowly than $n^2$.
     \end{answer}
   \end{subquestions}
-\item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
-  $\Theta(n^2)$?  Why?
-  \begin{answer}
-    Answers may vary.  In fact, it is $\Omega(n^2)$ but not $O(n^2)$;
-    multiplying by $\log_2 n$ means it grows strictly faster than
-    $n^2$.
-  \end{answer}
+\item In your answers to \pref{q:classify}, in which cases did you
+  make use of evidence from the model (the Venn diagram or graphs) to
+  justify your answers?  In which cases did you make use of team
+  members' previous knowledge?
 \end{questions}
 
 \newpage
@@ -432,6 +430,13 @@ Some unused questions:
   \begin{answer}
     This is true, though there is no particular way to answer this
     from the model alone; student answers may vary.
+  \end{answer}
+\item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
+  $\Theta(n^2)$?  Why?
+  \begin{answer}
+    Answers may vary.  In fact, it is $\Omega(n^2)$ but not $O(n^2)$;
+    multiplying by $\log_2 n$ means it grows strictly faster than
+    $n^2$.
   \end{answer}
 \end{itemize}
 
