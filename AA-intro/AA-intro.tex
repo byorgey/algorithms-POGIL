@@ -180,26 +180,29 @@ provided in Model 1 rather than on your memory.
   \end{subquestions}
 \end{questions}
 
-Consider the functions
-\begin{align*}
-  f(n) &= (n^2 + 2)/n, \\ g(n) &= n^2/2 - n, \text{and} \\ h(n) &= n^3/1000
-\end{align*}
-for which graphs are shown in the model (really the same graph shown
-three times at different zoom levels).
-\begin{questions}
-\item \label{q:table}
-  The following table has four columns representing different
-  intervals for $n$.  For each interval, the table is supposed to show
-  which function is smallest, which is biggest, and which is in
-  between.  For example, when $2 \leq n \leq 4$, we can see on the
-  leftmost graph that the blue line representing $f(n)$ is above the
-  other two lines, so $f(n)$ is biggest on this interval.  This has
-  already been filled in for you in the table.
+\hline \bigskip
 
-  \textbf{Using the graphs} in the model, fill in the rest of the
-  table. Note that the graphs do not quite show what happens at $n = 600$;
-  when filling in the last column of the table, simply use your best
-  judgment to predict what will happen.
+For Questions \ref{q:biggest}--\ref{q:synthesize}, consider the functions
+\begin{align*}
+  f(n) &= (n^2 + 2)/n, \\ g(n) &= n^2/2 - n, \text{and} \\ h(n) &= n^3/1000.
+\end{align*}
+Graphs of these functions are shown in the model (or rather,
+\emph{one} graph is shown three times at different zoom levels).
+\begin{questions}
+\item \label{q:biggest} Look at the graphs to determine which function is
+  biggest when $2 \leq n \leq 4$.
+  \begin{answer}
+    The left-hand graph shows that $f(n)$ (the blue line) is biggest
+    on this interval.
+  \end{answer}
+\item \label{q:table} The following table has four columns
+  representing different intervals for $n$.  For each interval, the
+  table is supposed to show which function is smallest, which is
+  biggest, and which is in between. A couple entries have already been
+  filled in for you.  Using the graphs in the model, fill in the rest
+  of the table. Note that the graphs do not quite show what happens at
+  $n = 600$; when filling in the last column of the table, simply use
+  your best judgment to predict what will happen.
 
   \textbf{Make sure your group agrees} on the best way to fill in the table.
 
@@ -225,7 +228,7 @@ three times at different zoom levels).
     \end{tabular}
   \end{answer}
 
-\item Does this relative order continue for all $n \geq 600$, or do
+\item Does the same relative order continue for all $n \geq 600$, or do
   the functions ever change places again?  Justify your answer.
   \begin{answer}The functions never change places again.  Since $h$
     is proportional to $n^3$ it will continue to grow faster than
@@ -234,35 +237,35 @@ three times at different zoom levels).
 \item \label{q:fgh} Again using the Venn diagram, for each function, say whether it is
   $O(n^2)$, $\Omega(n^2)$, or both.
   \begin{subquestions}
-  \item $f$
+  \item $f(n) = (n^2 + 2)/n$
     \begin{answer}
-      $f(n) = (n^2 + 2)/n$ is $O(n^2)$.
+      $f(n)$ is $O(n^2)$.
     \end{answer}
-  \item $g$
+  \item $g(n) = n^2/2 - n$
     \begin{answer}
-      $g(n) = n^2/2 - n$ is both $O(n^2)$ and $\Omega(n^2)$.
+      $g(n)$ is both $O(n^2)$ and $\Omega(n^2)$.
     \end{answer}
-  \item $h$
+  \item $h(n) = n^3/1000$
     \begin{answer}
-      $h(n) = n^3/1000$ is $\Omega(n^2)$.
+      $h$ is $\Omega(n^2)$.
     \end{answer}
   \end{subquestions}
-\item \label{q:synthesize} Based on your answers to the previous three questions, which
-  grow more quickly, functions which are $O(n^2)$, or functions which
-  are $\Omega(n^2)$? Write one or two sentences explaining your reasoning.
+\item \label{q:synthesize} Based on your answers to the previous three
+  questions, which grow more quickly in general, functions which are
+  $O(n^2)$, or functions which are $\Omega(n^2)$? Write one or two
+  sentences explaining your reasoning.  Be sure to mention evidence
+  from your answers to each of the previous three questions.
 
   \begin{answer}
-    $f$, which is $O(n^2)$, is the smallest function for $n \geq 600$;
-    $h$, which is $\Omega(n^2)$, is the biggest.  Eventually, $\Omega(n^2)$
-    functions grow more quickly than $O(n^2)$ functions.
+    $f$, which we know is $O(n^2)$ from question 5, is the smallest
+    function for $n \geq 600$ (based on the table in question 3 and
+    the answer to question 4); $h$, which is $\Omega(n^2)$, is the
+    biggest.  Eventually, $\Omega(n^2)$ functions grow more quickly
+    than $O(n^2)$ functions.
   \end{answer}
-
-\item Does your answer to \pref{q:synthesize} make use of evidence
-  from your answers to Questions \ref{q:table}--\ref{q:fgh}?  If not,
-  which ones were not used?  Could you modify your answer to take
-  them into account?
 \end{questions}
 
+\newpage
 \noindent \textbf{Using evidence from the model}, come to a consensus
 within your group as to whether each of the following statements is
 true or false.  Write a short justification for each answer.
@@ -403,7 +406,10 @@ true or false.  Write a short justification for each answer.
 \begin{itemize}
 \item Make grid, go around and tell them put up answers to T/F
   questions once they get there.  Discuss as necessary.
-\item Share and discuss proposed definitions of $O(n^2)$.
+\item Share and discuss proposed definitions of $O(n^2)$.  Note that
+  the next activity will present the real definition, so it is not
+  critical that students converge on an exactly correct definition;
+  the goal is to get them to think about the important issues.
 \end{itemize}
 
 \section{CTQs II (Big-Theta, classification) (15 mins: 10 activity + wrap-up)}
