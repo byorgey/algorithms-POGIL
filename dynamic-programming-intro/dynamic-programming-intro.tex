@@ -1,13 +1,6 @@
 % -*- compile-command: "rubber -d --unsafe dynamic-programming-intro.tex" -*-
 \documentclass{tufte-handout}
 
-% F'19:
-% This one seems short but working through it completely, then having
-% reporters compare with other teams took until around the 40-minute
-% mark or so.  And it was really good, they all got it.  Took the last
-% 10 minutes to sum up what we had done and put everything in a
-% big-picture context.
-
 \usepackage{algo-activity}
 
 \title{\thecourse: Introduction to Dynamic Programming}
@@ -18,9 +11,18 @@
 \maketitle
 
 \begin{objective}
-  Students will apply memoization techniques to speed up overlapping
-  recursion.
+  Students will apply memoization techniques to speed up recursion
+  with overlapping subproblems.
 \end{objective}
+
+\begin{pobjective}
+  Students will communicate high-level insights about recursive
+  functions orally and in writing.
+\end{pobjective}
+
+Begin by \textbf{skimming} the following model.  You do not need to
+understand all the code right away; the activity will guide you
+through the process of understanding it.
 
 \begin{model}{Fibonaccis}{fibonaccis}
 Here are three functions to compute Fibonacci numbers, implemented in
@@ -43,7 +45,7 @@ def fib2(n):
 
     return fibs[n]
 
-
+# global table of Fibonacci numbers
 fibtable = [0,1]
 
 def fib3(n):
@@ -58,6 +60,8 @@ def fib3(n):
 \end{verbatim}
 \end{model}
 
+\section{Critical Thinking Questions: \texttt{fib1} (15 minutes)}
+
 \begin{questions}
 \item Recall that the Fibonacci numbers are defined by the recurrence
   \begin{align*}
@@ -69,18 +73,41 @@ def fib3(n):
 \item How many times does \verb|fib1(2)| occur in the call tree?
   What about \verb|fib1(1)|?  \verb|fib1(0)|?
 \item It turns out that \verb|fib1| is extremely slow.\footnote{In
-    fact, it takes $\Theta(\varphi^n)$ time.}  Intuitively, why is it
-  so slow?
-\item Trace the execution of \verb|fib2(5)| and explain how it works. \vspace{1in}
+    fact, it takes $\Theta(\varphi^n)$ time.}  What do you think makes
+  it so slow?
+\end{questions}
+
+  \begin{fullwidth}
+  \begin{mdframed}
+    \begin{itemize}
+    \item Send your \textbf{reporter} to another group to check your
+      understanding of what makes \verb|fib1| slow.
+    \item While the reporter is gone, the \textbf{reflector} should
+      take a minute to think of one \textbf{strength} of your group's
+      work so far today and one \textbf{improvement} to suggest.
+    \item When the reporter gets back, they should share what they
+      learned.
+    \item The reflector should then share their insights with the
+      group.
+    \end{itemize}
+  \end{mdframed}
+  \end{fullwidth}
+\pause
+
+\section{Critical Thinking Questions: \texttt{fib2} and \texttt{fib3}
+  (25 minutes)}
+
+\begin{questions}
+\item Trace the execution of \verb|fib2(5)| and explain how it works
+  using one or two complete English sentences. \vspace{1in}
 \item Which does more work, \verb|fib2(5)| or \verb|fib1(5)|?  Why?
-\newpage
 \item In terms of $\Theta$, how long does \verb|fib2(n)|
   take?\footnote{For the purposes of this activity, you should assume
-    that each addition takes constant time.  However, as you know from
+    that each addition takes constant time.  However, as you may know from
     a previous activity, it is more accurate to say that addition
     takes linear time in the number of bits, which actually makes a
     difference here since Fibonacci numbers can get quite large.  You
-    will analyze the situation more precisely on the HW.}
+    will analyze the situation more precisely on a homework assignment.}
 \item Suppose we switch the direction of the \verb|for| loop in
   \verb|fib2|, so \verb|i| loops from \verb|n| down to \verb|2|.
   Would it still work?  Why or why not?
@@ -90,17 +117,35 @@ def fib3(n):
   except that \\ \blank.
 \item Fill in this statement: \verb|fib2| is just like \verb|fib3|
   except that \\ \blank.
-\item Why don't we do something akin to \verb|fib2| or \verb|fib3| for
-  merge sort?
+\item Why don't we do something like \verb|fib2| or \verb|fib3| in the
+  case of merge sort?
 \item Consider the following recursive definition of $Q(n)$ for $n
-  \geq 0$:
+  \geq 0$:\marginnote{Note that there are \emph{three} base cases.}
   \begin{align*}
     Q(0) &= 0 \\
     Q(1) &= Q(2) = 1 \\
     Q(n) &= \max \begin{cases} Q(n - 3)^2 \\ Q(n-1) + Q(n-2) \end{cases}
   \end{align*}
-  (Note that there are \emph{three} base cases.)  Using pseudocode,
-  write an algorithm to calculate $Q(n)$ efficiently.
+  Using pseudocode, or any language your group agrees to use, write an
+  algorithm to calculate $Q(n)$ efficiently.
 \end{questions}
+
+\newpage
+
+\section{Facilitation plan}
+\label{sec:facilitation}
+
+\newpage
+
+\section{Author notes}
+\label{sec:author}
+
+\begin{reflect}{F'19}
+This one seems short but working through it completely, then having
+reporters compare with other teams took until around the 40-minute
+mark or so.  And it was really good, they all got it.  Took the last
+10 minutes to sum up what we had done and put everything in a
+big-picture context.
+\end{reflect}
 
 \end{document}
