@@ -61,36 +61,53 @@ states of development, ranging from some that are quite refined and
 battle-tested, to some that were written hastily the day before class
 and only used once.
 
-The below table shows the typical order, XXX prerequisites, status
-XXX more about how status is determined. XXX diagrams status
+The below table contains all the activities, listed in the order I
+typically use them during a semester.  Each one lists
+  - Other activities which are prerequisites
+  - Whether the activity contains embedded code for diagrams.  This
+    makes it much more difficult to build the LaTeX sources and hence
+    difficult to modify.  Eventually I plan to revise all the
+    activities to use standalone diagram generation code.
+  - Whether a PDF of the activity has been checked into the repository.
+  - Whether an answer key is available for the activity.
+  - The status of the activity.  Statuses used include:
+      - Unknown --- use at your own risk!
+      - Needs revision --- not up to my own quality standards.
+      - Revised --- has been recently revised and is at least up to my
+        own quality standards, but has not necessarily gone through a
+        review process.
+      - Under review --- has been submitted for review through the
+        [Pogil Activity
+        Clearinghouse](http://pac.chem.pitt.edu/index.php/pac)
+      - Endorsed --- officially endorsed by The POGIL Project.
 
-| Activity                                                                                                               | Prerequisites                | Diagrams? | Status |
-|------------------------------------------------------------------------------------------------------------------------|------------------------------|-----------|--------|
-| [Intro to POGIL and CSCI 382](https://github.com/byorgey/algorithms-POGIL/tree/main/POGIL-intro)                       |                              |           |        |
-| [Brute force algorithms](https://github.com/byorgey/algorithms-POGIL/tree/main/brute-force)                            |                              |           |        |
-| [Reasons for POGIL](https://github.com/byorgey/algorithms-POGIL/tree/main/why-POGIL)                                   | Intro to POGIL               |           |        |
-| [GCD analysis](https://github.com/byorgey/algorithms-POGIL/tree/main/GCD-analysis)                                     |                              |           |        |
-| [Intro to asymptotic analysis](https://github.com/byorgey/algorithms-POGIL/tree/main/AA-intro)                         |                              |           |        |
-| [Asymptotic analysis definitions](https://github.com/byorgey/algorithms-POGIL/tree/main/AA-definitions)                | Intro to AA                  |           |        |
-| [Asmyptotic analysis limit theorems](https://github.com/byorgey/algorithms-POGIL/tree/main/AA-limits)                  | AA definitions               |           |        |
-| [Three proofs](https://github.com/byorgey/algorithms-POGIL/tree/main/three-proofs)                                     | AA definitions               |           |        |
-| [Intro to graphs](https://github.com/byorgey/algorithms-POGIL/tree/main/graphs)                                        |                              |           |        |
-| [BFS applications and directed graphs](https://github.com/byorgey/algorithms-POGIL/tree/main/BFS-applications)         | Intro to graphs              |           |        |
-| [Introduction to Dijkstra's Algorithm](https://github.com/byorgey/algorithms-POGIL/tree/main/Dijkstra-intro)           | Intro to graphs              |           |        |
-| [Minimum Spanning Trees](https://github.com/byorgey/algorithms-POGIL/tree/main/MST)                                    | Intro to graphs              |           |        |
-| [Kruskal's algorithm](https://github.com/byorgey/algorithms-POGIL/tree/main/Kruskal)                                   | MSTs                         |           |        |
-| [Introduction to Divide & Conquer](https://github.com/byorgey/algorithms-POGIL/tree/main/divide-and-conquer-intro)     |                              |           |        |
-| [Divide & Conquer Arithmetic](https://github.com/byorgey/algorithms-POGIL/tree/main/divide-and-conquer-arithmetic)     | Intro to D&C                 |           |        |
-| [Selection](https://github.com/byorgey/algorithms-POGIL/tree/main/selection)                                           | Intro to D&C                 |           |        |
-| [Introduction to Dynamic Programming](https://github.com/byorgey/algorithms-POGIL/tree/main/dynamic-programming-intro) |                              |           |        |
-| [2D dynamic programming (subset sum)](https://github.com/byorgey/algorithms-POGIL/tree/main/2D-dynamic-programming)    | Intro to DP                  |           |        |
-| [Floyd-Warshall](https://github.com/byorgey/algorithms-POGIL/tree/main/floyd-warshall)                                 | 2D dynamic programming       |           |        |
-| [Introduction to flow networks](https://github.com/byorgey/algorithms-POGIL/tree/main/flow-intro)                      |                              |           |        |
-| [Max flow](https://github.com/byorgey/algorithms-POGIL/tree/main/max-flow)                                             | Intro to flow networks       |           |        |
-| [Introduction to amortized analysis](https://github.com/byorgey/algorithms-POGIL/tree/main/amortized-intro)            |                              |           |        |
-| [Amortized analysis of arrays](https://github.com/byorgey/algorithms-POGIL/tree/main/amortized-array)                  | Intro to amortized analysis  |           |        |
-| [Binomial heaps](https://github.com/byorgey/algorithms-POGIL/tree/main/amortized-binomial-heap)                        | Amortized analysis of arrays |           |        |
-| [Introduction to reductions](https://github.com/byorgey/algorithms-POGIL/tree/main/reductions)                         |                              |           |        |
-| [SAT and 3-SAT](https://github.com/byorgey/algorithms-POGIL/tree/main/SAT)                                             | Intro to reductions          |           |        |
-| [Linear sorting](https://github.com/byorgey/algorithms-POGIL/tree/main/linear-sorting)                                 |                              |           |        |
+| Activity                                                                                                               | Prerequisites                | Diagrams? | PDF? | Key? | Status |
+|------------------------------------------------------------------------------------------------------------------------|------------------------------|-----------|------|------|--------|
+| [Intro to POGIL and CSCI 382](https://github.com/byorgey/algorithms-POGIL/tree/main/POGIL-intro)                       |                              |           |      |      |        |
+| [Brute force algorithms](https://github.com/byorgey/algorithms-POGIL/tree/main/brute-force)                            |                              |           |      |      |        |
+| [Reasons for POGIL](https://github.com/byorgey/algorithms-POGIL/tree/main/why-POGIL)                                   | Intro to POGIL               |           |      |      |        |
+| [GCD analysis](https://github.com/byorgey/algorithms-POGIL/tree/main/GCD-analysis)                                     |                              |           |      |      |        |
+| [Intro to asymptotic analysis](https://github.com/byorgey/algorithms-POGIL/tree/main/AA-intro)                         |                              |           |      |      |        |
+| [Asymptotic analysis definitions](https://github.com/byorgey/algorithms-POGIL/tree/main/AA-definitions)                | Intro to AA                  |           |      |      |        |
+| [Asmyptotic analysis limit theorems](https://github.com/byorgey/algorithms-POGIL/tree/main/AA-limits)                  | AA definitions               |           |      |      |        |
+| [Three proofs](https://github.com/byorgey/algorithms-POGIL/tree/main/three-proofs)                                     | AA definitions               |           |      |      |        |
+| [Intro to graphs](https://github.com/byorgey/algorithms-POGIL/tree/main/graphs)                                        |                              |           |      |      |        |
+| [BFS applications and directed graphs](https://github.com/byorgey/algorithms-POGIL/tree/main/BFS-applications)         | Intro to graphs              |           |      |      |        |
+| [Introduction to Dijkstra's Algorithm](https://github.com/byorgey/algorithms-POGIL/tree/main/Dijkstra-intro)           | Intro to graphs              |           |      |      |        |
+| [Minimum Spanning Trees](https://github.com/byorgey/algorithms-POGIL/tree/main/MST)                                    | Intro to graphs              |           |      |      |        |
+| [Kruskal's algorithm](https://github.com/byorgey/algorithms-POGIL/tree/main/Kruskal)                                   | MSTs                         |           |      |      |        |
+| [Introduction to Divide & Conquer](https://github.com/byorgey/algorithms-POGIL/tree/main/divide-and-conquer-intro)     |                              |           |      |      |        |
+| [Divide & Conquer Arithmetic](https://github.com/byorgey/algorithms-POGIL/tree/main/divide-and-conquer-arithmetic)     | Intro to D&C                 |           |      |      |        |
+| [Selection](https://github.com/byorgey/algorithms-POGIL/tree/main/selection)                                           | Intro to D&C                 |           |      |      |        |
+| [Introduction to Dynamic Programming](https://github.com/byorgey/algorithms-POGIL/tree/main/dynamic-programming-intro) |                              |           |      |      |        |
+| [2D dynamic programming (subset sum)](https://github.com/byorgey/algorithms-POGIL/tree/main/2D-dynamic-programming)    | Intro to DP                  |           |      |      |        |
+| [Floyd-Warshall](https://github.com/byorgey/algorithms-POGIL/tree/main/floyd-warshall)                                 | 2D dynamic programming       |           |      |      |        |
+| [Introduction to flow networks](https://github.com/byorgey/algorithms-POGIL/tree/main/flow-intro)                      |                              |           |      |      |        |
+| [Max flow](https://github.com/byorgey/algorithms-POGIL/tree/main/max-flow)                                             | Intro to flow networks       |           |      |      |        |
+| [Introduction to amortized analysis](https://github.com/byorgey/algorithms-POGIL/tree/main/amortized-intro)            |                              |           |      |      |        |
+| [Amortized analysis of arrays](https://github.com/byorgey/algorithms-POGIL/tree/main/amortized-array)                  | Intro to amortized analysis  |           |      |      |        |
+| [Binomial heaps](https://github.com/byorgey/algorithms-POGIL/tree/main/amortized-binomial-heap)                        | Amortized analysis of arrays |           |      |      |        |
+| [Introduction to reductions](https://github.com/byorgey/algorithms-POGIL/tree/main/reductions)                         |                              |           |      |      |        |
+| [SAT and 3-SAT](https://github.com/byorgey/algorithms-POGIL/tree/main/SAT)                                             | Intro to reductions          |           |      |      |        |
+| [Linear sorting](https://github.com/byorgey/algorithms-POGIL/tree/main/linear-sorting)                                 |                              |           |      |      |        |
 
