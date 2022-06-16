@@ -47,10 +47,21 @@ If you contribute to this repository (which you are welcome and
 encouraged to do!) you agree for your contributions to be available
 under the same license.
 
-Sources
--------
+Using and modifying activites
+-----------------------------
 
-XXX LaTeX, diagrams
+For activities which have a PDF checked into the repository, you are
+welcome to simply use the PDF as-is.  I have tried to ensure that all
+such PDFs do not contain details specific to my course (such as
+dates, the course number, etc.) so you should be able to use it in
+your own course.
+
+If a PDF is not available, or you wish to modify the activity for your
+own needs, you are welcome to download the provided LaTeX source and
+modify/build it yourself.  Note that you will also need the
+[`algo-activity.sty`
+style file](https://github.com/byorgey/algorithms-POGIL/blob/main/algo-activity.sty)
+in order to build the sources.
 
 List of activities
 ------------------
@@ -77,7 +88,7 @@ typically use them during a semester.  Each one lists
         own quality standards, but has not necessarily gone through a
         review process.
       - Under review --- has been submitted for review through the
-        [Pogil Activity
+        [POGIL Activity
         Clearinghouse](http://pac.chem.pitt.edu/index.php/pac)
       - Endorsed --- officially endorsed by The POGIL Project.
 
