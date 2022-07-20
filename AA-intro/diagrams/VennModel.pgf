@@ -61,7 +61,7 @@
 \pgfsetfillcolor{fc}
 \pgftransformshift{\pgfqpoint{250.0000bp}{88.3333bp}}
 \pgftransformscale{1.2500}
-\pgftext[]{$\frac{n^3}{1000}$}
+\pgftext[]{$h(n) = \frac{n^3}{1000}$}
 \end{pgfscope}
 \begin{pgfscope}
 \definecolor{fc}{rgb}{0.0000,0.0000,0.0000}
@@ -82,14 +82,14 @@
 \pgfsetfillcolor{fc}
 \pgftransformshift{\pgfqpoint{150.0000bp}{65.0000bp}}
 \pgftransformscale{1.2500}
-\pgftext[]{$\frac{n^2}{2} - n$}
+\pgftext[]{$2n^2 + n + 1$}
 \end{pgfscope}
 \begin{pgfscope}
 \definecolor{fc}{rgb}{0.0000,0.0000,0.0000}
 \pgfsetfillcolor{fc}
 \pgftransformshift{\pgfqpoint{150.0000bp}{88.3333bp}}
 \pgftransformscale{1.2500}
-\pgftext[]{$2n^2 + n + 1$}
+\pgftext[]{$g(n) = \frac{n^2}{2} - n$}
 \end{pgfscope}
 \begin{pgfscope}
 \definecolor{fc}{rgb}{0.0000,0.0000,0.0000}
@@ -110,14 +110,14 @@
 \pgfsetfillcolor{fc}
 \pgftransformshift{\pgfqpoint{50.0000bp}{65.0000bp}}
 \pgftransformscale{1.2500}
-\pgftext[]{$\frac{n^2 + 2}{n}$}
+\pgftext[]{$2\sqrt n$}
 \end{pgfscope}
 \begin{pgfscope}
 \definecolor{fc}{rgb}{0.0000,0.0000,0.0000}
 \pgfsetfillcolor{fc}
 \pgftransformshift{\pgfqpoint{50.0000bp}{88.3333bp}}
 \pgftransformscale{1.2500}
-\pgftext[]{$2\sqrt n$}
+\pgftext[]{$f(n) = \frac{n^2 + 2}{n}$}
 \end{pgfscope}
 \begin{pgfscope}
 \definecolor{fc}{rgb}{0.0000,0.0000,0.0000}

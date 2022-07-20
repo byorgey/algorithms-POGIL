@@ -1,6 +1,8 @@
 #!/usr/bin/env stack
 -- stack --resolver lts-19.6 script --package diagrams-lib --package diagrams-pgf --package texrunner
 
+-- Run with -w 300
+
 import Diagrams.Prelude
 import Diagrams.Backend.PGF.CmdLine
 
@@ -20,19 +22,19 @@ vennModel = mconcat
     bigO = mkColumn
       [ "6"
       , "n"
+      , "f(n) = \\frac{n^2 + 2}{n}"
       , "2\\sqrt n"
-      , "\\frac{n^2 + 2}{n}"
       ]
     bigTheta = mkColumn
       [ "n^2"
       , "\\frac{n^3 + 3}{n}"
+      , "g(n) = \\frac{n^2}{2} - n"
       , "2n^2 + n + 1"
-      , "\\frac{n^2}{2} - n"
       ]
     bigOmega = mkColumn
       [ "n^3"
       , "n^4 - 3n^2"
-      , "\\frac{n^3}{1000}"
+      , "h(n) = \\frac{n^3}{1000}"
       , "2^n"
       ]
 
