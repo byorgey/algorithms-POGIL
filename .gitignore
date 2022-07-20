@@ -15,6 +15,7 @@
 .~lock*
 *~
 *.class
+*.rubbercache
 
 *.hi
 *.o
@@ -25,3 +26,5 @@
 *-diagrams-latex-fig*.*
 
 _minted-*
+
+TAGS
