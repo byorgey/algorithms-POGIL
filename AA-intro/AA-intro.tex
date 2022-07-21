@@ -1,7 +1,7 @@
 % -*- compile-command: "rubber -d --unsafe AA-intro.tex" -*-
 \documentclass{tufte-handout}
 
-\usepackage{algo-activity}
+\usepackage[answers]{algo-activity}
 
 \usepackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
@@ -34,7 +34,6 @@
 \begin{axis}[
     axis lines = left,
     xlabel = $n$,
-%    ylabel = {$f(n)$},
     width = 5.5cm, height = 5.5cm,
     every axis plot/.append style={thick},
     legend style={at={(0.5, -0.7)},anchor=south},
@@ -142,20 +141,26 @@
 \newpage
 \section{Critical Thinking Questions I (20 minutes)}
 
+\newcommand{\lobjectiveA}{Extrapolating from examples, students
+  will develop and apply informal definitions to classify functions as
+  $O(n^2)$, $\Omega(n^2)$, or $\Theta(n^2)$.}
+
+\newcommand{\pobjectiveA}{Students will process information from a
+  model to explore the meaning of big-O and big-Omega notation.}
+
+\newcommand{\pobjectiveB}{Students will think critically to discover
+  counterexamples and assemble evidence.}
+
 \begin{objective}
-  Extrapolating from examples, students will develop an intuitive mental
-  model to classify functions as $O(n^2)$, $\Omega(n^2)$, or
-  $\Theta(n^2)$.
+  \lobjectiveA
 \end{objective}
 
 \begin{pobjective}
-  Students will process information from a model to explore the
-  meaning of big-O and big-Omega notation.
+  \pobjectiveA
 \end{pobjective}
 
 \begin{pobjective}
-  Students will think critically to discover counterexamples
-  and assemble evidence.
+  \pobjectiveB
 \end{pobjective}
 
 \textbf{Important note}: although any previous experience you have
@@ -171,11 +176,11 @@ provided in Model 1 rather than on your memory.
     ``o-mega'' is itself Greek for ``big O'', although they meant
     ``big'' in the sense of a long vowel, not uppercase).}
   \begin{subquestions}
-  \item $2\sqrt n$
-    \begin{answer}According to the Venn diagram, $2\sqrt n$ is $O(n^2)$.\end{answer}
-  \item $n^3$
+  \item $\frac{n^2 + 2}{n}$
+    \begin{answer}According to the Venn diagram, $\frac{n^2 + 2}{n}$ is $O(n^2)$.\end{answer}
+  \item $\frac{n^3}{1000}$
     \begin{answer}$\Omega(n^2)$\end{answer}
-  \item $2n^2 + n + 1$
+  \item $\frac{n^2}{2} - n$
     \begin{answer}Both $O(n^2)$ and $\Omega(n^2)$.\end{answer}
   \item $2^n$
     \begin{answer}$\Omega(n^2)$.\end{answer}
@@ -213,7 +218,7 @@ Graphs of these functions are shown in the model (or rather,
   \begin{fullwidth}
   \begin{tabular}{c|cccc}
     biggest & $f$ & & & \\
-    middle & & $f$ & & \\
+    mediumest & & $f$ & & \\
     smallest & & & & \\
     \hline
         & $2 \leq n \leq 4$ & $5 \leq n \leq 30$ & $35 \leq n \leq 450$ & $n = 600$
@@ -236,86 +241,88 @@ Graphs of these functions are shown in the model (or rather,
     is proportional to $n^3$ it will continue to grow faster than
     $g$, which will in turn continue to grow faster than
     $f$.\end{answer}
-\item \label{q:fgh} Again using the Venn diagram, for each function, say whether it is
-  $O(n^2)$, $\Omega(n^2)$, or both.
-  \begin{subquestions}
-  \item $f(n) = (n^2 + 2)/n$
-    \begin{answer}
-      $f(n)$ is $O(n^2)$.
-    \end{answer}
-  \item $g(n) = n^2/2 - n$
-    \begin{answer}
-      $g(n)$ is both $O(n^2)$ and $\Omega(n^2)$.
-    \end{answer}
-  \item $h(n) = n^3/1000$
-    \begin{answer}
-      $h$ is $\Omega(n^2)$.
-    \end{answer}
-  \end{subquestions}
-\item \label{q:synthesize} Based on your answers to the previous three
-  questions, which grow more quickly in general, functions which are
-  $O(n^2)$, or functions which are $\Omega(n^2)$? Write one or two
-  sentences explaining your reasoning.  Be sure to mention evidence
-  from your answers to each of the previous three questions.
+\item \label{q:synthesize} Based on the model and your answers to the
+  previous questions, match each statement on the left with an
+  appropriate informal\marginnote{You will see more formal definitions
+    on the next activity!} definition on the right. $q(n)$ represents an
+  arbitrary function.  \bigskip
+
+  \begin{fullwidth}
+  \begin{center}
+  \begin{minipage}{0.4\linewidth}
+    A function $q(n)$ is $O(n^2)$ \bigskip
+
+    A function $q(n)$ is $\Omega(n^2)$
+  \end{minipage}
+  \begin{minipage}{0.4\linewidth}
+     $q(n)$ is greater than $n^2$ for all $n \geq 0$ \bigskip
+
+     Eventually, for big enough values of $n$, $q(n)$ grows at
+      the same rate or more slowly than $n^2$ \bigskip
+
+     $q(n)$ grows more slowly than $n^2$ \bigskip
+
+     $q(n) \geq n^2$ for big enough values of $n$ \bigskip
+
+     The definition of $q(n)$ has $n^2$ in it \bigskip
+
+    $q(n)$ eventually grows at a similar rate or more quickly
+      than $n^2$
+  \end{minipage}
+  \end{center}
+  \end{fullwidth}
 
   \begin{answer}
-    $f$, which we know is $O(n^2)$ from question 5, is the smallest
-    function for $n \geq 600$ (based on the table in question 3 and
-    the answer to question 4); $h$, which is $\Omega(n^2)$, is the
-    biggest.  Eventually, $\Omega(n^2)$ functions grow more quickly
-    than $O(n^2)$ functions.
+    \begin{itemize}
+    \item ``$q(n)$ is $O(n^2)$'' goes with ``Eventually, for big enough
+      values of $n$, $q(n)$ grows at the same rate or more slowly than
+      $n^2$''.  The function $g(n)$ grows at the same rate as $n^2$,
+      and $f(n)$ grows more slowly than $n^2$; both are $O(n^2)$.  We
+      also know that it only matters what happens for big enough $n$,
+      because both $f(n)$ and $g(n)$ start out larger than $h(n)$, but
+      eventually $h(n)$ becomes larger, and $h(n)$ is not $O(n^2)$.
+    \item ``$q(n)$ is $\Omega(n^2)$'' goes with ``$q(n)$ eventually
+      grows at a similar rate or more quickly than $n^2$''.  The
+      reasoning is similar to that for $O(n^2)$.
+    \end{itemize}
   \end{answer}
-\end{questions}
 
 \newpage
-\noindent \textbf{Using evidence from the model}, come to a consensus
-within your group as to whether each of the following statements is
-true or false.  Write a short justification for each answer.
-
-\begin{questions}
-\item If $f(n)$ is $O(n^2)$, then it has $n^2$ in its definition.
-  \begin{answer} False; \eg $6$ is $O(n^2)$ but does not have $n^2$
-    in its definition.\end{answer}
-\item If $f(n)$ has $n^2$ in its definition, then $f(n)$ is $O(n^2)$.
-  \begin{answer} False; \eg $n^4 - 3n^2$ has $n^2$ in its definition
-    but it is not $O(n^2)$.\end{answer}
-\item If $f(n)$ is both $O(n^2)$ and $\Omega(n^2)$, then it has $n^2$
-  in its definition.
-  \begin{answer} False; \eg $\frac{n^3 + 3}{n}$. \end{answer}
-\item If $f(n) \leq n^2$ for all $n \geq 0$, then $f(n)$ is $O(n^2)$.
-  \begin{answer} This is true; although we can't know for sure without
-    knowing the definition of $O(n^2)$, all the functions in the model
-    with this property are in fact $O(n^2)$. \end{answer}
-\item If $f(n)$ is $O(n^2)$, then $f(n) \leq n^2$ for all $n \geq 0$.
+\item \label{q:compare} In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
+  and different from that of $O(n^2)$?
   \begin{answer}
-    False.  For example, $2n^2 + n + 1$ is $O(n^2)$ but it is never
-    $\leq n^2$.
+    Answers may vary.  For example, the definitions both have
+    something to do with $n$ being ``sufficiently large'', and they
+    both involve comparing something to $n^2$; one involves something
+    being $\leq$ something else, and the other involves $\geq$.
   \end{answer}
-\item If $f(n) \leq n^2$ for all $n$ that are sufficiently large, then
-  $f(n)$ is $O(n^2)$.
-  \begin{answer}
-    True.  For example, $\frac{n^2 + 2}{n}$ is only $\leq n^2$ for $n
-    > 1$.
-  \end{answer}
-\item If $f(n)$ is $O(n^2)$ and $g(n)$ is $\Omega(n^2)$, then $f(n)
-  \leq g(n)$ for all $n$.
-  \begin{answer}
-    False.  For example, consider $(n^2 + 2)/n$ (which is $O(n^2)$)
-    and $n^3/1000$ (which is $\Omega(n^2)$).  From the graphs we know
-    that the first function is actually greater than the second until
-    around $n = 30$.
-  \end{answer}
-\item Using one or more complete English sentences, propose a
-  definition of $O(n^2)$ by completing the following statement.
 
-  \emph{A function $f(n)$ is $O(n^2)$ if and only if\dots}
-
+\item \label{q:incorrect} Choose two \emph{incorrect} definitions from
+  the previous question.  For each one, write one or two sentences
+  explaining why it is incorrect.  Be sure to mention evidence from
+  your previous answers.
   \begin{answer}
-    Answers may vary.  Students may talk about how it only matters
-    what happens to $f(n)$ when $n$ is big enough; how $f(n)$ should
-    ``grow at a similar rate'' to $n^2$, or always be $\leq kn^2$ for
-    some constant $k$; they may note that only the ``biggest term'' of
-    $f(n)$ matters.
+    \begin{itemize}
+    \item ``$q(n)$ is greater than $n^2$ for all $n \geq 0$'': this is
+      an incorrect definition of $\Omega(n^2)$ since it requires
+      something to be true for all $n \geq 0$, whereas the real
+      definition only cares what happens once $n$ gets big enough.
+      For example, we know from the model that $h(n) = n^3/1000$ is
+      $\Omega(n^2)$, but it is only greater than $n^2$ for $n > 1000$.
+    \item ``$q(n)$ grows more slowly than $n^2$'': a function which is
+      $O(n^2)$ may grow more slowly \emph{or at the same rate} as
+      $n^2$.  For example, $2n^2 + n + 1$ is $O(n^2)$ but does not
+      grow more slowly than $n^2$.
+    \item ``$q(n) \geq n^2$ for big enough values of $n$'': for $q(n)$
+      to be $\Omega(n^2)$, we only require that it grows at a similar
+      or greater rate as $n^2$, not that it is literally greater than
+      $n^2$.  For example, from the model, $g(n) = n^2/2 - n$ is
+      $\Omega(n^2)$, but it is \emph{never} greater than $n^2$.
+    \item ``The definition of $q(n)$ has $n^2$ in it'': there are
+      clearly functions in the model which are $O(n^2)$ or
+      $\Omega(n^2)$ that do not mention $n^2$; for example, $2^n$ is
+      $\Omega(n^2)$ and $n$ is $O(n^2)$.
+    \end{itemize}
   \end{answer}
 \end{questions}
 
@@ -324,28 +331,22 @@ true or false.  Write a short justification for each answer.
 \section{Critical Thinking Questions II (10 minutes)}
 
 \begin{questions}
-\item In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
-  and different from that of $O(n^2)$?
-  \begin{answer}
-    Answers may vary.  For example, the definitions both have
-    something to do with $n$ being ``sufficiently large'', and they
-    both involve comparing something to $n^2$; one involves something
-    being $\leq$ something else, and the other involves $\geq$.
-  \end{answer}
-\item \label{q:classify} If a function is both $O(n^2)$ and $\Omega(n^2)$, we say it is
-  $\Theta(n^2)$.
-  \marginnote{$\Theta$ is pronounced ``big theta''.}
-  For each of the below functions, say whether you
-  think it is $\Theta(n^2)$, $O(n^2)$, or $\Omega(n^2)$.  Justify your answers.
+\item \label{q:classify} If a function is both $O(n^2)$ and
+  $\Omega(n^2)$, we say it is $\Theta(n^2)$.  \marginnote{$\Theta$ is
+    pronounced ``big theta''.}  For each of the below functions, say
+  whether you think it is $\Theta(n^2)$, or only $O(n^2)$ or
+  $\Omega(n^2)$.  Justify your answers.
   \begin{subquestions}
   \item $3n^2 + 2n - 10$
     \begin{answer}
-      This is $\Theta(n)$.  It is very similar to $2n^2 + n + 1$ which
-      we know is $\Theta(n)$.
+      This is $\Theta(n^2)$.  It is very similar to $2n^2 + n + 1$ which
+      we know is $\Theta(n^2)$.  It grows at a similar rate to $n^2$.
     \end{answer}
   \item $\displaystyle \frac{n^3 - 5}{n}$
     \begin{answer}
-      This is also $\Theta(n)$.  It is similar to $(n^3 + 3)/n$.
+      This is also $\Theta(n^2)$.  It is similar to $(n^3 + 3)/n$.  If
+      we rewrite it as $n^2 + 3/n$ we can see that it will also grow
+      at a similar rate to $n^2$.
     \end{answer}
   \item $\displaystyle \frac{n^3 - 5}{\sqrt n}$
     \begin{answer}
@@ -361,11 +362,19 @@ true or false.  Write a short justification for each answer.
       This is $O(n^2)$ but not $\Omega(n^2)$.  $n \sqrt n = n \cdot
       n^{1/2} = n^{1.5}$ which grows more slowly than $n^2$.
     \end{answer}
+  \item $n^2 \cdot \log_2 n$
+    \begin{answer}
+      This is $\Omega(n^2)$ but not $O(n^2)$; multiplying by
+      $\log_2 n$ means it grows strictly faster than $n^2$.
+    \end{answer}
   \end{subquestions}
 \item In your answers to \pref{q:classify}, in which cases did you
   make use of evidence from the model (the Venn diagram or graphs) to
   justify your answers?  In which cases did you make use of team
   members' previous knowledge?
+  \begin{answer}
+    Student answers will vary.
+  \end{answer}
 \end{questions}
 
 \newpage
@@ -378,17 +387,14 @@ true or false.  Write a short justification for each answer.
 \subsection{Content objectives}
 
 \begin{itemize}
-\item Students will develop intuitive mental models to classify
-  functions as $O(n^2)$, $\Omega(n^2)$, and/or $\Theta(n^2)$.
+\item \lobjectiveA
 \end{itemize}
 
 \subsection{Process objectives}
 
 \begin{itemize}
-\item Information processing (interpreting Venn diagram and graph
-  models)
-\item Critical thinking (finding counterexamples; synthesizing
-  examples to come up with intuitive models for $O(n^2)$ and $\Omega(n^2)$)
+\item \pobjectiveA
+\item \pobjectiveB
 \end{itemize}
 
 \section{Announcements (2 minutes)}
@@ -406,12 +412,11 @@ true or false.  Write a short justification for each answer.
 (Up to 3 minutes to get started, look at role cards, etc.)
 
 \begin{itemize}
-\item Make grid, go around and tell them put up answers to T/F
-  questions once they get there.  Discuss as necessary.
-\item Share and discuss proposed definitions of $O(n^2)$.  Note that
-  the next activity will present the real definition, so it is not
-  critical that students converge on an exactly correct definition;
-  the goal is to get them to think about the important issues.
+\item Share and discuss answers to \ref{q:synthesize},
+  \ref{q:compare}, and \ref{q:incorrect}.  Note that the next activity
+  will present the real definitions, so it is not critical that
+  students converge on an exactly correct definitions; the goal is to
+  get them to think about the important issues.
 \end{itemize}
 
 \section{CTQs II (Big-Theta, classification) (15 mins: 10 activity + wrap-up)}
@@ -419,7 +424,7 @@ true or false.  Write a short justification for each answer.
 \begin{itemize}
 \item Discuss answers as necessary.
 \item Wrap-up: today was about building intuition and
-  examples. Promise we will see the real definition next time!
+  examples. Promise we will see the real definitions next time!
 \end{itemize}
 
 \newpage
@@ -431,32 +436,9 @@ In the past when I have used a previous version of the activity in a
 50-minute class, I only made it through CTQ I and never made it to CTQ
 II.  I hope that
 \begin{itemize}
-\item This version is more streamlined
-\item Encouraging managers to keep track of time will help
+\item this version is more streamlined, and
+\item encouraging managers to keep track of time will help so that we
+  can get to the application questions.
 \end{itemize}
-so that we can get to the application questions.
-
-Some unused questions:
-
-\begin{itemize}
-\item $f(n)$ being $O(n^2)$ and/or $\Omega(n^2)$ has nothing to do
-  with whether it literally has $n^2$ in its definition.
-  \begin{answer} True. \end{answer}
-
-\item Every function $f(n)$ is either $O(n^2)$ or $\Omega(n^2)$ (or
-  both).
-  \begin{answer}
-    This is true, though there is no particular way to answer this
-    from the model alone; student answers may vary.
-  \end{answer}
-\item Do you think $n^2 \cdot \log_2 n$ is $O(n^2)$, $\Omega(n^2)$, or
-  $\Theta(n^2)$?  Why?
-  \begin{answer}
-    Answers may vary.  In fact, it is $\Omega(n^2)$ but not $O(n^2)$;
-    multiplying by $\log_2 n$ means it grows strictly faster than
-    $n^2$.
-  \end{answer}
-\end{itemize}
-
 
 \end{document}
