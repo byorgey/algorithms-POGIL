@@ -241,6 +241,115 @@ Graphs of these functions are shown in the model (or rather,
     is proportional to $n^3$ it will continue to grow faster than
     $g$, which will in turn continue to grow faster than
     $f$.\end{answer}
+
+\item Look at all the functions in the Venn diagram which are
+  \emph{both} $O(n^2)$ \emph{and} $\Omega(n^2)$.  What do they have in
+  common?
+
+\item Now look at the functions which are $O(n^2)$ but \emph{not}
+  $\Omega(n^2)$.  What do they have in common?
+
+\item Label each of the following statements as True or False, and
+  write a sentence or phrase explaining your reasoning.
+  \begin{subquestions}
+  \item XXX
+  \end{subquestions}
+
+\item Suppose we have three algorithms to solve a particular problem:
+  \begin{itemize}
+  \item Algorithm F takes $f(n) = (n^2 + 2)/n$ seconds to solve
+    the problem on a particular computer when given an input of size $n$.
+  \item Algorithm G takes $g(n) = n^2/2 - n$ seconds to solve
+    the problem on a particular computer when given an input of size $n$.
+  \item Algorithm H takes $h(n) = n^3/1000$ seconds to solve
+    the problem on a particular computer when given an input of size $n$.
+  \end{itemize}
+
+  Label each of the following statements as True or False, and write
+  a sentence or phrase explaining your reasoning.
+  \begin{subquestions}
+    \item Algorithm H would be the best choice if we only ever need to
+      solve the problem for small ($n \leq 10$) inputs.
+      \begin{answer}
+        True.  For $n \leq 10$, $h(n)$ is much smaller than $f(n)$ and
+        $g(n)$, so Algorithm H would be fastest.
+      \end{answer}
+    \item Algorithm G would be the best choice if we need to solve the
+      problem for very large ($n \geq 10^6$) inputs.
+      \begin{answer}
+        False.  $h(n) > g(n) > f(n)$ for $n \geq 10^6$, so Algorithm F
+        would actually be the best choice.
+      \end{answer}
+    \item Algorithm G will take exactly $g(n) = n^2/2 - n$ seconds to
+      solve a problem of size $n$ on \emph{any} computer.
+      \begin{answer}
+        False.  Different computers execute instructions at different
+        speeds, so Algorithm G would not take exactly this long on
+        every possible computer.
+      \end{answer}
+    \item If we run Algorithm G on a different computer, there is some
+      constant $k$ such that Algorithm G will take $k \cdot g(n) = k (n^2/2 - n)$
+      seconds to solve a problem of size $n$ on that computer.
+      \begin{answer}
+        True\dots sort of.  Under a simple model where different
+        computers simply execute the same machine instructions in
+        sequence and each instruction takes the same amount of time,
+        the running times of an algorithm on different computers would
+        indeed be related to each other by a constant factor.  This is
+        a perfectly acceptable mental model for students to have in
+        this course.
+
+        In actual practice, there are any number of reasons for this
+        to be false.  For example, the instruction set on the two
+        computers might be different, leading to very different
+        compiled executables with different performance
+        characteristics.  Things like cache size can also impact
+        running times in ways that are hard to predict.  Students are
+        not expected to come up with examples like this, but if they
+        do it could lead to an interesting discussion.
+      \end{answer}
+    \item If we need to solve inputs of any size $n \geq 10$ in at most
+      $n^2/4 - n/2$ seconds, we could run Algorithm G on a sufficiently
+      fast computer.
+      \begin{answer}
+        True. We just need to run Algorithm G on a computer which is
+        twice as fast.
+      \end{answer}
+    \item If we need to solve inputs of any size $n \geq 10$ in at most
+      $n^2/4 - n/2$ seconds, we could run Algorithm F on a sufficiently
+      fast computer.
+      \begin{answer}
+        This is true also, since $n^2$ grows faster than $n$, and
+        there is some constant $k$ for which
+        $k(n + 2/n) \leq n^2/4 - n/2$.  Graphically, since $n^2$ grows
+        faster than $n$, we can shrink $(n + 2/n)$ enough so it fits
+        under $n^2/4 - n/2$.
+      \end{answer}
+    \item If we need to solve inputs of any size $n \geq 10$ in at most
+      $n^2/4 - n/2$ seconds, we could run Algorithm H on a sufficiently
+      fast computer.
+      \begin{answer}
+        False.  Intuitively, no matter how fast the computer is, once
+        $n$ gets big enough Algorithm H will be too slow.  Formally,
+        no matter what constant $k$ we pick, $kn^3/1000 > n^2/4 - n/2$
+        for some sufficiently large $n$.
+      \end{answer}
+    \item Suppose Algorithm J solves the problem for inputs of size
+      $n$ in some amount of time that is $O(n^2)$.  In general,
+      assuming $n$ may be large, we would prefer Algorithm J over
+      Algorithm H.
+      \begin{answer}
+        True.  A function which is $O(n^2)$ will grow more slowly than
+        $h(n) = n^3/1000$.  For large enough $n$, Algorithm J will be
+        faster.
+      \end{answer}
+  \end{subquestions}
+
+  %% XXX
+  %% - Eventually, for big enough n
+  %% - grows at the same rate
+  %% - look at fastest-growing term??
+\newpage
 \item \label{q:synthesize} Based on the model and your answers to the
   previous questions, match each statement on the left with an
   appropriate informal\marginnote{You will see more formal definitions
@@ -287,16 +396,6 @@ Graphs of these functions are shown in the model (or rather,
     \end{itemize}
   \end{answer}
 
-\newpage
-\item \label{q:compare} In what way(s) do you think the definition of $\Omega(n^2)$ is similar to
-  and different from that of $O(n^2)$?
-  \begin{answer}
-    Answers may vary.  For example, the definitions both have
-    something to do with $n$ being ``sufficiently large'', and they
-    both involve comparing something to $n^2$; one involves something
-    being $\leq$ something else, and the other involves $\geq$.
-  \end{answer}
-
 \item \label{q:incorrect} Choose two \emph{incorrect} definitions from
   the previous question.  For each one, write one or two sentences
   explaining why it is incorrect.  Be sure to mention evidence from
@@ -334,8 +433,8 @@ Graphs of these functions are shown in the model (or rather,
 \item \label{q:classify} If a function is both $O(n^2)$ and
   $\Omega(n^2)$, we say it is $\Theta(n^2)$.  \marginnote{$\Theta$ is
     pronounced ``big theta''.}  For each of the below functions, say
-  whether you think it is $\Theta(n^2)$, or only $O(n^2)$ or
-  $\Omega(n^2)$.  Justify your answers.
+  whether you think it is $\Theta(n^2)$, only $O(n^2)$, or
+  only $\Omega(n^2)$.  Justify your answers.
   \begin{subquestions}
   \item $3n^2 + 2n - 10$
     \begin{answer}
