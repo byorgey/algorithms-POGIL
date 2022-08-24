@@ -1,4 +1,4 @@
-% -*- compile-command: "pdflatex POGIL-intro.tex" -*-
+% -*- compile-command: "rubber -d --unsafe POGIL-intro.tex" -*-
 
 % History:
 %   - 16c182a: used W, 23 Aug of F17.
@@ -6,7 +6,7 @@
 
 \documentclass{tufte-handout}
 
-\usepackage{../algo-activity}
+\usepackage{algo-activity}
 
 \title{\thecourse: Introduction}
 \date{}
@@ -25,13 +25,19 @@ POGIL works. (We will leave the question of \emph{why} we are using
 POGIL until next time.)  You'll also explore the syllabus of CSCI 382
 so you know what to expect this semester.
 
+\newcommand{\lobjectiveA}{Students will list and explain the roles in a POGIL
+  classroom.}
 \begin{objective}
-  Students will be able to list and explain the roles in a POGIL
-  classroom.
+  \lobjectiveA
 \end{objective}
 
-% Make sure you are sitting in a team of three or four people.  If not,
-% talk to your instructor.
+\newcommand{\lobjectiveB}{Students will be able to explain course
+  policies for weekly problem sets, grading, exams, and academic
+  integrity.}
+
+\begin{objective}
+  \lobjectiveB
+\end{objective}
 
 You should be in a group of three or four people.  If not, either you
 are trying to do this activity on your own (don't even think about
@@ -50,7 +56,7 @@ will be the \textbf{manager} for today. The other members of your
 team, in alphabetical order by first name, will be the
 \textbf{recorder}, the \textbf{reporter}, and the \textbf{reflector},
 respectively.  If your team only has three members, one person should
-take the roles of both recorder and reporter.
+take the roles of both reporter and reflector.
 
 \begin{questions}
 \item Figure out which team member has each role for today, and write
@@ -58,8 +64,6 @@ take the roles of both recorder and reporter.
 \item The \textbf{manager} should get the provided \textbf{role cards}
   from your instructor and distribute them appropriately.  Take two
   minutes to read over the role card(s) corresponding to your role(s).
-  What are the important functions of your role(s)?  Write down a
-  summary.
 \item Each team member should take \textbf{one minute} to explain the
   important aspects of their role(s) to the rest of the team.
 \end{questions}
@@ -68,13 +72,8 @@ take the roles of both recorder and reporter.
 \begin{model*}{CSCI 382 Syllabus}{syllabus}
   Visit the CSCI 382 course web page here: \bigskip
 
-  \url{http://Hendrix-CS.github.io/csci382/}
+  \url{http://hendrix-cs.github.io/csci382/}
 \end{model*}
-
-\begin{objective}
-  Students will be able to explain course policies for weekly problem
-  sets, late days, exams, and academic integrity.
-\end{objective}
 
 Say whether each statement below is true or false.  If false, explain
 what a correct version of the statement would be.
@@ -85,19 +84,20 @@ moving on.
 
 \begin{questions}
 
-  \item Problem sets are due every Friday at 4pm, and should be turned
-    in on Moodle.
+  \item Problem sets are typically due Friday at 4pm, and should be
+    submitted electronically.
 
   \item Problem sets can be submitted as either \texttt{.pdf} or
     \texttt{.doc} files.
 
-  \item One week, Amanda has a virtual play performance, three midterm
+  \item One week, Amanda has a play performance, three midterm
     exams, a 100-page paper due, and a family trip.  As a result, she
     is not able to finish her Algorithms problem set before the
     deadline.  She must either turn in whatever she has by the
     deadline, or else take a zero on the assignment.
-  \item There are three exams in the course, which together account
-    for about 50\% of your final grade.
+
+  \item Problem sets are graded out of 100 points.
+
   \item In this course, which of the following are considered academic
     integrity violations? \marginnote{Hint: be sure to also look at
       \url{http://ozark.hendrix.edu/~yorgey/ac-integrity-policy.html}
@@ -113,11 +113,34 @@ moving on.
         final exam
       \item obtaining a copy of exam questions before an exam
       \end{compactenum} \bigskip
-
-    \item Finally, as a group, come up with one question you have for
-      me about the syllabus or about the class in general. Find the
-      link to Piazza (either on the course web page or in a tab in the
-      CSCI 382 Algorithms Team) and post your question there.
 \end{questions}
+
+\newpage
+
+\section{Facilitation plan}
+\label{sec:facilitation}
+
+\section{Learning Objectives}
+
+\subsection{Content objectives}
+
+\begin{itemize}
+\item \lobjectiveA
+\item \lobjectiveB
+\end{itemize}
+
+\subsection{Process objectives}
+
+\section{Intro \& getting started, field trip to new room (10m)}
+
+\section{Introduction to POGIL (10m)}
+
+\section{CSCI 382 Syllabus (10m + 5m discussion)}
+
+Make chart of last Q on board (ac integrity), have reporters fill it
+in, discuss.  This will probably take a while.
+
+\end{document}
+
 
 \end{document}
