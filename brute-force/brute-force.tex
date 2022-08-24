@@ -1,8 +1,8 @@
-% -*- compile-command: "pdflatex brute-force.tex" -*-
+% -*- compile-command: "rubber -d --unsafe brute-force.tex" -*-
 
 \documentclass{tufte-handout}
 
-\usepackage{../algo-activity}
+\usepackage{algo-activity}
 
 \title{\thecourse: Brute Force}
 \date{}
@@ -130,5 +130,19 @@ Here are some algorithms intended to solve the above scenarios:
     you think a faster algorithm is possible?\marginnote[-1em]{I don't
       expect you to know the right answer for all of these!}
 \end{questions}
+
+\newpage
+
+\section{Brute-Force Algorithms (15m)}
+
+Report out on definitions of brute force.
+
+\section{Closure (5m)}
+
+A lot of this semester is going to focus on approaches and techniques
+for doing better than brute-force.  But we will also explore limits:
+for example, for scenario (c) we strongly suspect that it's not
+possible to do fundamentally better than brute force!
+
 
 \end{document}
