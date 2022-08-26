@@ -17,6 +17,13 @@
 
 \section{Review questions (7 minutes)}
 
+\begin{mdframed}
+  \emph{Notice that section headings will often contain a target time,
+like the one above.  The manager may want to set a timer to help
+ensure your group is making good progress through the section in order
+to finish on time.}
+\end{mdframed}
+
 \begin{questions}
   \item What is $27 \bmod 5$?
   \item What is $2 \bmod 5$?
@@ -29,9 +36,18 @@
   \item What is $5 \bmod 0$?
   \item Is $0$ divisible by $10$?
 \end{questions}
+\vfill
+\begin{mdframed}[innerrightmargin=1cm]
+  \emph{When you see a STOP sign like the one below, it means that you
+    should wait until instructed to go on to the next page.  If you
+    finish before other groups, take the time to go back over your
+    answers on this section: are there any lingering questions or
+    confusions you have? Any answers you could make more complete or
+    more nuanced?  Anything you notice, or wonder about?}
+\end{mdframed}
+\pause
 
-\newpage
-\begin{model*}{GCD}{gcd}
+\begin{model*}{GCD (8 minutes)}{gcd}
 \begin{defn}
   Recall that the \term{greatest common divisor}, or GCD, of two
   positive integers $a$ and $b$ is defined as the largest positive
@@ -48,10 +64,11 @@
 \item What is $\gcd(144, 690)$?
 \item What if we extend the definition of GCD to apply to all
   nonnegative integers?  What should $\gcd(a,0)$ be when $a > 0$?
-\item XXX reflector
+\item Have the Reflector take a minute to share one way that your
+  group has worked well together, and one way that you could improve.
 \end{questions}
 
-\newpage
+\pause
 
 \begin{model*}{The Euclidean Algorithm}{euclidean-algorithm}
 
@@ -61,7 +78,7 @@
 
 \begin{minipage}[t]{.5\textwidth}
 \begin{acode}
-\> GCDIa($m$,$n$) = \\
+\> GCDIterA($m$,$n$) = \\
 \> \tb \> $a \gets m$ \\
 \>     \> $b \gets n$ \\
 \>     \> !while $(a \neq 0)$ \\
@@ -72,15 +89,15 @@
 \end{acode} \bigskip
 
 \begin{acode}
-\> GCDRa($a$,$b$) = \\
+\> GCDRecA($a$,$b$) = \\
 \> \tb \> !if $b = 0$ \\
 \>     \> \tb \> !then \> $a$ \\
-\>     \>     \> !else \> GCDRa($b$, $a \bmod b$)
+\>     \>     \> !else \> GCDRecA($b$, $a \bmod b$)
 \end{acode}
 \end{minipage}
 \begin{minipage}[t]{.5\textwidth}
 \begin{acode}
-\> GCDIb($m$,$n$) = \\
+\> GCDIterB($m$,$n$) = \\
 \> \tb \> $a \gets m$ \\
 \>     \> $b \gets n$ \\
 \>     \> !while $(a \neq 0)$ !and $(b \neq 0)$ \\
@@ -91,10 +108,10 @@
 \end{acode} \bigskip
 
 \begin{acode}
-\> GCDRb($a$,$b$) = \\
+\> GCDRecB($a$,$b$) = \\
 \> \tb \> !if $b = 0$ \\
 \>     \> \tb \> !then \> $a$ \\
-\>     \>     \> !else \> GCDRb($a \bmod b$, $b$)
+\>     \>     \> !else \> GCDRecB($a \bmod b$, $b$)
 \end{acode}
 \end{minipage}
 \end{model*}
@@ -106,8 +123,8 @@
 
 \newpage
 \begin{questions}
-\item What do you think the \textsf{I} and \textsf{R} stand for in
-  \textsf{GCDI} and \textsf{GCDR}?
+\item What do you think \textsf{Iter} and \textsf{Rec} stand for in
+  the names of the functions?
 \item List some similarities and differences among the algorithms.
 \item Which algorithms are incorrect?  What is wrong with them?
 \item For the correct algorithms, describe in a few sentences what
@@ -129,13 +146,7 @@
 \item After Model 1 (8 mins), just share out very quickly to make sure
   everyone is on the same page.
 
-\item Model 2 (10 mins).
-
-\item Closure (2 mins): hopefully you have started to develop
-  intuitions as to why these algorithms work.  Next time we will turn
-  these intuitions into formal proofs.  Note HW 1 posted on website.
-  Get started early!  We will review proof by induction and see
-  examples on Monday.
+\item Model 2 (remaining time).
 
 \end{itemize}
 
