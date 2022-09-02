@@ -288,8 +288,9 @@ Graphs of these functions are shown in the model (or rather,
         every possible computer.
       \end{answer}
     \item If we run Algorithm G on a different computer, there is some
-      constant $k$ such that Algorithm G will take $k \cdot g(n) = k (n^2/2 - n)$
-      seconds to solve a problem of size $n$ on that computer.
+      positive real number $k$ such that Algorithm G will take
+      $k (n^2/2 - n)$ seconds to solve a problem of size $n$ on that
+      computer.
       \begin{answer}
         True\dots sort of.  Under a simple model where different
         computers simply execute the same machine instructions in
@@ -309,14 +310,13 @@ Graphs of these functions are shown in the model (or rather,
         do it could lead to an interesting discussion.
       \end{answer}
     \item If we need to solve inputs of any size $n \geq 10$ in at most
-      $n^2/4 - n/2$ seconds, we could run Algorithm G on a sufficiently
-      fast computer.
+      $n^2/4 - n/2$ seconds, we could run Algorithm G but on a computer
+      that is twice as fast.
       \begin{answer}
-        True. We just need to run Algorithm G on a computer which is
-        twice as fast.
+        True.
       \end{answer}
     \item If we need to solve inputs of any size $n \geq 10$ in at most
-      $n^2/4 - n/2$ seconds, we could run Algorithm F on a sufficiently
+      $n^2/4 - n/2$ seconds, we could use Algorithm F on a sufficiently
       fast computer.
       \begin{answer}
         This is true also, since $n^2$ grows faster than $n$, and
@@ -367,7 +367,7 @@ Graphs of these functions are shown in the model (or rather,
      $q(n)$ is greater than $n^2$ for all $n \geq 0$ \bigskip
 
      Eventually, for big enough values of $n$, $q(n)$ grows at
-      a similar rate or more slowly than $n^2$ \bigskip
+      a similar or lower rate than $n^2$ \bigskip
 
      $q(n)$ grows more slowly than $n^2$ \bigskip
 
@@ -375,7 +375,7 @@ Graphs of these functions are shown in the model (or rather,
 
      The definition of $q(n)$ has $n^2$ in it \bigskip
 
-    $q(n)$ eventually grows at a similar rate or more quickly
+    $q(n)$ eventually grows at a similar or higher rate
       than $n^2$
   \end{minipage}
   \end{center}
