@@ -1,6 +1,9 @@
 % -*- compile-command: "stack exec -- rubber -d --unsafe three-proofs.tex" -*-
 \documentclass{tufte-handout}
 
+\usepackage[outputdir=diagrams, extension=pgf, backend=pgf, input]{diagrams-latex}
+\usepackage{pgf}
+
 \usepackage{algo-activity}
 
 \title{\thecourse: Some asymptotic sums}
@@ -48,7 +51,9 @@
 \begin{align}
   1 + 2 + \dots + n &< n + n + \dots + n \label{eq:ltns} \\
                     &= n^2 \label{eq:nsqr} \\[1em]
-  1 + 2 + \dots + n &> n/2 + (n/2 + 1) + \dots + n \label{eq:halfzero} \\
+  1 + 2 + \dots + n &= 1 + 2 + \dots + (n/2 - 1) + n/2 + (n/2 + 1) +
+                      \dots + n \label{eq:expand} \\
+                    &> n/2 + (n/2 + 1) + \dots + n \label{eq:halfzero} \\
                     &> n/2 + n/2 + \dots +
                       n/2 \label{eq:downtohalves} \\
                     &= (n/2)^2 \label{eq:sqrhalf} \\
@@ -116,12 +121,19 @@ again assume $n$ is even.\footnote{It is not hard to fix the proof to work
   \item Why is the right-hand side of \eqref{eq:ltns} equal to
     \eqref{eq:nsqr} ?
   \item What does this prove about $1 + 2 + \dots + n$?
-  \item Now, what is happening in step \eqref{eq:halfzero}?
-  \item Why is the right-hand side of \eqref{eq:halfzero} greater than
+  \item Now, what is happening in step \eqref{eq:expand}?
+  \item Why is \eqref{eq:expand} greater than \eqref{eq:halfzero}?
+  \item Why is \eqref{eq:halfzero} greater than
     \eqref{eq:downtohalves}?
   \item Why is \eqref{eq:downtohalves} equal to \eqref{eq:sqrhalf}?
-  \item What does this prove about $1 + 2 + \dots + n$ in terms of $\Theta$?
-  \item Two of these three proofs are in some sense the same.  Which two?
+  \item Explain why we have now shown that $n^2/4 < 1 + 2 + \dots + n
+    < n^2$.
+  \item What does this prove about $1 + 2 + \dots + n$ in terms of
+    $\Theta$?
+  \item Two of these three proofs are in some sense the same.  Which
+    two?
+  \item Use one of the proof methods from this activity to derive the
+    big-Theta asymptotic behavior of $1 + 2 + 4 + 8 + 16 + \dots + 2^n$.
   \end{questions}
 
 \end{document}

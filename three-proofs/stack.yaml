@@ -1,12 +1,12 @@
-resolver: lts-13.27
+resolver: lts-19.22
 packages: []
 
 extra-deps:
-- diagrams-pgf-1.4.1
-- diagrams-rasterific-1.4.1.1
+- diagrams-pgf-1.4.2
+- diagrams-rasterific-1.4.2.2
 - texrunner-0.0.1.2
-- diagrams-builder-0.8.0.4
-- haskell-src-exts-simple-1.20.0.0
+- diagrams-builder-0.8.0.5
+- haskell-src-exts-simple-1.23.0.0
 
 flags:
   diagrams-builder:
