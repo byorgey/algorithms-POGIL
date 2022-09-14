@@ -13,38 +13,15 @@
 \begin{model}{Graphs and graph terms}{graphs}
   \begin{center}
   \begin{minipage}{0.45\textwidth}
-  \begin{diagram}[width=150]
-    import Graphs
-    dia :: Diagram B
-    dia = graph
-      [(0,1),(0,2),(1,2), (1,3),(3,4),(2,5),(5,6),(6,7),(7,8),(8,5),(3,9)]
-      (\i -> "$" ++ show i ++ "$")
-    \end{diagram}
+    \input{diagrams/conn.pgf}
   \end{minipage}
   \begin{minipage}{0.45\textwidth}
-  \begin{diagram}[width=150]
-    import Graphs
-    import Data.Char (chr, ord)
-    dia :: Diagram B
-    dia = graph
-      [(0,2), (1,2), (2,3), (3,4), (4,5), (3,6), (6,7), (6,8), (6,9)]
-      (\i -> [chr (i + ord 'a')])
-    \end{diagram}
+    \input{diagrams/tree.pgf}
   \end{minipage}
 
   \vspace{1em}
   \begin{minipage}{0.45\textwidth}
-    \begin{diagram}[width=150]
-      import Graphs
-      import Data.Char (chr, ord)
-      dia :: Diagram B
-      dia = graph
-        [ (0,1), (1,2), (2,0)
-        , (3,4), (4,5)
-        , (6,6), (7,7)
-        ]
-        (\i -> [chr (i + ord 'A')])
-    \end{diagram}
+    \input{diagrams/graph3.pgf}
   \end{minipage}
   \begin{minipage}{0.45\textwidth}
     \begin{align*}
@@ -98,6 +75,8 @@ the first time.
   \term{cycle}, \term{cyclic}, \term{acyclic}, and \term{tree}.
 \end{objective}
 
+% XXX probably need more exploration questions first!  Currently this
+% leads off with an invention question.
 \begin{questions}
 \item What does it mean for two vertices to be \term{adjacent}?
 \item Are $\alpha$ and $\beta$ adjacent?   What about $\alpha$ and $\zeta$?
@@ -107,6 +86,9 @@ the first time.
 \item What is the definition of a \term{leaf}?  Use the term
   \term{degree} in your answer.
 \item Which vertices are leaves in the Greek graph?
+\item In the space below, draw a graph with at least three leaves, one
+  vertex with degree five, and at least one pair of vertices that are
+  not adjacent.
 \end{questions}
 
 \newpage
@@ -126,7 +108,7 @@ Model~\ref{model:graphs}:
 \item The numeric and lowercase graphs have one \term{connected
     component} each.  The uppercase graph has four connected
   components.
-\item $0$--$1$--$2$--$0$ is a \term{cycle}.  So is $C$--$A$--$B$--$C$.
+\item $8$--$7$--$6$--$5$--$8$ is a \term{cycle}.  So is $C$--$A$--$B$--$C$.
   $h$--$g$--$i$--$h$ is not a cycle.  $h$--$g$--$h$ is not a cycle
   either.  Nor is $H$--$H$.
 \item The numeric graph and uppercase graph are \term{cyclic} graphs.
