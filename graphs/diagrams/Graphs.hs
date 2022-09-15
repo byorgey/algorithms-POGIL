@@ -1,7 +1,6 @@
 {-# LANGUAGE FlexibleContexts          #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE PartialTypeSignatures     #-}
-{-# LANGUAGE TemplateHaskell           #-}
 {-# LANGUAGE TypeFamilies              #-}
 
 {-# OPTIONS_GHC -fno-warn-partial-type-signatures #-}
@@ -23,7 +22,7 @@ graph es vLabel = drawEnsemble es vLabel $
   forceLayout
     ( with
     & damping     .~ 0.8
-    & energyLimit .~ Just 0.001
+    & energyLimit ?~ 0.001
     & stepLimit   .~ Nothing
     )
   ens
