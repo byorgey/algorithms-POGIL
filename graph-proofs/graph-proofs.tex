@@ -1,0 +1,114 @@
+% -*- compile-command: "rubber -d graph-proofs.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Some Proofs about Trees}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{objective}
+  Students will write proofs about graphs.
+\end{objective}
+
+\begin{model*}{A theorem about trees}{trees}
+\begin{thm}[Trees]
+  Let $G = (V,E)$ be a graph with $|V| = n \geq 1$.  Any two of the following
+  imply the third:
+  \begin{enumerate}
+  \item $G$ is connected.
+  \item $G$ is acyclic.
+  \item $G$ has $n-1$ edges.
+  \end{enumerate}
+\end{thm}
+\end{model*}
+
+\begin{questions}
+  \item (Review) From the previous activity, what is the definition of
+    a tree?
+  \item How does the given theorem relate to the definition of a tree?
+  \item The theorem implies that there are two other alternative, yet
+    equivalent, ways we could have defined trees.  What are they?
+\end{questions}
+
+We will take each pair of statements in turn and show that they imply
+the third.  Fill in the blanks to complete the following proofs!  Note
+that the size of a blank does not necessarily correspond to the
+amount of stuff you should write in it.
+
+\begin{lem} \label{lem:onetwothree}
+  $(1), (2) \implies (3)$.  That is: let $G = (V,E)$ be a graph with $|V|
+  = n \geq 1$.  If \blank\linebreak and \blank,\linebreak then \blank.
+\end{lem}
+
+\begin{proof}
+  Let $P(n)$ denote the statement ``Any graph $G$ with $n$ vertices
+  which is \blank and \blank\linebreak
+  must have \blank.''\linebreak  We wish to show
+  that $P(n)$ holds for all $n \geq 1$.
+
+  The proof is by \blank.
+  \begin{itemize}
+  \item The base case is when \blank.\linebreak In this case, $G$ must
+    be \blank\linebreak which indeed \blank.
+  \item For the induction step, suppose $P(k)$ holds for some $k \geq
+    1$.  That is, suppose that any graph with \blank vertices\linebreak which is
+    \blank\linebreak must have \blank.\linebreak  Then we wish to show
+    $P(k+1)$, that is, any graph with \blank\linebreak vertices which is
+    connected and acyclic must have \blank.
+
+    So, let $G$ be a graph with \blank vertices which is\linebreak
+    \mbox{}\blank and \blank.\linebreak  We claim that $G$
+    must have some vertex which is a leaf, that is, a vertex of degree
+    \blank,\newline which we can show as follows:
+    \begin{itemize}
+    \item $G$ cannot have any vertices of degree \blank\linebreak because
+      \blank.
+    \item It also cannot be the case that every vertex of $G$ has
+      degree $\geq$ \blank.  If they did, then we could find a \blank
+      by starting at any\linebreak vertex and walking along edges
+      randomly until \blank;\linebreak we would never get stuck
+      because \blank.\linebreak However, this is impossible because we
+      assumed \blank.
+    \end{itemize}
+    Hence, $G$ must have some vertex which \blank.\linebreak If we
+    delete this vertex along with the edge adjacent to it, it results
+    in a graph $G'$ with only \blank vertices;\linebreak we note that
+    $G'$ is still \blank\linebreak because \blank\linebreak and also
+    \blank\linebreak because \blank.\linebreak  Hence we may apply the
+    inductive hypothesis to conclude that $G'$\linebreak \mbox{}\blank.
+    Adding the deleted vertex and edge\linebreak back to $G'$ shows that $G$
+    \blank,\linebreak which is what we wanted to show.
+  \end{itemize}
+\end{proof}
+
+Let's do one more!  (You will do the third on your HW.)
+
+\begin{lem}
+  $(2),(3) \implies (1)$, that is, \blank\linebreak \mbox{}\blank.
+\end{lem}
+
+\begin{proof}
+  This proof uses a \term{counting argument}: we will show what we
+  wish to show by counting things in multiple ways.
+
+  Let $c$ denote the number of connected components of $G$.  We want
+  to show that \blank.
+
+  Number the components of $G$ from $1 \dots c$, and say that
+  component $i$ has $n_i$ vertices.  Then \[ \sum_{i=1}^c n_i =
+    \underline{\phantom{XXXXXXXXXX}} \] because \blank.\linebreak  Each
+  connected component is by definition a \blank graph;\linebreak each
+  component must also be \blank\linebreak since we assumed that $G$ is.  Hence
+  we may apply \pref{lem:onetwothree} to conclude that component $i$
+  \blank.\linebreak
+  Adding these up, the total number of edges in $G$ is
+  \[ |E| = \sum_{i=1}^c \underline{\phantom{XXXXXX}} =
+    \underline{\phantom{XXXXXXXXXXXXX}} \] But we already assumed the
+  number of edges in $G$ is \blank,\linebreak and hence \blank as desired.
+\end{proof}
+
+\end{document}
