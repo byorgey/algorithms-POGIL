@@ -1,4 +1,4 @@
-% -*- compile-command: "./build.sh" -*-
+% -*- compile-command: "rubber -d MST.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
@@ -38,65 +38,7 @@
   \end{defn}
 
   \begin{center}
-    \begin{diagram}[width=300]
-      {-# LANGUAGE ViewPatterns #-}
-
-      import GraphDiagrams
-      import Data.Bifunctor
-      import System.Random
-
-      perturb :: P2 Double -> IO (P2 Double)
-      perturb (coords -> (x :& y)) = do
-        dx <- randomRIO (-0.3, 0.3)
-        dy <- randomRIO (-0.3, 0.3)
-        return ((x + dx) ^& (y + dy))
-
-      mvertices :: [(Char, P2 Double)]
-      mvertices =
-        [ ('a', 1 ^& 2)
-        , ('b', 0 ^& 1)
-        , ('c', 1 ^& 0)
-        , ('d', 2 ^& 1)
-        , ('i', 3 ^& 0)
-        , ('f', 3 ^& 2)
-        , ('e', 4 ^& 1)
-        , ('j', 4 ^& (-1))
-        , ('g', 5 ^& 2)
-        , ('h', 5 ^& 0)
-        ]
-
-      mvertices' :: IO [(Char, P2 Double)]
-      mvertices' = (traverse . traverse) perturb mvertices
-
-      medges =
-        [ (('a','b'), 3)
-        , (('b','c'), 17)
-        , (('b','d'), 16)
-        , (('a','f'), 2)
-        , (('c','d'), 8)
-        , (('c','i'), 18)
-        , (('d','i'), 4)
-        , (('d','e'), 11)
-        , (('i','e'), 10)
-        , (('f','e'), 1)
-        , (('f','g'), 7)
-        , (('e','g'), 6)
-        , (('e','h'), 5)
-        , (('i','h'), 12)
-        , (('i','j'), 9)
-        , (('j','h'), 13)
-        , (('g','h'), 15)
-        ]
-
-      g :: IO (Graph Char Int)
-      g = do
-        vs <- mvertices'
-        return $ wgraph vs medges
-
-      dia :: IO (Diagram B)
-      dia = drawGraph (drawVTeX . first (:[])) (drawUWE (tex . show)) <$> g
-  \end{diagram}
-
+    \input{diagrams/MSTexample.pgf}
   \end{center}
 \end{model*}
 
@@ -195,35 +137,9 @@ algorithms for finding them.
 \item On the next page are four copies of the same graph.  Use these
   to trace the execution of each algorithm in the model.
   \begin{figure}
-  \begin{center}
-    \begin{diagram}[width=400]
-      import GraphDiagrams
-      import Data.Bifunctor
-
-      g :: Graph Char Int
-      g = wgraph
-        [ ('a', 1 ^& 2)
-        , ('b', 0 ^& 1)
-        , ('c', 2 ^& 1)
-        , ('d', 1 ^& 0)
-        , ('e', 2 ^& 2)
-        ]
-
-        [ (('a','b'), 5)
-        , (('a','d'), 9)
-        , (('b','d'), 20)
-        , (('a','c'), 3)
-        , (('c','d'), 1)
-        , (('a','e'), 2)
-        , (('e','c'), 4)
-        ]
-
-      gDia = drawGraph (drawVTeX . first (:[])) (drawUWE (tex . show)) g
-
-      dia = vsep 1 . map (hsep 1) $  -- $
-        [[gDia, gDia], [gDia, gDia]]
-    \end{diagram}
-  \end{center}
+    \begin{center}
+      \input{diagrams/MSTtrace.pgf}
+    \end{center}
   \end{figure}
 \item One of these algorithms is fake.  Which one?  Give an example
   showing why it does not work.
