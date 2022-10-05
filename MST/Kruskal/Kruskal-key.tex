@@ -1,4 +1,4 @@
-% -*- compile-command: "./build.sh" -*-
+% -*- compile-command: "pdflatex -d Kruskal-key.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
@@ -19,65 +19,7 @@ it works correctly.
 
 \begin{model*}{Kruskal's Algorithm (12 mins)}{kruskal}
   \begin{center}
-    \begin{diagram}[width=300]
-      {-# LANGUAGE ViewPatterns #-}
-
-      import GraphDiagrams
-      import Data.Bifunctor
-      import System.Random
-
-      perturb :: P2 Double -> IO (P2 Double)
-      perturb (coords -> (x :& y)) = do
-        dx <- randomRIO (-0.3, 0.3)
-        dy <- randomRIO (-0.3, 0.3)
-        return ((x + dx) ^& (y + dy))
-
-      mvertices :: [(Char, P2 Double)]
-      mvertices =
-        [ ('a', 1 ^& 2)
-        , ('b', 0 ^& 1)
-        , ('c', 1 ^& 0)
-        , ('d', 2 ^& 1)
-        , ('i', 3 ^& 0)
-        , ('f', 3 ^& 2)
-        , ('e', 4 ^& 1)
-        , ('j', 4 ^& (-1))
-        , ('g', 5 ^& 2)
-        , ('h', 5 ^& 0)
-        ]
-
-      mvertices' :: IO [(Char, P2 Double)]
-      mvertices' = (traverse . traverse) perturb mvertices
-
-      medges =
-        [ (('a','b'), 3)
-        , (('b','c'), 17)
-        , (('b','d'), 16)
-        , (('a','f'), 2)
-        , (('c','d'), 8)
-        , (('c','i'), 18)
-        , (('d','i'), 4)
-        , (('d','e'), 11)
-        , (('i','e'), 10)
-        , (('f','e'), 1)
-        , (('f','g'), 7)
-        , (('e','g'), 6)
-        , (('e','h'), 5)
-        , (('i','h'), 12)
-        , (('i','j'), 9)
-        , (('j','h'), 13)
-        , (('g','h'), 15)
-        ]
-
-      g :: IO (Graph Char Int)
-      g = do
-        vs <- mvertices'
-        return $ wgraph vs medges
-
-      dia :: IO (Diagram B)
-      dia = drawGraph (drawVTeX . first (:[])) (drawUWE (tex . show)) <$> g
-  \end{diagram}
-
+    \input{../diagrams/MSTexample.pgf}
   \end{center}
 
   \begin{algorithm}[H]
@@ -102,7 +44,7 @@ it works correctly.
   spanning tree?
 
   \emph{All edges from 1--10 except edge 7 are included; the total
-    weight is $48$.}
+  weight is $48$.}
 \item The way the algorithm is written in \pref{model:kruskal}, one
   must iterate through every single edge in $E$.  However, this is not
   always necessary.  Can you think of a simple way to tell when we can
@@ -138,65 +80,7 @@ it works correctly.
 
 \begin{model*}{The Cut Property (20 mins)}{cut-property}
   \begin{center}
-    \begin{diagram}[width=300]
-      {-# LANGUAGE ViewPatterns #-}
-
-      import GraphDiagrams
-      import Data.Bifunctor
-      import System.Random
-
-      perturb :: P2 Double -> IO (P2 Double)
-      perturb (coords -> (x :& y)) = do
-        dx <- randomRIO (-0.3, 0.3)
-        dy <- randomRIO (-0.3, 0.3)
-        return ((x + dx) ^& (y + dy))
-
-      mvertices :: [(Char, P2 Double)]
-      mvertices =
-        [ ('a', 1 ^& 2)
-        , ('b', 0 ^& 1)
-        , ('c', 1 ^& 0)
-        , ('d', 2 ^& 1)
-        , ('i', 3 ^& 0)
-        , ('f', 3 ^& 2)
-        , ('e', 4 ^& 1)
-        , ('j', 4 ^& (-1))
-        , ('g', 5 ^& 2)
-        , ('h', 5 ^& 0)
-        ]
-
-      mvertices' :: IO [(Char, P2 Double)]
-      mvertices' = (traverse . traverse) perturb mvertices
-
-      medges =
-        [ (('a','b'), 3)
-        , (('b','c'), 17)
-        , (('b','d'), 16)
-        , (('a','f'), 2)
-        , (('c','d'), 8)
-        , (('c','i'), 18)
-        , (('d','i'), 4)
-        , (('d','e'), 11)
-        , (('i','e'), 10)
-        , (('f','e'), 1)
-        , (('f','g'), 7)
-        , (('e','g'), 6)
-        , (('e','h'), 5)
-        , (('i','h'), 12)
-        , (('i','j'), 9)
-        , (('j','h'), 13)
-        , (('g','h'), 15)
-        ]
-
-      g :: IO (Graph Char Int)
-      g = do
-        vs <- mvertices'
-        return $ wgraph vs medges
-
-      dia :: IO (Diagram B)
-      dia = drawGraph (drawVTeX . first (:[])) (drawUWE (tex . show)) <$> g
-  \end{diagram}
-
+    \input{../diagrams/MSTexample.pgf}
   \end{center}
 
   \begin{defn}

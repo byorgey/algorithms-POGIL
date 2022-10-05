@@ -42,16 +42,49 @@ it works correctly.
 \item Simulate Kruskal's Algorithm on the graph in
   \pref{model:kruskal}.  What is the total weight of the resulting
   spanning tree?
+
+  \begin{answer}
+  All edges from 1--10 except edge 7 are included; the total
+  weight is $48$.
+  \end{answer}
 \item The way the algorithm is written in \pref{model:kruskal}, one
   must iterate through every single edge in $E$.  However, this is not
   always necessary.  Can you think of a simple way to tell when we can
   stop the loop early?
+
+  \begin{answer}
+    Since a tree with $V$ vertices has exactly $V-1$ edges, we can
+    just count how many edges have been picked so far and stop when we
+    get to $V-1$.
+  \end{answer}
 \item Explain why even in the worst case,
   $\Theta(\lg V) = \Theta(\lg E)$ in any graph. (Hint: what is the
   biggest $E$ can be, relative to $V$?)
+
+  \begin{answer}
+    In the worst case, $E$ is $O(V^2)$, in which case $\Theta(\lg
+    E) = \Theta(\lg V^2) = \Theta(2 \lg V) = \Theta(\lg V)$.
+  \end{answer}
 \item In the above algorithm, how long does line 2 take?  Simplify
   your answer using the observation from the previous question.
-\item Can you think of a way to implement line 4?  How long would it take?
+
+  \begin{answer}
+    We are sorting a list of $E$ edges; if we use an efficient
+    $\Theta(n \lg n)$ sorting algorithm, it will take $\Theta(E \lg E)
+    = \Theta(E \lg V)$ time.
+  \end{answer}
+\item Can you think of a way to implement line 4?  How long would it
+  take?
+
+  \begin{answer}
+    Do a BFS (or DFS) in $T$ from one endpoint of $e$.  $e$
+    makes a cycle if and only if the other endpoint of $e$ is
+    reachable.  This would take $\Theta(V)$ time (BFS or DFS in
+    general take $\Theta(V+E)$ time, but in this case since $T$ has no
+    cycles it can't have more edges than vertices).  Hence the total
+    time for the whole algorithm would be $\Theta(E \lg V) + \Theta(E
+    \cdot V) = \Theta(VE)$.
+  \end{answer}
 \end{questions}
 
 \pause
@@ -82,6 +115,10 @@ it works correctly.
 \item Give three examples of cuts in the graph from
   \pref{model:cut-property} and identify the smallest edge crossing
   each cut.
+
+  \begin{answer}
+    Answers will vary.
+  \end{answer}
 \end{questions}
 
 Let's prove the cut property.
