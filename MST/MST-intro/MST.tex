@@ -42,7 +42,7 @@
 \end{model*}
 
 \begin{questions}
-\item \label{q:draw-ss} Draw any spanning subgraph of the example
+\item \label{q:draw-ss} Draw (or describe) any spanning subgraph of the example
   graph from~\pref{model:mwss}.
 \item Can a graph $G$ have more than one spanning subgraph?
 \item Is it possible for a graph $G$ to be a spanning subgraph of
@@ -51,10 +51,12 @@
   subgraph?  Why or why not?
 \item Can a graph $G$ have more than one minimum-weight spanning
   subgraph?  Give an example, or explain why it is not possible.
-\item Find a MWSS for the graph in~\pref{model:mwss}. Does it have
+\item Find what you think is a MWSS for the graph in~\pref{model:mwss}. Does it have
   more than one?\marginnote{\textbf{Note}: don't spend too much time on this
     question; just find a spanning subgraph which you reasonably think
     is the minimum, and move on.}
+\item What is the length of the shortest path from $d$ to $b$ in Model 1?
+\item What is the length of the path from $d$ to $b$ in your MWSS?
 \item \label{q:scenarios} Which of the following scenarios could be
   modeled by finding a MWSS?
   \begin{subquestions}
@@ -67,9 +69,9 @@
     total amount of fiber optic cable used. There must be at least two
     routes between any pair of data centers, so that any one fiber
     optic link going down will not disconnect the network.
-  \item Given a network of train routes between a collection of
-    cities and the cost of each route, find the cheapest route between
-    two given cities.
+  \item Given a network of train tracks between a collection of cities
+    and the cost of travelling on each track, find the cheapest route
+    between two given cities.
   \item You have the latest Megazorx puzzle toy, which can be in any
     one of a number of different states.  There are various moves
     which can transform the Megazorx from one state to another.  In
@@ -130,8 +132,8 @@ algorithms for finding them.
     all vertices are connected.
   \item (\textbf{Reverse delete}) Start with all edges initially
     ``picked'', and consider them in order from biggest to smallest
-    weight.  For each edge, throw it out (\ie ``unpick'' it) if and
-    only if doing so would not disconnect the remaining edges.
+    weight.  For each edge, delete it if and only if doing so would
+    not disconnect the remaining graph.
   \end{itemize}
 \end{model*}
 
