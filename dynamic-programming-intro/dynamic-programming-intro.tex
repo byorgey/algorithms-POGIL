@@ -100,8 +100,9 @@ def fib3(n):
   (25 minutes)}
 
 \begin{questions}
-\item Trace the execution of \verb|fib2(5)| and explain how it works
-  using one or two complete English sentences. \vspace{1in}
+\item Trace the execution of \verb|fib2(5)|. As a group, come up with
+  one or two complete English sentences to explain how it
+  works. \vspace{1in}
 \item Which does more work, \verb|fib2(5)| or \verb|fib1(5)|?  Why?
 \item In terms of $\Theta$, how long does \verb|fib2(n)|
   take?\footnote{For the purposes of this activity, you should assume
@@ -119,17 +120,18 @@ def fib3(n):
   except that \\ \blank.
 \item Fill in this statement: \verb|fib2| is just like \verb|fib3|
   except that \\ \blank.
-\item Why don't we do something like \verb|fib2| or \verb|fib3| in the
-  case of merge sort?
 \item Consider the following recursive definition of $Q(n)$ for $n
   \geq 0$:\marginnote{Note that there are \emph{three} base cases.}
   \begin{align*}
     Q(0) &= 0 \\
     Q(1) &= Q(2) = 1 \\
-    Q(n) &= \max \begin{cases} Q(n - 3)^2 \\ Q(n-1) + Q(n-2) \end{cases}
+    Q(n) &= Q(n-1) + 2 \cdot \left[Q(n - 3)\right]^2
   \end{align*}
-  Using pseudocode, or any language your group agrees to use, write an
-  algorithm to calculate $Q(n)$ efficiently.
+  \begin{enumerate}[label=(\alph*)]
+  \item Calculate $Q(3)$, $Q(4)$, and $Q(5)$. \vspace{1in}
+  \item Using pseudocode, or any language your group agrees to use, write an
+    algorithm to calculate $Q(n)$ efficiently.
+  \end{enumerate}
 \end{questions}
 
 \newpage
