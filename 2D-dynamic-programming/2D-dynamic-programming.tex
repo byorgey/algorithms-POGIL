@@ -3,7 +3,9 @@
 
 \usepackage{algo-activity}
 
-\title{\thecourse: 2D Dynamic Programming}
+\graphicspath{{images/}{../images/}}
+
+\title{\thecourse: Subset Sum (2D Dynamic Programming)}
 \date{}
 
 \begin{document}
@@ -14,7 +16,7 @@
   \begin{align*}
     A &= \{ 1, 2, 3, 5, 7 \} \\
     B &= \{ 4, 16, 19, 23, 25, 72, 103 \} \\
-    C &= \{ 3, 34, 4, 12, 5, 2, 99 \} \\
+    C &= \{ 3, 34, 6, 17 \} \\
     D &= \{ \}
   \end{align*}
 \end{model*}
@@ -25,8 +27,6 @@
   subsets which add up to $7$ ($\{7\}$ and $\{5,2\}$ respectively),
   but $B$ and $D$ do not.
   \begin{enumerate}[label=(\alph*)]
-  \item 149
-  \item 148
   \item 9
   \item 16
   \item 0
@@ -50,7 +50,10 @@ problem:
 
 \begin{questions}
 \item Describe a brute-force algorithm for solving this problem.
-\item \label{q:brute} What is the running time of your brute-force algorithm?
+\item \label{q:brute} What is the running time of your brute-force
+  algorithm?
+\item Use your brute-force algorithm to decide whether there is any
+  subset of $C$ which adds up to $54$.  What about $55$?
 \end{questions}
 
 Let's see how to attack this problem using dynamic programming.
@@ -78,20 +81,40 @@ Let's see how to attack this problem using dynamic programming.
 
 \newcommand{\canAddTo}{\mathit{canAddTo}}
 
-Define $\canAddTo(k,s)$ to be a true or false value which is
-the answer to the question, ``Is there a subset of $\{x_1, \dots,
-x_k\}$ which adds up to exactly $s$?''
+Define $\canAddTo(k,s)$ to be a true or false value which is the
+answer to the question, ``Is there a subset of only the first $k$
+elements $\{x_1, \dots, x_k\}$ which adds up to exactly $s$?''
 
+\begin{questions}
+\item Consider set $A = \{1,2,3,5,7\}$ from Model 1 again.  Number the
+  elements starting from $1$, that is, $x_1 = 1$, $x_2 = 2$, \dots,
+  $x_5 = 7$.  Evaluate each expression below as true or false,
+  and give a brief justification for each.
+  \begin{subquestions}
+  \item $\canAddTo(5, 16)$
+  \item $\canAddTo(4, 16)$
+  \item $\canAddTo(4, 9)$
+  \item $\canAddTo(3, 1)$
+  \item $\canAddTo(3, 0)$
+  \item $\canAddTo(0, 2)$
+  \item $\canAddTo(0, 0)$
+  \end{subquestions}
+\end{questions}
+Now let's come up with a recurrence for $\canAddTo$ in the general
+case of determining whether there is a subset of $X = \{x_1, \dots,
+x_n\}$ which adds up to $S$.
 \begin{questions}
   \item Fill in base cases for $\canAddTo$:
     \begin{itemize}
-    \item $\canAddTo(k,0) = $ \blank for all $k \geq 0$, \\ because
+    \item $\canAddTo(k,0) = $ \blank for all $k \geq 0$, \\ because we
+      can always
       \blank.
-    \item $\canAddTo(0,s) = $ \blank for all $s > 0$, \\ because \blank.
+    \item $\canAddTo(0,s) = $ \blank for all $s > 0$, \\ because
+      there's no way to \blank.
     \end{itemize}
   \item Now consider $\canAddTo(k,s)$ in the general case, when
     $k > 0$ and $s > 0$.  That is, we are trying to find whether we
-    can add up to exactly $s$ using only some subset of
+    can add up to exactly $s$ if we're only allowed to use
     $x_1, \dots, x_k$.  In order to break this problem down into
     subproblems, we would need to decrease $k$ and/or $s$.  Fill in
     the following steps.
@@ -108,7 +131,7 @@ x_k\}$ which adds up to exactly $s$?''
       only \blank \\ which adds up to \blank.
     \end{itemize}
   \item Use your reasoning above to write down a complete recursive
-    definition of $\canAddTo$.
+    definition of $\canAddTo$.  Don't forget the base cases!
 \end{questions}
 
 \pause
@@ -128,7 +151,6 @@ x_k\}$ which adds up to exactly $s$?''
     the output corresponding to each possible input, what data
     structure should we use?  Draw a picture.
   \item How big is this data structure?
-  \newpage
   \item In what order can we fill in the data structure, so that we
     never try to fill in a value before filling in other values it
     depends on?
@@ -137,6 +159,7 @@ x_k\}$ which adds up to exactly $s$?''
     programming algorithm?
   \item Is this faster than your answer to
     \pref{q:brute}?\marginnote{Hint: this is a trick question.}
+    \newpage
   \item Write some code (using either pseudocode or a language of your
     choice) to compute $\canAddTo(n,S)$ using the approach outlined
     here.
