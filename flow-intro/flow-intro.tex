@@ -1,10 +1,12 @@
-% -*- compile-command: "./build.sh" -*-
+% -*- compile-command: "rubber -d --unsafe flow-intro.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
 
 \title{\thecourse: Introduction to Flow Networks}
 \date{}
+
+\graphicspath{{images/}{../images/}}
 
 \begin{document}
 
@@ -16,78 +18,32 @@
 
 \begin{model}{Networks and flows}{networksandflows}
   \begin{center}
-  {\huge A}
-  \begin{diagram}[width=300]
-    import FlowIntro
-    import qualified Data.Map as M
-    dia = drawFlow False flowExample
-  \end{diagram}
+    {\huge A}
+    \input{diagrams/graph.pgf}
   \end{center}
   \bigskip \bigskip
 
   \hrule \bigskip
 
   \begin{center}
-  {\huge B}
-  \begin{diagram}[width=300]
-    import FlowIntro
-    import qualified Data.Map as M
-
-    flow = M.fromList $  -- $
-      [ (('s','a'), 2)
-      , (('s','b'), 3)
-      , (('a','d'), 1)
-      , (('d','t'), 1)
-      , (('a','b'), 1)
-      , (('b','e'), 4)
-      , (('e','f'), 2)
-      , (('e','t'), 2)
-      , (('f','t'), 2)
-      ]
-    dia = drawFlow True (flowExample # withFlow flow)
-  \end{diagram}
+    {\huge B}
+    \input{diagrams/flowB.pgf}
   \end{center}
 \end{model}
 
 \setcounter{modelcounter}{0}
 \begin{model}{(continued)}{networksandflows}
   \begin{center}
-  {\huge C}
-  \begin{diagram}[width=300]
-    import FlowIntro
-    import qualified Data.Map as M
-
-    flow = M.fromList $  -- $
-      [ (('s','a'), 10)
-      , (('a','d'), 9)
-      , (('a','e'), 1)
-      , (('d','t'), 9)
-      , (('e','t'), 1)
-      ]
-    dia = drawFlow True (flowExample # withFlow flow)
-  \end{diagram}
+    {\huge C}
+    \input{diagrams/flowC.pgf}
   \end{center}
   \bigskip \bigskip
 
   \hrule \bigskip
 
   \begin{center}
-  {\huge D}
-  \begin{diagram}[width=300]
-    import FlowIntro
-    import qualified Data.Map as M
-
-    flow = M.fromList $  -- $
-      [ (('s','a'), 10)
-      , (('s','b'), 5)
-      , (('b','e'), 7)
-      , (('a','d'), 10)
-      , (('d','e'), 1)
-      , (('d','t'), 9)
-      , (('e','t'), 8)
-      ]
-    dia = drawFlow True (flowExample # withFlow flow)
-  \end{diagram}
+    {\huge D}
+    \input{diagrams/flowD.pgf}
   \end{center}
 \end{model}
 
@@ -120,10 +76,9 @@ might be used to model things like:
 \begin{defn}
   A \term{flow network} is a directed graph $G = (V,E)$ with
   \begin{itemize}
-  \item a distinguished \term{source} vertex $s \in V$, with only
-    outgoing edges;
+  \item a distinguished \term{source} vertex $s \in V$, with indegree 0;
   \item a distinguished \term{sink} or \term{target} vertex $t \in V$,
-    with only incoming edges;
+    with outdegree 0;
   \item a \term{capacity function} $c : E \to \R^+$ assigning a
     non-negative real number capacity $c(e)$ to each edge $e \in E$.
   \end{itemize}

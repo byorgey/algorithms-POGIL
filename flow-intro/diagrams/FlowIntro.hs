@@ -1,3 +1,6 @@
+#!/usr/bin/env stack
+-- stack --resolver lts-19.6 script --package diagrams-lib --package diagrams-pgf --package texrunner --package colour --package containers
+
 {-# LANGUAGE FlexibleContexts          #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE TypeFamilies              #-}
@@ -82,3 +85,53 @@ drawFlow showFlow (nodes, edges) = drawNodes <> drawEdges
     tex x = ("$" ++ x ++ "$") # text
 
 -- main = defaultMain (drawFlow False flowExample # frame 1)
+
+------------------------------------------------------------
+
+graphDia :: Diagram B
+graphDia = drawFlow False flowExample
+
+flowB :: Diagram B
+flowB = drawFlow True (flowExample # withFlow flow)
+  where
+    flow = M.fromList $
+      [ (('s','a'), 2)
+      , (('s','b'), 3)
+      , (('a','d'), 1)
+      , (('d','t'), 1)
+      , (('a','b'), 1)
+      , (('b','e'), 4)
+      , (('e','f'), 2)
+      , (('e','t'), 2)
+      , (('f','t'), 2)
+      ]
+
+flowC :: Diagram B
+flowC = drawFlow True (flowExample # withFlow flow)
+  where
+    flow = M.fromList $
+      [ (('s','a'), 10)
+      , (('a','d'), 9)
+      , (('a','e'), 1)
+      , (('d','t'), 9)
+      , (('e','t'), 1)
+      ]
+
+flowD :: Diagram B
+flowD = drawFlow True (flowExample # withFlow flow)
+  where
+    flow = M.fromList $
+      [ (('s','a'), 10)
+      , (('s','b'), 5)
+      , (('b','e'), 7)
+      , (('a','d'), 10)
+      , (('d','e'), 1)
+      , (('d','t'), 9)
+      , (('e','t'), 8)
+      ]
+
+main = do
+  renderPGF "graph.pgf" (mkWidth 300) graphDia
+  renderPGF "flowB.pgf" (mkWidth 300) flowB
+  renderPGF "flowC.pgf" (mkWidth 300) flowC
+  renderPGF "flowD.pgf" (mkWidth 300) flowD
