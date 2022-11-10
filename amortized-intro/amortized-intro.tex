@@ -1,10 +1,13 @@
-% -*- compile-command: "./build.sh" -*-
+% -*- compile-command: "rubber -d --unsafe amortized-intro.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
+\usepackage{fourier}
 
 \title{\thecourse: Amortized Analysis}
 \date{}
+
+\graphicspath{{images/}{../images/}}
 
 \begin{document}
 
@@ -16,36 +19,7 @@
 
 \begin{model*}{Incrementing a binary counter}{bin-inc}
   \begin{center}
-  \begin{diagram}[width=100]
-    toBinary :: Int -> [Int]
-    toBinary 0 = []
-    toBinary n = n `mod` 2 : toBinary (n `div` 2)
-
-    tex a = text ("$" ++ a ++ "$")
-
-    drawCounter :: Int -> Int -> Diagram B
-    drawCounter len n = hsep 0.5
-      [ tex (show n) # fontSizeL 0.5 <> square 1 # lw none
-      , drawBitArray len (toBinary n)
-      ]
-
-    drawBitArray :: Int -> [Int] -> Diagram B
-    drawBitArray len bs = (hcat . map drawCell)
-      (replicate (len - length bs) 0 ++ reverse (take len bs))
-      where
-        drawCell b = text ("$" ++ show b ++ "$") # fontSizeL 0.9 <> square 1
-
-    dia = vsep 0.5
-      [ hcat (map drawIndex [5, 4 .. 0]) # translateX 1.5
-      , vsep 0.5 (map (drawCounter 6) [0..15])
-      ]
-      where
-        drawIndex i = mconcat
-          [ text ("\\texttt{" ++ show i ++ "}")
-            # fontSizeL 0.5
-          , square 1 # lw none
-          ]
-  \end{diagram}
+    \input{diagrams/bit-array.pgf}
   \end{center}
 \end{model*}
 
@@ -61,11 +35,19 @@ binary counter is shown at the left.
     state $1$?
   \item How many bits differ between states $1$ and $2$?  Between $2$
     and $3$?  Between $3$ and $4$?
+  \item Next to each counter state in the model, write the number of
+    bits that changed from the previous state.  Circle the bits that
+    changed.
+  \item Now, highlight the bits that changed \emph{from zero to one}.
+  \item What patterns do you notice?
+  \item How many bits are there that change from zero to one each
+    time?
+  \item How many bits are there that change from one to zero?
+  \item How do the bits that change from zero to one relate to the
+    bits that change from one to zero?
   \item Write pseudocode to perform an increment operation, given an
-    array of bits $b$ as an input.\marginnote{\emph{Hint}: either look
-      for patterns, or think about how the grade school addition
-      algorithm works in binary when adding 1. You do not need to worry about
-    overflowing the array.}
+    array of bits $b$ as an input.\marginnote{You do not need to worry
+      about overflowing the array.} \vspace{1in}
   \item \label{q:inc-best} If we assume that changing the value of a
     bit takes 1 time step, what is the best-case runtime of your
     algorithm when given a counter representing some number $n$?
@@ -74,8 +56,8 @@ binary counter is shown at the left.
   \item \label{q:inc-worst} What is the worst-case runtime of your
     algorithm when given a counter representing some number $n$?
     Express your answer in terms of $n$, using big-$\Theta$
-    notation.\marginnote{Careful!  $n$ is the \emph{number
-        represented by} the bits, not the number of bits.}
+    notation. (Careful!  $n$ is the \emph{number represented by} the
+    bits, not the \emph{number of bits}.)
   \item Give an example of a worst-case input for your algorithm.
   \item Based on your answer to \pref{q:inc-best}, what is the best
     total running time we could possibly hope for a sequence of $n$
