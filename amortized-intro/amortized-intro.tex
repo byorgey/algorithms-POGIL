@@ -1,10 +1,13 @@
-% -*- compile-command: "./build.sh" -*-
+% -*- compile-command: "rubber -d --unsafe amortized-intro.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
+\usepackage{fourier}
 
 \title{\thecourse: Amortized Analysis}
 \date{}
+
+\graphicspath{{images/}{../images/}}
 
 \begin{document}
 
@@ -16,36 +19,7 @@
 
 \begin{model*}{Incrementing a binary counter}{bin-inc}
   \begin{center}
-  \begin{diagram}[width=100]
-    toBinary :: Int -> [Int]
-    toBinary 0 = []
-    toBinary n = n `mod` 2 : toBinary (n `div` 2)
-
-    tex a = text ("$" ++ a ++ "$")
-
-    drawCounter :: Int -> Int -> Diagram B
-    drawCounter len n = hsep 0.5
-      [ tex (show n) # fontSizeL 0.5 <> square 1 # lw none
-      , drawBitArray len (toBinary n)
-      ]
-
-    drawBitArray :: Int -> [Int] -> Diagram B
-    drawBitArray len bs = (hcat . map drawCell)
-      (replicate (len - length bs) 0 ++ reverse (take len bs))
-      where
-        drawCell b = text ("$" ++ show b ++ "$") # fontSizeL 0.9 <> square 1
-
-    dia = vsep 0.5
-      [ hcat (map drawIndex [5, 4 .. 0]) # translateX 1.5
-      , vsep 0.5 (map (drawCounter 6) [0..15])
-      ]
-      where
-        drawIndex i = mconcat
-          [ text ("\\texttt{" ++ show i ++ "}")
-            # fontSizeL 0.5
-          , square 1 # lw none
-          ]
-  \end{diagram}
+    \input{diagrams/bit-array.pgf}
   \end{center}
 \end{model*}
 
@@ -61,11 +35,18 @@ binary counter is shown at the left.
     state $1$?
   \item How many bits differ between states $1$ and $2$?  Between $2$
     and $3$?  Between $3$ and $4$?
+  \item Next to each counter state in the model, write the number of
+    bits that changed from the previous state.  Circle the bits that
+    changed.
+  \item Now, highlight the bits that changed \emph{from zero to one}.
+  \item What patterns do you notice?
+  \item How many bits are there that change from zero to one each
+    time?
+  \item How do the bits that change from zero to one relate to the
+    bits that change from one to zero?
   \item Write pseudocode to perform an increment operation, given an
-    array of bits $b$ as an input.\marginnote{\emph{Hint}: either look
-      for patterns, or think about how the grade school addition
-      algorithm works in binary when adding 1. You do not need to worry about
-    overflowing the array.}
+    array of bits $b$ as an input.\marginnote{You do not need to worry
+      about overflowing the array.} \vspace{1in}
   \item \label{q:inc-best} If we assume that changing the value of a
     bit takes 1 time step, what is the best-case runtime of your
     algorithm when given a counter representing some number $n$?
@@ -74,8 +55,8 @@ binary counter is shown at the left.
   \item \label{q:inc-worst} What is the worst-case runtime of your
     algorithm when given a counter representing some number $n$?
     Express your answer in terms of $n$, using big-$\Theta$
-    notation.\marginnote{Careful!  $n$ is the \emph{number
-        represented by} the bits, not the number of bits.}
+    notation. (Careful!  $n$ is the \emph{number represented by} the
+    bits, not the \emph{number of bits}.)
   \item Give an example of a worst-case input for your algorithm.
   \item Based on your answer to \pref{q:inc-best}, what is the best
     total running time we could possibly hope for a sequence of $n$
@@ -108,7 +89,8 @@ binary counter is shown at the left.
   \item How many bit flips are needed, in total, to start at $0$ and
     repeatedly increment a binary counter until reaching $16$?
   \item Look at the third row and compare it to the first row.  What
-    patterns do you notice?
+    patterns do you notice? \marginnote{\emph{Hint}: look at powers of
+      two.  There's no one right answer to this question.}
   \item Make a conjecture: how many total bit flips will be needed to
     increment from $0$ to $32$?
   \item In general, how many bit flips do you think will be needed to
@@ -125,57 +107,57 @@ binary counter is shown at the left.
       look at your answers to Questions~\ref{q:inc-worst}--\ref{q:worst-total}.}
 \end{questions}
 
-\pause
+% \pause
 
-\newcommand{\one}{\underset{\$}{1}}
-\newcommand{\pay}{\overset{\$\$}{\longrightarrow}}
+% \newcommand{\one}{\underset{\$}{1}}
+% \newcommand{\pay}{\overset{\$\$}{\longrightarrow}}
 
-\begin{model*}{The accounting method}{accounting}
-  \[ 0000 \pay 000\one \pay 00\one 0 \pay 00\one\one \pay 0 \one 00 \pay
-     0\one 0\one \pay 0\one \one 0 \pay 0 \one\one\one \pay \one 000
-  \]
-\end{model*}
+% \begin{model*}{The accounting method}{accounting}
+%   \[ 0000 \pay 000\one \pay 00\one 0 \pay 00\one\one \pay 0 \one 00 \pay
+%      0\one 0\one \pay 0\one \one 0 \pay 0 \one\one\one \pay \one 000
+%   \]
+% \end{model*}
 
-Now, let's actually prove your conjecture from \pref{q:upper-bound}.
-Imagine that we are providing a binary counter
-service.\marginnote{Perhaps it should be called \url{countr.com}\dots
-  drat, that domain is already taken.}  Anyone can ask us to create a
-binary counter for them, which starts out with the value zero. They
-can then ask us to increment their counter whenever they want (they
-can also ask us to tell them the current value).  Every time we flip a
-bit, it costs us \$1.  How much should we charge our customers for an
-increment operation to make sure that we can at least break even?
+% Now, let's actually prove your conjecture from \pref{q:upper-bound}.
+% Imagine that we are providing a binary counter
+% service.\marginnote{Perhaps it should be called \url{countr.com}\dots
+%   drat, that domain is already taken.}  Anyone can ask us to create a
+% binary counter for them, which starts out with the value zero. They
+% can then ask us to increment their counter whenever they want (they
+% can also ask us to tell them the current value).  Every time we flip a
+% bit, it costs us \$1.  How much should we charge our customers for an
+% increment operation to make sure that we can at least break even?
 
-\begin{questions}
-  \item Explain why charging \$1 for an increment operation is not
-    enough.  That is, if we charge only \$1 for every increment
-    operation, it will not be enough to cover our costs and we will
-    eventually go bankrupt.
-\end{questions}
+% \begin{questions}
+%   \item Explain why charging \$1 for an increment operation is not
+%     enough.  That is, if we charge only \$1 for every increment
+%     operation, it will not be enough to cover our costs and we will
+%     eventually go bankrupt.
+% \end{questions}
 
-The model shows what happens if we charge \$2 per increment
-operation. The two \$\$ signs over each arrow represent the \$2 paid
-by a customer every time they want to increment their counter.  In
-between the arrows are various states of the counter \emph{along with
-  extra money we have saved}.
+% The model shows what happens if we charge \$2 per increment
+% operation. The two \$\$ signs over each arrow represent the \$2 paid
+% by a customer every time they want to increment their counter.  In
+% between the arrows are various states of the counter \emph{along with
+%   extra money we have saved}.
 
-\begin{questions}
-  \item Consider the first arrow in the diagram, \[ 0000 \pay
-      000\one. \] Explain what is happening with the money.  Why is
-    there \$1 left over? Why do you think we save it under the $1$?
+% \begin{questions}
+%   \item Consider the first arrow in the diagram, \[ 0000 \pay
+%       000\one. \] Explain what is happening with the money.  Why is
+%     there \$1 left over? Why do you think we save it under the $1$?
 
-  \item Now explain the second step, \[ 000\one \pay 00\one 0. \] Why
-    is there \$1 left over again?  What do you think we did with the
-    \$1 that was stored under the rightmost $1$?  What did we do with
-    the \$2 paid by the customer?
+%   \item Now explain the second step, \[ 000\one \pay 00\one 0. \] Why
+%     is there \$1 left over again?  What do you think we did with the
+%     \$1 that was stored under the rightmost $1$?  What did we do with
+%     the \$2 paid by the customer?
 
-  \item Now explain \[ 00\one 0 \pay 00\one\one \pay 0\one 00. \]
+%   \item Now explain \[ 00\one 0 \pay 00\one\one \pay 0\one 00. \]
 
-  \item Can you explain why charging \$2 per increment operation will
-    ensure that we always have enough money to cover our costs?
+%   \item Can you explain why charging \$2 per increment operation will
+%     ensure that we always have enough money to cover our costs?
 
-  \item This actually constitutes a proof of your conjecture from
-    \pref{q:upper-bound}.  Explain why.
-\end{questions}
+%   \item This actually constitutes a proof of your conjecture from
+%     \pref{q:upper-bound}.  Explain why.
+% \end{questions}
 
 \end{document}

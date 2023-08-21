@@ -1,4 +1,4 @@
-% -*- compile-command: "pdflatex --enable-write18 XXX.tex" -*-
+% -*- compile-command: "pdflatex --enable-write18 max-flow.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
@@ -13,7 +13,7 @@
 
 \begin{questions}
 
-\item Consider the graph in Model \ref{graph1} and the algorithm below. The algorithm claims to find in a graph $V, E$ the maximum flow $f(e) \forall \e in E$ through the graph. On line 3, it arbitrarily chooses an unsaturated path and adds flow to it. What is an ordering of choices that enables this algorithm to successfully find a maximum flow?
+\item Consider the graph in Model \ref{graph1} and the algorithm below. The algorithm claims to find in a graph $V, E$ the maximum flow $f(e) \forall e in E$ through the graph. On line 3, it arbitrarily chooses an unsaturated path and adds flow to it. What is an ordering of choices that enables this algorithm to successfully find a maximum flow?
 
 \begin{objective}
   Students will derive an efficient algorithm for finding the flow of maximum value in a graph.
@@ -58,7 +58,7 @@
 \begin{defn}
   Given a network $G=(V,E)$ and a flow $f$ on $G$, we define the
   \term{residual graph} $G_{f}$ as $G_{f}=(V,E_f)$, with
-  \[ E_f = \{ e \in E \mid c(e) - f(e) > 0 \} \union \{ e^R \mid e \in
+  \[ E_f = \{ e \in E \mid c(e) - f(e) > 0 \} \cup \{ e^R \mid e \in
     E, f(e) > 0 \} \] (where $e^R$ denotes the reverse of edge $e$)
   and we define the capacities of edges in $E_f$ by
   \begin{itemize}
