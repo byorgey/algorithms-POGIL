@@ -58,15 +58,16 @@ it works correctly.
     get to $V-1$.
   \end{answer}
 \item Explain why even in the worst case,
-  $\Theta(\lg V) = \Theta(\lg E)$ in any graph. (Hint: what is the
-  biggest $E$ can be, relative to $V$?)
+  $\Theta(\lg V) = \Theta(\lg E)$ in any graph. \marginnote{\emph{Hint: what is the
+  biggest $E$ can be, relative to $V$?}}
 
   \begin{answer}
     In the worst case, $E$ is $O(V^2)$, in which case $\Theta(\lg
     E) = \Theta(\lg V^2) = \Theta(2 \lg V) = \Theta(\lg V)$.
   \end{answer}
-\item In the above algorithm, how long does line 2 take?  Simplify
-  your answer using the observation from the previous question.
+\item In the above algorithm, how long does line 2 take, assuming we
+  use an efficient sorting algorithm?  Simplify your answer using the
+  observation from the previous question.
 
   \begin{answer}
     We are sorting a list of $E$ edges; if we use an efficient
