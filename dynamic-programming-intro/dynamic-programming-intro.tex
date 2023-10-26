@@ -47,18 +47,17 @@ def fib2(n):
 
     return fibs[n]
 
-
-fibtable = [0,1]  # global table of Fibonacci numbers
+# Global table of Fibonacci numbers; assume no one will
+# ever call fib3(n) with n >= 1000
+fib_table = [-1] * 1000
 
 def fib3(n):
+    if n <= 1:
+        fib_table[n] = n
+    elif fib_table[n] == -1:
+        fib_table[n] = fib3(n-1) + fib3(n-2)
 
-    while len(fibtable) < n+1:
-        fibtable.append(-1)
-
-    if fibtable[n] == -1:
-        fibtable[n] = fib3(n-1) + fib3(n-2)
-
-    return fibtable[n]
+    return fib_table[n]
 \end{verbatim}
 \end{model}
 
