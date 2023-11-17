@@ -1,4 +1,4 @@
-% -*- compile-command: "pdflatex --enable-write18 XXX.tex" -*-
+% -*- compile-command: "pdflatex --enable-write18 binomial-heap.tex" -*-
 \documentclass{tufte-handout}
 
 \usepackage{algo-activity}
@@ -10,28 +10,41 @@
 
 \maketitle
 
-
-
 \begin{objective}
   Students will learn about binomial heaps and analyze their amortized running time.
 \end{objective}
 
-\begin{questions}
-
-\item A binomial tree of order 0 is a single node. A binomial tree of order $n$ consists of a root node with $n$ subtrees. The leftmost subtree is of order $n-1$, the next subtree is of order $n-2$, and so forth, with the rightmost subtree of order 0.
-
-Model \ref{binomial-trees} depicts a series of \emph{binomial trees} in increasing order. The leftmost tree is order 0, the next one is order 1, the third one is order 2, the fourth one is order 3, and the final tree is order 4.
-
 \begin{model*}{Binomial Trees}{binomial-trees}
-  \includegraphics[]{binomial_trees.PNG}
+  \begin{defn}
+    A \term{binomial tree} of order $n$ (for $n \geq 0$) consists of a root
+    node with $n$ subtrees. The leftmost subtree is of order $n-1$,
+    the next subtree is of order $n-2$, and so forth, with the
+    rightmost subtree being of order 0.
+  \end{defn}
+
+  The image below depicts a series of \emph{binomial trees} in
+  increasing order. The leftmost tree is order 0, the next one is
+  order 1, the third one is order 2, the fourth one is order 3, and
+  the final tree is order 4.
+
+  \begin{center}
+  \input{diagrams/binomial-trees.pgf}
+  \end{center}
   \label{binomial-trees}
 \end{model*}
 
-Prove by induction that a binomial tree of order $n$ has $2^n$ nodes.
+\begin{questions}
+\item What patterns do you notice?  Write down at least three
+  observations.
 
-\item How can we make a binomial tree of order $n$ from two binomial trees of order $n - 1$? \label{binomial-merge}
+\item If it was not already among your observations from the previous
+  question, explain how we can make a binomial tree of order $n$ from
+  two binomial trees of order $n - 1$. \label{binomial-merge}
 
-\item Give an asymptotic upper bound on the time necessary for the algorithm you wrote for Question \ref{binomial-merge}.
+\item How many total nodes does a binomial tree of order $n$ have?
+  Why?
+
+WORKING HERE
 
 \item A \emph{binomial heap} is a list of binomial trees such that:
 \begin{itemize}
