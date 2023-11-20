@@ -37,6 +37,9 @@
 \item What patterns do you notice?  Write down at least three
   observations.
 
+\item Send your reporter to some other groups to share your
+  observations and collect as many additional observations as possible.
+
 \item If it was not already among your observations from the previous
   question, explain how we can make a binomial tree of order $n$ from
   two binomial trees of order $n - 1$. \label{binomial-merge}
@@ -44,20 +47,20 @@
 \item How many total nodes does a binomial tree of order $n$ have?
   Why?
 
-WORKING HERE
-
-\item A \emph{binomial heap} is a list of binomial trees such that:
-\begin{itemize}
+\begin{model*}{Binomial Heap}{binomial-heap}
+  \begin{defn}
+    A \emph{binomial heap} is a list of binomial trees such that:
+    \begin{itemize}
     \item Each binomial tree satisfies the heap property, i.e., each node's value is less than or equal to the values of all its children.
     \item There is at most one binomial tree of any given order.
-\end{itemize}
-
-\begin{model*}{Binomial Heap}{binomial-heap}
+    \end{itemize}
+  \end{defn}
+  XXX one valid heap and two invalid heaps
   \includegraphics[]{binomial_heap.PNG}
   \label{binomial-heap}
 \end{model*}
 
-How many total nodes does the binomial heap in Model \ref{binomial-heap} contain?
+\item How many total nodes does the binomial heap in Model \ref{binomial-heap} contain?
 
 \item What is the order of each binomial tree in Model \ref{binomial-heap}?
 
