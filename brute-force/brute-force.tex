@@ -30,8 +30,9 @@ Consider the following scenarios:
 % \item Given an amount in US dollars and cents, you want to find the
 %   minimum number of coins (using only pennies, nickels, dimes, and
 %   quarters) needed to make the given amount.
-\item You are asked whether there is any way to visit all $48$
-  contiguous US states by car without entering the same state twice.
+\item You are given a map of contiguous regions and asked whether
+  there is any way to visit every region by car without entering the
+  same region twice.
 \end{enumerate}
 
 \vspace{0.5in}
@@ -50,8 +51,8 @@ Here are some algorithms intended to solve the above scenarios:
   \item (\emph{You will fill in this algorithm in \pref{q:gcd-brute}.})
   % \item List all possible ways to make the given amount using US
   %   coins.  Output the one that uses the fewest coins.
-  \item List every possible ordering of the 48 states.  Check each
-    ordering to see whether every pair of adjacent states in the
+  \item List every possible ordering of the regions.  Check each
+    ordering to see whether every pair of adjacent regions in the
     ordering is also geographically adjacent.  If such an ordering is
     found, output ``yes''; else output ``no''.
   \end{enumerate}
@@ -111,10 +112,10 @@ Here are some algorithms intended to solve the above scenarios:
   \end{subquestions}
 
   \newpage
-  \item All the algorithms in \pref{model:probs-algos} are called
-    \term{brute force algorithms}.  Using one or more \textbf{complete
-      English sentences}, write down a definition of what a
-    \term{brute force algorithm} is.
+\item All the algorithms in \pref{model:probs-algos} are called
+  \term{brute force algorithms}.  Using one or more \textbf{complete
+    English sentences}, write down what you think a definition of
+  \term{brute force algorithm} is.
 
   \item \label{q:gcd-brute} Fill in this description of a brute force
     algorithm for scenario (d): \vspace{0.3in}
@@ -142,7 +143,6 @@ Report out on definitions of brute force.
 A lot of this semester is going to focus on approaches and techniques
 for doing better than brute-force.  But we will also explore limits:
 for example, for scenario (c) we strongly suspect that it's not
-possible to do fundamentally better than brute force!
-
+possible to do much better than brute force!
 
 \end{document}
