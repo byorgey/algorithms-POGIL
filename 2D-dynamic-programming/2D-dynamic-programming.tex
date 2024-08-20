@@ -5,7 +5,15 @@
 
 \graphicspath{{images/}{../images/}}
 
-\title{\thecourse: Subset Sum (2D Dynamic Programming)}
+\titleformat{\section}%
+  [display]% shape
+  {\relax\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\begin{fullwidth}}{}\normalfont\Large\itshape}% format applied to label+text
+  {\thesection}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  [\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\end{fullwidth}}{}]% after the title body
+
+\title{\thecourse: Subset Sum (Dynamic Programming)}
 \date{}
 
 \begin{document}

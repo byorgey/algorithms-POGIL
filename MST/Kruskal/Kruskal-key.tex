@@ -111,10 +111,10 @@ Let's prove the cut property.
 \newcommand{\filled}[1]{\underline{#1}}
 
 \begin{proof}
-  Let $G$ be a weighted, undirected graph $G = (V,E)$, let $X$ and $Y$
+  Let $G$ be a weighted, undirected graph $G = (V,E)$, let $S$ and $T$
   be an arbitrary partition of $V$ into two sets, and suppose
-  $e = (x,y)$ is the smallest-weight edge with one endpoint in $X$ and
-  one in $Y$.  We wish to show that \filled{every MST of $G$ must
+  $e = (x,y)$ is the smallest-weight edge with one endpoint in $S$ and
+  one in $T$.  We wish to show that \filled{every MST of $G$ must
     include $e$}.
 
   We will prove the contrapositive. Suppose $M$ is a spanning tree of
@@ -122,8 +122,8 @@ Let's prove the cut property.
   \filled{tree} it contains a unique \filled{path} between any two
   \filled{vertices}. So consider the unique \filled{path} in $M$
   between \filled{$x$ and $y$}. It must cross the cut at least once
-  since \filled{$x \in X$ and $y \in Y$}; suppose it crosses at
-  $e' = (x',y')$, with $x' \in X$ and $y' \in Y$.  We know that the
+  since \filled{$x \in S$ and $y \in T$}; suppose it crosses at
+  $e' = (x',y')$, with $x' \in S$ and $y' \in T$.  We know that the
   weight of $e$ is smaller than the weight of $e'$, since \filled{we
     assumed $e$ is the smallest-weight edge crossing the cut}. Now
   take $M$ and replace \filled{$e'$} with \filled{$e$}; the result is
