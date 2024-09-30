@@ -1,0 +1,99 @@
+% -*- compile-command: "rubber -d graph-proofs-filled.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+
+\title{\thecourse: Some Proofs about Trees (Key)}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{model*}{A theorem about trees}{trees}
+\begin{thm}[Trees]
+  Let $G = (V,E)$ be a graph with $|V| = n \geq 1$.  Any two of the following
+  imply the third:
+  \begin{enumerate}
+  \item $G$ is connected.
+  \item $G$ is acyclic.
+  \item $G$ has $n-1$ edges.
+  \end{enumerate}
+\end{thm}
+\end{model*}
+
+\begin{lem} \label{lem:onetwothree} $(1), (2) \implies (3)$.  That is:
+  let $G = (V,E)$ be a graph with $|V| = n \geq 1$.  If $G$ is
+  connected and acyclic, then $G$ has $n-1$ edges.
+\end{lem}
+
+\begin{proof}
+  Let $P(n)$ denote the statement ``Any graph $G$ with $n$ vertices
+  which is connected and acyclic must have $n-1$ edges.''  We wish to
+  show that $P(n)$ holds for all $n \geq 1$.
+
+  The proof is by induction on $n$.
+  \begin{itemize}
+  \item The base case is when $n = 1$. In this case, $G$ is just
+    a single vertex, so it is indeed connected, acyclic, and has $0$
+    edges.
+  \item For the induction step, suppose $P(k)$ holds for some $k \geq
+    1$.  That is, suppose that any graph with $k$ vertices which is
+    connected and acyclic must have $k-1$ edges.  Then we wish to show
+    $P(k+1)$, that is, any graph with $k+1$ vertices which is
+    connected and acyclic must have $k$ edges.
+
+    So, let $G$ be a graph with $k+1$ vertices which is connected and
+    acyclic.  We claim that $G$ must have some vertex which is a leaf,
+    that is, a vertex of degree $1$, which we can show as
+    follows:
+    \begin{itemize}
+    \item $G$ cannot have any vertices of degree $0$, because
+      it is connected (and has at least two vertices).
+    \item It also cannot be the case that every vertex of $G$ has
+      degree $\geq 2$.  If they did, then we could find a cycle by
+      starting at any vertex and walking along edges randomly until
+      encountering a repeated vertex; we would never get stuck because
+      every vertex has degree $\geq 2$, that is, if we come in along
+      one edge there must always be a different edge along which we
+      can leave. However, this is impossible because we assumed
+      $G$ is acyclic.
+    \end{itemize}
+    Hence, $G$ must have some vertex which is a leaf. If we delete
+    this vertex along with the edge adjacent to it, it results in a
+    graph $G'$ with only $k$ vertices; we note that $G'$ is still
+    connected (because $G$ was connected and we deleted a leaf) and
+    also acyclic (because deleting something from an acyclic graph
+    cannot create a cycle).  Hence we may apply the inductive
+    hypothesis to conclude that $G'$ has $k-1$ edges.  Adding the
+    deleted vertex and edge back to $G'$ shows that $G$ has $k$ edges,
+    which is what we wanted to show.
+  \end{itemize}
+\end{proof}
+
+\begin{lem}
+  $(2),(3) \implies (1)$, that is, any acyclic graph with $n$ vertices
+  and $n-1$ edges must be connected.
+\end{lem}
+
+\begin{proof}
+  This proof uses a \term{counting argument}: we will show what we
+  wish to show by counting things in multiple ways.
+
+  Let $c$ denote the number of connected components of $G$.  We want
+  to show that $c = 1$.
+
+  Number the components of $G$ from $1 \dots c$, and say that
+  component $i$ has $n_i$ vertices.  Then \[ \sum_{i=1}^c n_i = n
+  \] because adding up the number of vertices in each component gives
+  the total number of vertices.  Each connected component is by
+  definition a connected graph; each component must also be acyclic
+  since we assumed that $G$ is acyclic.  Hence we may apply
+  \pref{lem:onetwothree} to conclude that component $i$ has $n_i - 1$
+  edges.  Adding these up, the total number of edges in $G$ is
+  \[ |E| = \sum_{i=1}^c (n_i - 1) = \left(\sum_{i=1}^c n_i \right) -
+    \left(\sum_{i=1}^c 1 \right) = n - c. \] But we already assumed the
+  number of edges in $G$ is $n-1$, and hence $c = 1$ as desired.
+\end{proof}
+
+\end{document}
