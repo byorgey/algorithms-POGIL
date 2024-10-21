@@ -147,13 +147,13 @@ Algorithm; the proofs for the other algorithms are similar.
 
 \begin{proof}
   Suppose at some step the algorithm picks the edge $e = (x,y)$.  Let
-  $X$ be the set of vertices connected to $x$ by edges which have been
-  picked so far (not including $e$), and let $Y$ be all other
-  vertices. $x \in X$ by definition.  We know that $y \notin X$ since
+  $S$ be the set of vertices connected to $x$ by edges which have been
+  picked so far (not including $e$), and let $T$ be all other
+  vertices. $x \in S$ by definition.  We know that $y \notin S$ since
   if it was, $e$ would make a \filled{cycle} but then Kruskal's
   Algorithm wouldn't \filled{have picked it}. $e$ therefore crosses
-  the cut $(X,Y)$. No other edges which have been picked previously
-  cross the cut, since \filled{by definition the vertices in $Y$
+  the cut $(S,T)$. No other edges which have been picked previously
+  cross the cut, since \filled{by definition the vertices in $T$
     aren't connected to $x$}. Therefore $e$ must be the smallest
   \filled{edge crossing the cut} because \filled{the edges are
     considered in order from smallest to biggest weight}. Therefore by

@@ -13,12 +13,11 @@
 \section{Roles (2 mins)}
 
 \begin{itemize}
-\item Whoever has used social media least recently gets to choose whether
-  they want to be the manager, or whether they want to make the person
-  who has used social media most recently be the manager.  The manager
-  should make sure to pay attention to the suggested time limits for
-  each section.
-\item Clockwise from the manager are the recorder, reflector, and reporter.
+\item Whoever has watched a movie most recently is the manager.
+\item The manager should assign the other roles (in consultation with
+  their teammates) as appropriate.
+\item The manager should make sure to pay attention to the suggested
+  time limits for each section.
 \end{itemize}
 
 \begin{model*}{Minimum-weight Spanning Subgraphs (20 mins)}{mwss}
@@ -30,8 +29,8 @@
   \end{defn}
 
   \begin{defn}
-    Given a \emph{weighted}, undirected graph $G$, the
-    \term{minimum-weight spanning subgraph} (MWSS) of $G$ is the
+    Given a \emph{weighted}, undirected graph $G$, a
+    \term{minimum-weight spanning subgraph} (MWSS) of $G$ is a
     spanning subgraph of $G$ whose total weight (\ie\ the sum of the
     weights of all its edges) is as small as possible.
   \end{defn}
@@ -107,31 +106,31 @@
 
 Because of the result from \pref{q:mwss-tree}, we typically refer to
 a minimum-weight spanning subgraph as a \term{minimum spanning tree}
-(MST).  Now that you understand the definition of a MST and some
+(MST).  Now that you understand the definition of an MST and some
 scenarios that MSTs can be used to model, let's explore some
 algorithms for finding them.
 
 \begin{model*}{Four algorithms (15 mins)}{four-algorithms}
   Given a weighted, undirected graph $G$, the goal of each algorithm
-  is to pick a subset of the edges of $G$ which constitute a MST.
+  is to choose a subset of the edges of $G$ which constitute a MST.
   \begin{itemize}
   \item (\textbf{Kruskal's}) Consider all the edges in order from
-    smallest to biggest weight; for each edge, pick it if and only if
+    smallest to biggest weight; for each edge, choose it if and only if
     it does not complete a cycle with previously chosen edges.
   \item (\textbf{Prim's}) Choose an arbitrary vertex to start and mark
-    it as visited.  At each step, pick the smallest edge which
+    it as visited.  At each step, choose the smallest edge which
     connects any visited vertex to any unvisited vertex and which would
     not complete a cycle with previously chosen edges; mark the other
     end of the edge visited.
   \item (\textbf{Johnson's}) Choose any vertex to start.  At each
-    step, pick the smallest edge connected to the current vertex which
+    step, choose the smallest edge connected to the current vertex which
     has not already been chosen and would not complete a cycle with
     previously chosen edges.  The other end of the edge becomes the
     new current vertex.  Repeat until running out of options; then
-    pick a new starting vertex and repeat the entire process, until
+    choose a new starting vertex and repeat the entire process, until
     all vertices are connected.
   \item (\textbf{Reverse delete}) Start with all edges initially
-    ``picked'', and consider them in order from biggest to smallest
+    ``chosen'', and consider them in order from biggest to smallest
     weight.  For each edge, delete it if and only if doing so would
     not disconnect the remaining graph.
   \end{itemize}

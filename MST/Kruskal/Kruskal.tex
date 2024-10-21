@@ -138,6 +138,170 @@ Let's prove the cut property.
   cut at least once since\linebreak \mbox{} \blank; suppose it crosses
   at $e' = (x',y')$,\linebreak with $x' \in S$ and $y' \in T$.  We
   know that the weight of $e$ is smaller than the weight of $e'$,
+% -*- compile-command: "pdflatex -d Kruskal-key.tex" -*-
+\documentclass{tufte-handout}
+
+\usepackage{algo-activity}
+\usepackage{algorithm, algorithmicx}
+\usepackage[noend]{algpseudocode}
+
+\title{\thecourse: Kruskal's Algorithm (key)}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+In the previous activity you learned about minimum spanning trees and
+experimented with several different algorithms for finding them.  In
+today's activity we will focus on Kruskal's Algorithm and prove that
+it works correctly.
+
+\begin{model*}{Kruskal's Algorithm (12 mins)}{kruskal}
+  \begin{center}
+    \input{../diagrams/MSTexample.pgf}
+  \end{center}
+
+  \begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \Require Undirected, weighted graph $G = (V,E)$
+      \State $T \gets \varnothing$   \Comment{$T$ holds the set of
+        edges in the MST}
+      \State Sort $E$ from smallest to biggest weight
+      \For{each edge $e \in E$}
+        \If{$e$ does not make a cycle with other edges in $T$}
+          \State Add $e$ to $T$
+        \EndIf
+      \EndFor
+    \end{algorithmic}
+    \label{alg:kruskal}
+  \end{algorithm}
+\end{model*}
+
+\begin{questions}
+\item Simulate Kruskal's Algorithm on the graph in
+  \pref{model:kruskal}.  What is the total weight of the resulting
+  spanning tree?
+
+  \emph{All edges from 1--10 except edge 7 are included; the total
+  weight is $48$.}
+\item The way the algorithm is written in \pref{model:kruskal}, one
+  must iterate through every single edge in $E$.  However, this is not
+  always necessary.  Can you think of a simple way to tell when we can
+  stop the loop early?
+
+  \emph{Since a tree with $V$ vertices has exactly $V-1$ edges, we can
+  just count how many edges have been picked so far and stop when we
+  get to $V-1$.}
+\item Explain why even in the worst case,
+  $\Theta(\lg V) = \Theta(\lg E)$ in any graph.
+
+  \emph{In the worst case, $E$ is $O(V^2)$, in which case $\Theta(\lg
+    E) = \Theta(\lg V^2) = \Theta(2 \lg V) = \Theta(\lg V)$.}
+\item In the above algorithm, how long does line 2 take?  Simplify
+  your answer using the observation from the previous question.
+
+  \emph{We are sorting a list of $E$ edges; if we use an efficient
+    $\Theta(n \lg n)$ sorting algorithm, it will take $\Theta(E \lg E)
+    = \Theta(E \lg V)$ time.}
+\item Can you think of a way to implement line 4?  How long would it
+  take?
+
+  \emph{Do a DFS (or BFS) in $T$ from one endpoint of $e$.  $e$
+    makes a cycle if and only if the other endpoint of $e$ is
+    reachable.  This would take $\Theta(V)$ time (BFS or DFS in
+    general take $\Theta(V+E)$ time, but in this case since $T$ has no
+    cycles it can't have more edges than vertices).  Hence the total
+    time for the whole algorithm would be $\Theta(E \lg V) + \Theta(E
+    \cdot V) = \Theta(VE)$.}
+\end{questions}
+
+\pause
+
+\begin{model*}{The Cut Property (20 mins)}{cut-property}
+  \begin{center}
+    \input{../diagrams/MSTexample.pgf}
+  \end{center}
+
+  \begin{defn}
+    A \term{cut} in a graph $G = (V,E)$ is a partition of the vertices
+    $V$ into two sets $S$ and $T$, that is, every vertex is in either
+    $S$ or $T$ but not both.  We say that an edge $e$ \term{crosses}
+    the cut $(S,T)$ if one vertex of $e$ is in $S$ and the other is in
+    $T$.
+  \end{defn}
+
+  \begin{thm}[Cut Property]
+    Given a weighted, undirected graph $G = (V,E)$, let $S$ and $T$ be
+    any partition of $V$, and suppose $e$ is some edge crossing the
+    $(S,T)$ cut, such that the weight of $e$ is strictly smaller than
+    the weight of any other edge crossing the $(S,T)$ cut.  Then every
+    minimum spanning tree of $G$ must include $e$.
+  \end{thm}
+\end{model*}
+
+\begin{questions}
+\item Give three examples of cuts in the graph from
+  \pref{model:cut-property} and identify the smallest edge crossing
+  each cut.
+\end{questions}
+
+Let's prove the cut property.
+
+\newcommand{\filled}[1]{\underline{#1}}
+
+\begin{proof}
+  Let $G$ be a weighted, undirected graph $G = (V,E)$, let $S$ and $T$
+  be an arbitrary partition of $V$ into two sets, and suppose
+  $e = (x,y)$ is the smallest-weight edge with one endpoint in $S$ and
+  one in $T$.  We wish to show that \filled{every MST of $G$ must
+    include $e$}.
+
+  We will prove the contrapositive. Suppose $M$ is a spanning tree of
+  $G$ which does \textbf{not} contain the edge $e$.  Since $M$ is a
+  \filled{tree} it contains a unique \filled{path} between any two
+  \filled{vertices}. So consider the unique \filled{path} in $M$
+  between \filled{$x$ and $y$}. It must cross the cut at least once
+  since \filled{$x \in S$ and $y \in T$}; suppose it crosses at
+  $e' = (x',y')$, with $x' \in S$ and $y' \in T$.  We know that the
+  weight of $e$ is smaller than the weight of $e'$, since \filled{we
+    assumed $e$ is the smallest-weight edge crossing the cut}. Now
+  take $M$ and replace \filled{$e'$} with \filled{$e$}; the result is
+  still \filled{connected} because \filled{any path that went through
+    $e'$ can detour around through $e$}, but it has a smaller total
+  \filled{weight} because \filled{we removed $e'$ and replaced it with
+  $e$ which has a smaller weight}.
+
+So, we have shown that any spanning tree $M$ which does not contain
+the edge $e$ can be made into a \filled{smaller-weight spanning tree},
+which means that $M$ is not a \filled{minimum spanning tree}.
+\end{proof}
+
+The cut property can be used to directly show the correctness of
+several MST algorithms.  Let's prove the correctness of Kruskal's
+Algorithm; the proofs for the other algorithms are similar.
+
+\begin{thm}
+  Kruskal's Algorithm is correct.
+\end{thm}
+
+\begin{proof}
+  Suppose at some step the algorithm picks the edge $e = (x,y)$.  Let
+  $X$ be the set of vertices connected to $x$ by edges which have been
+  picked so far (not including $e$), and let $Y$ be all other
+  vertices. $x \in X$ by definition.  We know that $y \notin X$ since
+  if it was, $e$ would make a \filled{cycle} but then Kruskal's
+  Algorithm wouldn't \filled{have picked it}. $e$ therefore crosses
+  the cut $(X,Y)$. No other edges which have been picked previously
+  cross the cut, since \filled{by definition the vertices in $Y$
+    aren't connected to $x$}. Therefore $e$ must be the smallest
+  \filled{edge crossing the cut} because \filled{the edges are
+    considered in order from smallest to biggest weight}. Therefore by
+  the Cut Property $e$ must be in any MST and Kruskal's Algorithm is
+  correct to pick it.
+\end{proof}
+
+\end{document}
   since \blank.\linebreak Now take $M$ and replace \blank with \blank;
   the result is\linebreak still \blank because
   \blank,\linebreak but it has a smaller total \blank because \blank.
@@ -157,12 +321,12 @@ Algorithm; the proofs for the other algorithms are similar.
 
 \begin{proof}
   Suppose at some step the algorithm picks the edge $e = (x,y)$.  Let
-  $X$ be the set of vertices connected to $x$ by edges which have been
-  picked so far (not including $e$), and let $Y$ be all other
-  vertices. $x \in X$ by definition.  We know that $y \notin X$ since
+  $S$ be the set of vertices connected to $x$ by edges which have been
+  picked so far (not including $e$), and let $T$ be all other
+  vertices. $x \in S$ by definition.  We know that $y \notin S$ since
   if it was, $e$ would\linebreak make a \blank but then Kruskal's
   Algorithm wouldn't \blank.\linebreak $e$ therefore crosses the cut
-  $(X,Y)$. No other edges which have been picked previously cross the
+  $(S,T)$. No other edges which have been picked previously cross the
   cut, since \blank.\linebreak Therefore $e$ must be the smallest
   \blank\linebreak because \blank.\linebreak Therefore by the Cut
   Property $e$ must be in any MST and Kruskal's Algorithm is correct

@@ -47,7 +47,11 @@ as addition or multiplication, we simply assume they take constant
 time.  This is appropriate when the integers are bounded by some fixed
 size, \eg if all the integers are $64$-bit integers.  However, if we
 want to be able to deal with integers of arbitrary size, this is no
-longer appropriate; we must take the size of the integers into account.
+longer appropriate; we must take the size of the integers into
+account.  For example, as of October 12, 2024, the largest
+known prime number is $2^{136\,279\,841} - 1$, a number with
+$41\,024\,320$ decimal digits.  The arithmetic operations needed to
+test this number for primality take a nontrivial amount of time!
 
 \begin{objective}
   Students will analyze arithmetic operations on $n$-bit integers.
@@ -58,7 +62,9 @@ longer appropriate; we must take the size of the integers into account.
   is each of the operands?
 \item Approximately how many single bit operations (\emph{e.g.} adding
   or comparing two bits) are needed to compute the addition
-  $1011010_2 + 1110011_2$ shown in the model?  Your answer should be a number.
+  $1011010_2 + 1110011_2$ shown in the model?  Your answer should be a
+  number, but don't spend too much time arguing over the precise
+  answer; make sure you agree to within $\pm 2$ and move on.
 \item In general, suppose we want to add two integers of $n$ bits
   each.  In terms of $\Theta$, how many bit operations are needed?
 \item Explain why it is not possible to do any better than this.
