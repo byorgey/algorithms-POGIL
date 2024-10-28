@@ -3,7 +3,7 @@
 
 \usepackage{algo-activity}
 
-\graphicspath{{images/}{../images/}}
+\graphicspath{{images/}{../images/}{../../images}}
 
 \title{\thecourse: Introduction to Dynamic Programming}
 \date{}
@@ -74,8 +74,8 @@ def fib3(n):
 \item How many times does \verb|fib1(2)| occur in the call tree?
   What about \verb|fib1(1)|?  \verb|fib1(0)|?
 \item It turns out that \verb|fib1| is extremely slow.\footnote{In
-    fact, it takes $\Theta(\varphi^n)$ time.}  What do you think makes
-  it so slow?
+    fact, it takes $\Theta(\varphi^n)$ time.}  Intuitively, what do
+  you think makes it so slow?
 \end{questions}
 
   \begin{fullwidth}
@@ -113,7 +113,8 @@ def fib3(n):
 \item Suppose we switch the direction of the \verb|for| loop in
   \verb|fib2|, so \verb|i| loops from \verb|n| down to \verb|2|.
   Would it still work?  Why or why not?
-\item Trace the execution of \verb|fib3(5)| and explain how it works. \vspace{1in}
+\item Trace the execution of \verb|fib3(5)| and explain how it works
+  in one or two complete English sentences. \vspace{1in}
 \item In terms of $\Theta$, how long does \verb|fib3(n)| take?
 \item Fill in this statement: \verb|fib3| is just like \verb|fib1|
   except that \\ \blank.
