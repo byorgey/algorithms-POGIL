@@ -3,8 +3,6 @@
 
 \usepackage{algo-activity}
 
-\graphicspath{{images/}{../images/}}
-
 \titleformat{\section}%
   [display]% shape
   {\relax\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\begin{fullwidth}}{}\normalfont\Large\itshape}% format applied to label+text
@@ -59,7 +57,8 @@ problem:
 \begin{questions}
 \item Describe a brute-force algorithm for solving this problem.
 \item \label{q:brute} What is the running time of your brute-force
-  algorithm?
+  algorithm? \marginnote{Make sure you consider the time to add up each
+    subset, not just the time to list them all.}
 \item Use your brute-force algorithm to decide whether there is any
   subset of $C$ which adds up to $54$.  What about $55$?
 \end{questions}
