@@ -64,9 +64,16 @@ badBinomialHeap2 = [bt1 23, Node 4 [], bt2, Node 8 []]
 binomialHeaps :: Diagram B
 binomialHeaps = vsep 3 (map (drawBinomialHeap drawNode) [badBinomialHeap1, goodBinomialHeap, badBinomialHeap2])
 
+addend :: [Tree Int]
+addend = [Node 2 [Node 19 []], Node 3 []]
+
+heapMerge :: Diagram B
+heapMerge = vsep 3 (map (drawBinomialHeap drawNode) [goodBinomialHeap, addend])
+
 drawNode :: Int -> Diagram B
 drawNode = fontSizeL 0.7 . (<> circle 1) . text . (++ "$") . ("$" ++) . show
 
 main = do
     renderPGF "binomial-trees.pgf" (mkWidth 400) binomialTrees
     renderPGF "binomial-heaps.pgf" (mkWidth 200) binomialHeaps
+    renderPGF "heap-merge.pgf" (mkWidth 400) heapMerge

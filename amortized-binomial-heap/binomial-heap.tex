@@ -51,6 +51,7 @@
 
 \item How many total nodes does a binomial tree of order $n$ have?
   Why?
+\end{questions}
 
 \begin{model}{Binomial Heaps}{binomial-heap}
   \begin{defn}
@@ -66,6 +67,7 @@
   \label{binomial-heap}
 \end{model}
 
+\begin{questions}
 \item Two of the binomial heaps shown above are invalid, and one is
   valid.  Which is which?  Cross out the invalid ones.
 
@@ -79,29 +81,26 @@
   \item 11 nodes
   \end{subquestions}
 
+\item The table below displays total number of nodes ($n$) across the
+  top row; each column records the number of trees of each order
+  needed to make a binomial heap of a certain size.  The number of
+  trees of each order needed to make binomial heaps of sizes $0$, $1$,
+  and $2$ have already been filled in for you.  Fill in the rest of
+  the table. \bigskip
+
+  \begin{tabular}{c|ccccccccc}
+    $n$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ \\[8pt]
+    Order 0 trees & $0$ & $1$ & $0$ & & & & & & \\[8pt]
+    Order 1 trees & $0$ & $0$ & $1$ & & & & & & \\[8pt]
+    Order 2 trees & $0$ & $0$ & $0$ & & & & & & \\[8pt]
+    Order 3 trees & $0$ & $0$ & $0$ & & & & & & \\[8pt]
+  \end{tabular}
+
 \item What is the relationship between the number of elements in a
   binomial heap and the orders of the binomial trees that it contains?
 
-% \item What is the order of each binomial tree in Model \ref{binomial-heap}?
-
-% \item The table in Model \ref{heaptrees} lists a total number of nodes and the number of trees of each order. Fill in the table.
-
-% \begin{model*}{Trees in binomial heap of size $n$}{heaptrees}
-%   \centering
-%   % \tabcolsep=0.1cm
-%   \begin{tabular}{c|cccccccccccccccc}
-%     $n$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$
-%     & $11$ & $12$ & $13$ & $14$ & $15$  \\[8pt]
-%     Order 0 trees & $0$ & $1$ & $0$ & & & & & & & & & & & & & \\[8pt]
-%     Order 1 trees & $0$ & $0$ & $1$ & & & & & & & & & & & & & \\[8pt]
-%     Order 2 trees & $0$ & $0$ & $0$ & & & & & & & & & & & & & \\[8pt]
-%     Order 3 trees & $0$ & $0$ & $0$ & & & & & & & & & & & & & \\[8pt]
-%   \end{tabular}
-%   \label{heaptrees}
-% \end{model*}
-
 \item If a binomial heap has a total of $n$ elements, what is the
-  maximum number of binomial trees that it contains?
+  maximum number of binomial trees it could contain?
 
 % \item The \verb|merge| operation takes two binomial heaps as parameters and returns a new binomial heap containing all of the values from the first two heaps. If two binomial heaps each have one tree of order 0, explain how \verb|merge| will create a new binomial heap.
 
