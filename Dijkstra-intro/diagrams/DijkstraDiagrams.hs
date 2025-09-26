@@ -1,5 +1,5 @@
 #!/usr/bin/env stack
--- stack --resolver lts-19.6 script --package diagrams-lib --package diagrams-pgf --package texrunner
+-- stack --resolver lts-24.10 script --package diagrams-lib --package diagrams-pgf --package texrunner --extra-dep diagrams-pgf-1.5.0.1
 
 -- Run with -w 300
 
@@ -23,21 +23,21 @@ g2 :: Graph
 g2 =
   Graph
     (zip (map (: []) "s234567t") [(0, 0), (3, 3), (15, 3), (13, 0), (9, -1), (6, 0), (3, -3), (15, -3)])
-    [ ("s", "d", Just 9)
-    , ("s", "i", Just 15)
-    , ("s", "h", Just 14)
-    , ("h", "i", Just 5)
-    , ("d", "e", Just 24)
-    , ("h", "e", Just 18)
-    , ("h", "g", Just 30)
-    , ("g", "e", Just 2)
-    , ("g", "f", Just 11)
-    , ("f", "e", Just 6)
-    , ("f", "t", Just 6)
-    , ("e", "t", Just 19)
-    , ("i", "t", Just 44)
-    , ("i", "g", Just 20)
-    , ("g", "t", Just 16)
+    [ ("s", "2", Just 9)
+    , ("s", "7", Just 15)
+    , ("s", "6", Just 14)
+    , ("6", "7", Just 5)
+    , ("2", "3", Just 24)
+    , ("6", "3", Just 18)
+    , ("6", "5", Just 30)
+    , ("5", "3", Just 2)
+    , ("5", "4", Just 11)
+    , ("4", "3", Just 6)
+    , ("4", "t", Just 6)
+    , ("3", "t", Just 19)
+    , ("7", "t", Just 44)
+    , ("7", "5", Just 20)
+    , ("5", "t", Just 16)
     ]
 
 dia :: Diagram B
