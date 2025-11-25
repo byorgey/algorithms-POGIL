@@ -1,5 +1,5 @@
 #!/usr/bin/env stack
--- stack --resolver lts-19.6 script --package diagrams-lib --package diagrams-pgf --package texrunner --package colour --package containers
+-- stack --resolver lts-24.20 script --package diagrams-lib --package diagrams-pgf --package texrunner --package colour --package containers
 
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE TypeFamilies #-}
@@ -8,21 +8,22 @@
 module BinomialHeaps where
 
 import Data.Colour.SRGB
+import Data.List (intersperse)
 import Data.Tree
 import Diagrams.Backend.PGF.CmdLine
 import Diagrams.Prelude
 
 drawLeftLeaningTree :: (a -> Diagram B) -> Tree a -> Diagram B
 drawLeftLeaningTree node (Node a ts) =
-    vsep
-        2
-        [ node a # named "root"
-        , hsep 2 (zipWith (\k t -> drawLeftLeaningTree node t # named k) [0 :: Int ..] ts)
-        ]
-        # applyAll [connectOutside' connOpts "root" k | k <- [0 .. length ts - 1]]
-        # localize
-  where
-    connOpts = with & arrowHead .~ noHead
+  vsep
+    2
+    [ node a # named "root"
+    , hsep 2 (zipWith (\k t -> drawLeftLeaningTree node t # named k) [0 :: Int ..] ts)
+    ]
+    # applyAll [connectOutside' connOpts "root" k | k <- [0 .. length ts - 1]]
+    # localize
+ where
+  connOpts = with & arrowHead .~ noHead
 
 binomialTreeShape :: Int -> Tree ()
 binomialTreeShape 0 = Node () []
@@ -62,7 +63,12 @@ badBinomialHeap2 :: [Tree Int]
 badBinomialHeap2 = [bt1 23, Node 4 [], bt2, Node 8 []]
 
 binomialHeaps :: Diagram B
-binomialHeaps = vsep 3 (map (drawBinomialHeap drawNode) [badBinomialHeap1, goodBinomialHeap, badBinomialHeap2])
+binomialHeaps =
+  [badBinomialHeap1, goodBinomialHeap, badBinomialHeap2]
+    # map (drawBinomialHeap drawNode)
+    # intersperse (hrule 50 # lc gray)
+    # map centerX
+    # vsep 2
 
 addend :: [Tree Int]
 addend = [Node 2 [Node 19 []], Node 3 []]
@@ -74,6 +80,6 @@ drawNode :: Int -> Diagram B
 drawNode = fontSizeL 0.7 . (<> circle 1) . text . (++ "$") . ("$" ++) . show
 
 main = do
-    renderPGF "binomial-trees.pgf" (mkWidth 400) binomialTrees
-    renderPGF "binomial-heaps.pgf" (mkWidth 200) binomialHeaps
-    renderPGF "heap-merge.pgf" (mkWidth 400) heapMerge
+  renderPGF "binomial-trees.pgf" (mkWidth 400) binomialTrees
+  renderPGF "binomial-heaps.pgf" (mkWidth 300) binomialHeaps
+  renderPGF "heap-merge.pgf" (mkWidth 400) heapMerge

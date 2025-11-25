@@ -45,9 +45,10 @@
   question, explain how we can make a binomial tree of order $n$ from
   two binomial trees of order $n - 1$. \label{binomial-merge}
 
-\item Assuming a binomial tree stores a root value and a list of
-  children, how long does this operation (making two order-$(n-1)$ trees
-  into an order-$n$ tree) take?
+\item Assuming a binomial tree is stored as an object containing a
+  root value and a list of children (which are themselves binomial
+  tree objects), how long does this operation (making two
+  order-$(n-1)$ trees into an order-$n$ tree) take?
 
 \item How many total nodes does a binomial tree of order $n$ have?
   Why?
@@ -60,6 +61,9 @@
     \item Each binomial tree satisfies the heap property, i.e., each node's value is less than or equal to the values of all its children.
     \item There is at most one binomial tree of any given order.
     \end{itemize}
+    Below are three potential binomial heaps (one per row).  However,
+    only one of them is a valid binomial heap according to the
+    definition above; the other two are invalid.
   \end{defn}
   \begin{center}
     \input{diagrams/binomial-heaps.pgf}
@@ -96,6 +100,7 @@
     Order 3 trees & $0$ & $0$ & $0$ & & & & & & \\[8pt]
   \end{tabular}
 
+\newpage
 \item What is the relationship between the number of elements in a
   binomial heap and the orders of the binomial trees that it contains?
 
